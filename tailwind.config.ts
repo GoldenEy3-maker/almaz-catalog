@@ -55,6 +55,7 @@ export default {
           foreground: "#E6E6E6",
         },
         description: "#8C8C8E",
+        destructive: "#E70400",
       },
     },
   },
