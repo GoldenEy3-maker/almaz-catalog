@@ -7,10 +7,8 @@ html(lang="ru")
     script(src="main.min.js", defer) 
     title Document
   body
-    div(class="flex min-h-svh flex-col")
-      block header
-        header header
+    div(class="main-container max-container min-h-svh grid-rows-[auto_1fr_auto]")
+      header(class="col-span-full") header
       block content
         main content
-      block footer
-        footer footer
+      footer(class="col-span-full") footer
