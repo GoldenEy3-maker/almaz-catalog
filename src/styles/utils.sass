@@ -7,11 +7,11 @@
   $minViewport: math.div($minViewport, 16)
   $maxViewport: math.div($maxViewport, 16)
 
-  @if unit($minValue) == "rem"
+  @if math.unit($minValue) == "rem"
     $minValue: strip-units($minValue)
   @else
     $minValue: math.div(strip-units($minValue), 16)
-  @if (unit($maxValue) == "rem")
+  @if (math.unit($maxValue) == "rem")
     $maxValue: strip-units($maxValue)
   @else
     $maxValue: math.div(strip-units($maxValue), 16)
