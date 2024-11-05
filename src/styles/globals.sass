@@ -1,5 +1,21 @@
+@use "fonts"
 @use "utils" as utils
 
 @tailwind base
 @tailwind components
 @tailwind utilities
+
+@layer base
+  body
+    @apply bg-background text-foreground font-gothamPro
+
+@layer utilities
+  .main-container
+    display: grid
+    grid-template-columns: utils.calc-clamp(1rem, 3rem, 640, 1536) [main-start] repeat(18, 1fr) [main-end] utils.calc-clamp(1rem, 3rem, 640, 1536)
+    grid-auto-rows: max-content
+
+  .max-container
+    width: 100%
+    max-width: 120rem
+    margin-inline: auto
