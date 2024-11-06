@@ -1,0 +1,70 @@
+mixin submenu
+  div(
+    class="main-container absolute inset-x-0 top-0 z-10 h-svh overflow-auto bg-background transition-all duration-300 ~pt-20/32 aria-hidden:invisible aria-hidden:pt-0 aria-hidden:opacity-0",
+    data-submenu="",
+    aria-hidden="true"
+  ) 
+    div(
+      class="col-[main] grid grid-cols-subgrid gap-x-6 overflow-auto ~gap-y-[2.5rem]/[5rem] ~pb-[2.5rem]/[3.75rem]"
+    )
+      div(class="md2:col-span-6 col-span-full sm:col-span-9 xl:col-span-4")
+        h4(class="mb-5 text-h4 font-medium") Бороны
+        ul(class="space-y-3")
+          li
+            a(href="#") Дисковые двухрядные бороны
+          li
+            a(href="#") Дисковые четырехрядные бороны
+          li
+            a(href="#") Бороны-мульчировщики
+          li
+            a(href="#") Бороны дисковые тяжелые
+          li
+            a(href="#") Бороны пружинные средние
+          li
+            a(href="#") Бороны пружинные тяжелые
+          li
+            a(href="#") Сцепки борон односледные
+          li
+            a(href="#") Сцепки борон двуследные
+      div(class="md2:col-span-6 col-span-full sm:col-span-9 xl:col-span-4")
+        h4(class="mb-5 text-h4 font-medium") Плуги
+        ul(class="space-y-3")
+          li
+            a(href="#") Плуги лемешные навесные
+          li
+            a(href="#") Плуги лемешные полунавесные
+          li
+            a(href="#") Плуги лемешные полуприцепные
+          li
+            a(href="#") Плуги оборотные навесные
+          li
+            a(href="#") Плуги оборотные полунавесные
+          li
+            a(href="#") Плуги чизельные навесные
+          li
+            a(href="#") Плуги чизельные полуприцепные
+          li
+            a(href="#") Плоскорезы навесные
+          li
+            a(href="#") Плоскорезы полуприцепные
+      div(class="md2:col-span-6 col-span-full sm:col-span-9 xl:col-span-4")
+        h4(class="mb-5 text-h4 font-medium") Катки
+        ul(class="space-y-3")
+          li
+            a(href="#") Сцепки катков
+      div(
+        class="md2:col-span-6 col-span-full row-start-3 sm:col-span-9 sm:row-start-2 xl:col-span-4"
+      )
+        h4(class="mb-5 text-h4 font-medium") Культиваторы
+        ul(class="space-y-3")
+          li
+            a(href="#") Предпосевные культиваторы
+          li
+            a(href="#") Культиваторы чизельные дисковые
+      div(class="md2:col-span-6 col-span-full row-start-2 sm:col-span-9 xl:col-span-4")
+        h4(class="mb-5 text-h4 font-medium") Сеялки
+        ul(class="space-y-3")
+          li
+            a(href="#") Сеялки зернотуковые
+          li
+            a(href="#") Сцепка прицепная универсальная

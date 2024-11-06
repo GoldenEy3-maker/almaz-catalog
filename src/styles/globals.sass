@@ -7,6 +7,10 @@
 
 @layer base
   body
+    &.lock-scroll
+      padding-right: var(--scrollbar-width, 0)
+      overflow: hidden
+
     @apply bg-background text-foreground font-gothamPro
 
 @layer utilities

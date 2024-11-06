@@ -18,6 +18,9 @@ export default {
     screens,
     fontSize,
     extend: {
+      screens: {
+        md2: "62rem",
+      },
       fontFamily: {
         gothamPro: ["GothaPro", ...fontFamily.sans],
         ptRoot: ["PTRoot", ...fontFamily.sans],
