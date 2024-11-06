@@ -56,9 +56,185 @@ mixin footer
           defs
             clippath#clip0_3500_3634
               rect(width="122", height="42", fill="white")
-    div(class="col-[main] grid grid-cols-subgrid")
+    div(class="col-[main] mt-3 grid grid-cols-subgrid gap-y-6 font-ptRoot")
+      div(
+        class="col-span-full flex flex-col items-start text-sm md:col-span-8 md2:col-span-6"
+      )
+        p(class="text-muted") © ТД&nbsp;Алмаз 2019. Алтайский край,
+        p(class="text-muted") г.&nbsp;Барнаул, ул.&nbsp;Северо-Западная 2а, оф.&nbsp;301
+        a(href="tel:88007005008", class="mt-6 text-h3 font-medium") 8&nbsp;800&nbsp;700-50-08
+        a(href="mailto:almaztd@almaztd.ru", class="mt-2 text-primary") almaztd@almaztd.ru
+      nav(
+        class="col-span-full flex flex-col justify-between gap-x-5 gap-y-6 font-ptRoot ~text-base/lg sm:flex-row md:col-span-10 md2:col-span-8 xl:col-span-6"
+      )
+        ul(class="flex flex-col items-start space-y-3")
+          li
+            a(href="#", class="transition-all duration-300 hover:text-primary") Техника
+          li
+            a(href="#", class="transition-all duration-300 hover:text-primary") Запчасти
+          li
+            a(href="#", class="transition-all duration-300 hover:text-primary") Сервис
+          li
+            a(href="#", class="transition-all duration-300 hover:text-primary") Компания
+          li
+            a(href="#", class="transition-all duration-300 hover:text-primary") Пресс-центр
+        ul(class="flex flex-col items-start space-y-3")
+          li
+            a(href="#", class="transition-all duration-300 hover:text-primary") Вакансии
+          li
+            a(href="#", class="transition-all duration-300 hover:text-primary") Дилерам
+          li
+            a(href="#", class="transition-all duration-300 hover:text-primary") Контакты
+        ul(class="flex flex-col items-start space-y-3 text-muted")
+          li
+            a(
+              href="#",
+              class="flex items-center gap-2 whitespace-nowrap transition-all duration-300 hover:text-primary"
+            )
+              span(class="text-primary")
+                svg(
+                  width="19",
+                  height="18",
+                  viewbox="0 0 19 18",
+                  fill="none",
+                  xmlns="http://www.w3.org/2000/svg"
+                )
+                  path(
+                    d="M17 7C17 13 9.5 18 9.5 18C9.5 18 2 13 2 7C2 3.13401 5.35787 0 9.5 0C13.6421 0 17 3.13401 17 7Z",
+                    fill="currentColor"
+                  )
+                  path(
+                    class="fill-background",
+                    d="M9.5 10C11.2752 10 12.7143 8.65685 12.7143 7C12.7143 5.34315 11.2752 4 9.5 4C7.7248 4 6.28571 5.34315 6.28571 7C6.28571 8.65685 7.7248 10 9.5 10Z"
+                  )
+              span Где купить
+          li
+            a(
+              href="https://t.me/AlmazHelpBot",
+              target="_blank",
+              class="flex items-center gap-2 whitespace-nowrap transition-all duration-300 hover:text-primary"
+            )
+              span(class="text-primary")
+                svg(
+                  width="19",
+                  height="17",
+                  viewbox="0 0 19 17",
+                  fill="none",
+                  xmlns="http://www.w3.org/2000/svg"
+                )
+                  path(
+                    d="M19 0.602225L15.9946 16.2923C15.9946 16.2923 15.5741 17.3801 14.4189 16.8584L7.48458 11.3526L7.45242 11.3364C8.38909 10.4654 15.6524 3.70266 15.9698 3.39612C16.4613 2.92136 16.1562 2.63873 15.5856 2.99736L4.85679 10.053L0.717638 8.61077C0.717638 8.61077 0.0662573 8.37083 0.00359284 7.84911C-0.0598962 7.32653 0.739076 7.0439 0.739076 7.0439L17.6131 0.188948C17.6131 0.188948 19 -0.44207 19 0.602225Z",
+                    fill="currentColor"
+                  )
+              span Сервис 24/7
+      div(class="col-span-full flex md2:col-span-2 md2:col-end-[main] md2:justify-end")
+        ul(class="inline-flex flex-col items-start space-y-3 text-muted")
+          li
+            a(
+              href="https://www.youtube.com/@almaztd_official",
+              target="_blank",
+              class="inline-flex items-center gap-x-2 leading-none"
+            )
+              span(class="h-4 w-4")
+                svg(
+                  xmlns="http://www.w3.org/2000/svg",
+                  width="100%",
+                  height="100%",
+                  viewbox="0 0 15 12",
+                  fill="none"
+                )
+                  path(
+                    d="M11.8847 0.684082H3.11531C1.39477 0.684082 0 2.05811 0 3.75306V8.07164C0 9.7666 1.39477 11.1406 3.11531 11.1406H11.8847C13.6052 11.1406 15 9.7666 15 8.07164V3.75306C15 2.05811 13.6052 0.684082 11.8847 0.684082ZM9.77783 6.12247L5.6761 8.04965C5.56681 8.101 5.44056 8.0225 5.44056 7.90323V3.9284C5.44056 3.80743 5.57013 3.72902 5.67965 3.78371L9.78138 5.83135C9.90333 5.89222 9.90121 6.06451 9.77783 6.12247Z",
+                    fill="currentColor"
+                  )
+              span YouTube
+          li
+            a(
+              href="https://vk.com/almaztd_official",
+              target="_blank",
+              class="inline-flex items-center gap-x-2 leading-none"
+            )
+              span(class="h-4 w-4")
+                svg(
+                  xmlns="http://www.w3.org/2000/svg",
+                  width="100%",
+                  height="100%",
+                  viewbox="0 0 18 11",
+                  fill="none"
+                )
+                  path(
+                    d="M9.25916 10C3.45092 10 0.138039 6.24625 0 0H2.90943C3.005 4.58458 5.14985 6.52653 6.84879 6.92693V0H9.58844V3.95395C11.2661 3.78378 13.0286 1.98198 13.6232 0H16.3628C15.9062 2.44244 13.9949 4.24424 12.6357 4.98498C13.9949 5.58559 16.1718 7.15716 17 10H13.9843C13.3366 8.0981 11.7227 6.62663 9.58844 6.42643V10H9.25916Z",
+                    fill="currentColor"
+                  )
+              span ВКонтакте
+          li
+            a(
+              href="https://t.me/almaztd_official",
+              target="_blank",
+              class="inline-flex items-center gap-x-2 leading-none"
+            )
+              span(class="h-4 w-4")
+                svg(
+                  width="100%",
+                  height="100%",
+                  viewbox="0 0 24 24",
+                  fill="none",
+                  xmlns="http://www.w3.org/2000/svg"
+                )
+                  path(
+                    fill-rule="evenodd",
+                    clip-rule="evenodd",
+                    d="M2.51239 11.0404C8.41795 8.07678 12.3559 6.123 14.3263 5.17903C19.9521 2.48381 21.1211 2.01562 21.883 2.00016C22.0506 1.99676 22.4253 2.0446 22.668 2.27145C22.873 2.46299 22.9294 2.72174 22.9563 2.90334C22.9833 3.08495 23.0169 3.49865 22.9902 3.8219C22.6854 7.51145 21.3662 16.465 20.6951 20.5974C20.4111 22.3459 19.852 22.9322 19.3107 22.9896C18.1343 23.1143 17.2409 22.0941 16.1015 21.2338C14.3186 19.8876 13.3113 19.0496 11.5807 17.736C9.58058 16.2179 10.8772 15.3835 12.017 14.0199C12.3153 13.663 17.4986 8.23264 17.5989 7.74002C17.6115 7.67841 17.6231 7.44875 17.5046 7.32749C17.3862 7.20622 17.2114 7.24769 17.0852 7.28067C16.9064 7.32742 14.0581 9.49585 8.54035 13.786C7.73187 14.4254 6.99958 14.737 6.34347 14.7206C5.62016 14.7026 4.2288 14.2496 3.19447 13.8623C1.92583 13.3873 0.91753 13.1362 1.00533 12.3295C1.05106 11.9093 1.55341 11.4796 2.51239 11.0404Z",
+                    fill="currentColor"
+                  )
+              span Telegram
+          li
+            a(
+              href="https://rutube.ru/channel/25059762/",
+              target="_blank",
+              class="inline-flex items-center gap-x-2 leading-none"
+            )
+              span(class="h-4 w-4")
+                svg(
+                  width="100%",
+                  height="100%",
+                  viewbox="0 0 16 16",
+                  fill="none",
+                  xmlns="http://www.w3.org/2000/svg"
+                )
+                  g(clip-path="url(#clip0_3338_19760)")
+                    mask#mask0_3338_19760(
+                      style="mask-type: luminance",
+                      maskunits="userSpaceOnUse",
+                      x="0",
+                      y="0",
+                      width="16",
+                      height="16"
+                    )
+                      path(
+                        d="M16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16C12.4183 16 16 12.4183 16 8Z",
+                        fill="white"
+                      )
+                    g(mask="url(#mask0_3338_19760)")
+                      path(
+                        d="M9.88399 7.63473H5.15702V5.76421H9.88399C10.1601 5.76421 10.3521 5.81234 10.4484 5.89638C10.5448 5.98042 10.6045 6.1363 10.6045 6.36401V7.03565C10.6045 7.27556 10.5448 7.43144 10.4484 7.51549C10.3521 7.59953 10.1601 7.63545 9.88399 7.63545V7.63473ZM10.2083 4.00072H3.15234V12H5.15702V9.3975H8.85146L10.6045 12H12.8493L10.9165 9.3853C11.6291 9.2797 11.9491 9.06132 12.213 8.70144C12.4768 8.34156 12.6092 7.76618 12.6092 6.99829V6.3985C12.6092 5.94307 12.561 5.58319 12.4768 5.30736C12.3927 5.03152 12.249 4.7916 12.0447 4.5761C11.829 4.3721 11.5888 4.22842 11.3005 4.13217C11.0122 4.04813 10.6519 4 10.2083 4V4.00072Z",
+                        fill="currentColor"
+                      )
+                      path(
+                        d="M24 3.93752e-06C24 4.41828 20.4183 8.00001 16 8.00001C15.1017 8.00001 14.2381 7.85195 13.432 7.57892C13.4492 7.38881 13.4568 7.19444 13.4568 6.99829V6.3985C13.4568 5.88921 13.4036 5.44029 13.2876 5.05983C13.1624 4.64955 12.9479 4.29646 12.6598 3.99249L12.6438 3.97561L12.6269 3.95964C12.32 3.66935 11.972 3.46212 11.5684 3.32735L11.5528 3.32217L11.5371 3.31759C11.1528 3.20558 10.7092 3.15152 10.2075 3.15152H9.35897V3.15223H8.64498C8.22987 2.18493 8 1.11931 8 3.93752e-06C8 -4.41828 11.5817 -8 16 -8C20.4183 -8 24 -4.41828 24 3.93752e-06Z",
+                        fill="currentColor"
+                      )
+                    path(
+                      d="M15.8787 7.99988C15.8787 3.64855 12.3512 0.121094 7.99988 0.121094C3.64855 0.121094 0.121094 3.64855 0.121094 7.99988C0.121094 12.3512 3.64855 15.8787 7.99988 15.8787C12.3512 15.8787 15.8787 12.3512 15.8787 7.99988Z",
+                      stroke="currentColor",
+                      stroke-width="2"
+                    )
+                  defs
+                    clippath#clip0_3338_19760
+                      rect(width="16", height="16", fill="white")
+              span RuTube
     div(
-      class="col-[main] flex flex-wrap items-center justify-between gap-x-6 gap-y-1 pt-[3.75rem] font-ptRoot text-sm text-muted"
+      class="col-[main] flex flex-wrap items-center justify-between gap-x-6 gap-y-1 font-ptRoot text-sm text-muted ~pt-6/[3.75rem]"
     )
       a(href="#", target="_blank", class="") Политика конфиденциальности
       span(class="font-medium") Сделано в&nbsp;
