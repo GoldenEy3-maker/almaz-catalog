@@ -1,5 +1,49 @@
 extends layouts/root.pug
 
+include ../components/button
+
 block content
-  main(class="col-span-full pt-[10rem]")
-    section section
+  main(class="col-span-full grid grid-cols-subgrid ~pt-[8.375rem]/[14.5625rem]")
+    section(class="col-span-full flex flex-col items-center") 
+      h1(class="text-center text-h1 font-bold ~mb-4/12") Авторизация
+      form(
+        action="/api/login",
+        method="post",
+        class="w-full max-w-[46.875rem] space-y-5 bg-card ~px-8/12 ~py-[2.125rem]/[3.125rem]",
+        novalidate="",
+        data-redirect=""
+      )
+        div(class="flex flex-col space-y-[0.625rem]", data-form-control)
+          label(for="login", class="font-medium leading-none") Логин
+          input#login(
+            type="text",
+            class="peer h-12 rounded-sm border border-border bg-background px-6 focus:outline-none",
+            name="login",
+            required="",
+            autocapitalize="off",
+            autocomplete="off",
+            spellcheck="false"
+          )
+          p(
+            class="hidden text-destructive peer-aria-[invalid='true']:block",
+            data-form-control-message
+          )
+        div(class="flex flex-col space-y-[0.625rem]", data-form-control)
+          label(for="password", class="font-medium leading-none") Пароль
+          input#password(
+            type="password",
+            class="peer h-12 rounded-sm border border-border bg-background px-6 focus:outline-none",
+            name="password",
+            required="",
+            minlength="3"
+          )
+          p(
+            class="hidden text-destructive peer-aria-[invalid='true']:block",
+            data-form-control-message
+          )
+        +button(type="submit", class="!mt-10") Войти
+        p(
+          class="text-destructive aria-hidden:hidden",
+          data-form-response="",
+          aria-hidden="true"
+        ) 

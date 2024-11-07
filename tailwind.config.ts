@@ -26,8 +26,8 @@ export default {
         ptRoot: ["PTRoot", ...fontFamily.sans],
       },
       fontSize: {
-        // 40px
-        h1: ["2.5rem", "1.3"],
+        // 32px at 640px and 40px at 1536px
+        h1: ["clamp(2rem, 1.6429rem + 0.8929vw, 2.5rem)", "1.3"],
         // 36px
         h2: ["2.25rem", "1.3"],
         // 24px
