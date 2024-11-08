@@ -44,6 +44,7 @@
     "vinyl-source-stream": "^2.0.0"
   },
   "dependencies": {
+    "@tailwindcss/container-queries": "^0.1.1",
     "gulp-pug": "^5.0.0",
     "tailwindcss": "^3.4.10"
   }
