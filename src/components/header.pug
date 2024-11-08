@@ -118,7 +118,7 @@ mixin header
                 )
       +submenu
     div(
-      class="max-container col-[main] flex pb-3 pt-4 [.lock-scroll_&]:pr-[var(--scrollbar-width)]"
+      class="max-container col-[main] flex pb-3 pt-4 ~gap-6/10 [.lock-scroll_&]:pr-[var(--scrollbar-width)]"
     )
       button(
         type="button",
@@ -184,13 +184,13 @@ mixin header
               )
         a(
           href="#",
-          class="relative inline-flex items-center font-medium ~text-sm/base ~gap-[0.375rem]/3"
+          class="inline-flex items-center font-medium ~text-sm/base ~gap-[0.375rem]/3"
         )
-          span(
-            class="absolute -right-1 top-0 inline-flex h-3 min-w-3 items-center justify-center rounded-full bg-destructive px-[0.15rem] text-[0.5rem] leading-none text-background md:top-2"
-          ) 2
           span Корзина
-          span(class="text-primary ~h-[1.125rem]/[1.625rem]")
+          span(class="relative text-primary ~h-[1.125rem]/[1.625rem]")
+            span(
+              class="absolute -right-1 -top-1 inline-flex h-3 min-w-3 items-center justify-center rounded-full bg-destructive px-[0.15rem] text-[0.5rem] leading-none text-background"
+            ) 2
             svg(
               width="27",
               height="100%",
