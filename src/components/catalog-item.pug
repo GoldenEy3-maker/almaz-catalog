@@ -1,22 +1,36 @@
 mixin catalog-item(href, title, img, description)
-  a(href=href, class="")
-    div(class="flex items-baseline justify-between gap-x-6")
-      h3(class="text-h3")= title
-      span(class="text-primary")
+  a(href=href, class="group bg-black/5 font-ptRoot ~p-5/6")
+    div(class="mb-2 flex items-baseline justify-between gap-x-6")
+      h3(class="text-h3 font-medium")= title
+      span(class="flex items-center text-primary")
         svg(
-          width="14",
-          height="13",
-          viewbox="0 0 14 13",
-          fill="none",
+          class="transition-all duration-300 group-hover:translate-x-1",
+          width="9",
+          height="12",
+          viewbox="0 0 9 12",
+          fill="currentColor",
           xmlns="http://www.w3.org/2000/svg"
         )
           path(
-            d="M1.03518e-07 0.5L5.46736 6.5L0 12.5H2.73368L8.20099 6.49995L2.73368 0.5H1.03518e-07Z",
-            fill="currentColor"
+            d="M1.07108e-07 1.23978e-05L5.65685 5.65687L0 11.3137L2.82843 11.3137L8.48524 5.65682L2.82843 1.23978e-05H1.07108e-07Z"
           )
+        svg(
+          class="-translate-x-[0.18rem] transition-all duration-300 group-hover:translate-x-[0.35rem]",
+          width="9",
+          height="12",
+          viewbox="0 0 9 12",
+          fill="currentColor",
+          xmlns="http://www.w3.org/2000/svg"
+        )
           path(
-            d="M5.79901 0.5L11.2664 6.5L5.79901 12.5H8.53269L14 6.49995L8.53269 0.5H5.79901Z",
-            fill="currentColor"
+            d="M1.07108e-07 1.23978e-05L5.65685 5.65687L0 11.3137L2.82843 11.3137L8.48524 5.65682L2.82843 1.23978e-05H1.07108e-07Z"
           )
-    img(src=img, alt="")
-    p!= description
+    div(
+      class="@[49.65rem]:~min-[53.125rem]:~h-[16rem]/[25rem] flex items-center justify-center overflow-hidden ~sm/[53.125rem]:~h-[13rem]/[24rem]"
+    )
+      img(
+        src=img,
+        alt="",
+        class="w-full object-contain brightness-95 transition-all duration-300 group-hover:scale-105"
+      )
+    p(class="mt-2 text-description")!= description
