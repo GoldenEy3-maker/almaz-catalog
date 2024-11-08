@@ -1,0 +1,9 @@
+extends ../layouts/root
+
+include ../../components/breadcrumbs
+
+block content
+  main(class="col-[main] grid grid-cols-subgrid pt-[11.81.25rem]")
+    div(class="col-span-full") 
+      +breadcrumbs(["Каталог запчастей", "Бороны"], "Мульчировщик PULSAR")
+      h1(class="text-h1 font-bold") Бороны
