@@ -3,7 +3,9 @@ extends ../layouts/root
 include ../../components/breadcrumbs
 
 block content
-  main(class="col-[main] grid grid-cols-subgrid pt-[11.81.25rem]")
+  main(class="col-[main] grid grid-cols-subgrid ~pt-[8.375rem]/[12.5625rem]")
     div(class="col-span-full") 
-      +breadcrumbs(["Каталог запчастей", "Бороны"], "Мульчировщик PULSAR")
+      +breadcrumbs([{href: "index.html", value: "Каталог запчастей"}], "Мульчировщик PULSAR")(
+        class="mb-[1.125rem]"
+      )
       h1(class="text-h1 font-bold") Бороны
