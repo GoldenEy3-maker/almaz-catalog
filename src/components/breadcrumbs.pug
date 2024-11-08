@@ -1,0 +1,9 @@
+mixin breadcrumbs(prevPages, currentPage)
+  ul(class="flex flex-wrap items-center font-ptRoot text-lg font-medium")&attributes(attributes)
+    each link in prevPages
+      li(
+        class="after:mx-[0.375rem] after:inline-flex after:h-2 after:w-[0.5625rem] after:bg-primary after:[mask:url(assets/img/arrow-right-sm.svg)_no-repeat_50%_50%] [&:nth-last-child(2)]:after:bg-border"
+      )
+        a(href="#", class="text-primary")= link
+    li(class="")
+      span(class="text-border")= currentPage
