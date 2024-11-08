@@ -1,10 +1,10 @@
 include ./submenu
 
 mixin header
-  header(class="main-container fixed inset-x-0 top-0 w-full bg-background")
+  header(class="main-container fixed inset-x-0 top-0 z-50 w-full bg-background")
     div(class="relative col-span-full grid grid-cols-subgrid")
       div(
-        class="relative z-20 col-[main] flex border-b border-card bg-background ~pt-3/[1.125rem] ~pb-2/[1.125rem] [.lock-scroll_&]:pr-[var(--scrollbar-width)]"
+        class="max-container relative z-20 col-[main] flex border-b border-card bg-background ~pt-3/[1.125rem] ~pb-2/[1.125rem] [.lock-scroll_&]:pr-[var(--scrollbar-width)]"
       )
         a(
           href="/",
@@ -117,7 +117,9 @@ mixin header
                   fill="currentColor"
                 )
       +submenu
-    div(class="col-[main] flex pb-3 pt-4 [.lock-scroll_&]:pr-[var(--scrollbar-width)]")
+    div(
+      class="max-container col-[main] flex pb-3 pt-4 [.lock-scroll_&]:pr-[var(--scrollbar-width)]"
+    )
       button(
         type="button",
         class="inline-flex w-6 items-center justify-center md:hidden"
