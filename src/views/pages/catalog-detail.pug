@@ -1,6 +1,7 @@
 extends ../layouts/root
 
 include ../../components/breadcrumbs
+include ../../components/filters
 
 block content
   main(class="col-[main] grid grid-cols-subgrid ~pt-[8.375rem]/[12.5625rem]")
@@ -9,3 +10,4 @@ block content
         class="mb-[1.125rem]"
       )
       h1(class="text-h1 font-bold") Бороны
+      +filters(class="mt-9")

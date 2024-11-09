@@ -1,0 +1,55 @@
+mixin filters
+  div(class="flex flex-wrap items-center border-b-2 border-primary pb-4 ~gap-x-10/12")&attributes(attributes)
+    div(class="relative", data-custom-select="")
+      input(
+        type="text",
+        name="filter-1",
+        hidden="",
+        data-custom-select-input=""
+      )
+      button(
+        type="button",
+        class="inline-flex items-baseline gap-2 py-3 font-medium leading-none",
+        data-custom-select-trigger=""
+      )
+        span
+          svg(
+            width="12",
+            height="8",
+            viewbox="0 0 12 8",
+            fill="none",
+            xmlns="http://www.w3.org/2000/svg"
+          )
+            path(d="M1 1L6 6L11 1", stroke="currentColor", stroke-width="2")
+        span Количество рядов
+      div(
+        class="absolute top-full overflow-hidden rounded-md bg-card transition-all duration-300 aria-hidden:invisible aria-hidden:top-[80%] aria-hidden:opacity-0",
+        aria-hidden="true",
+        data-custom-select-content=""
+      )
+        input(
+          type="text",
+          placeholder="Поиск",
+          class="border-b border-black/30 bg-transparent px-4 py-1.5 text-sm placeholder:text-black/40 focus:outline-none",
+          data-custom-select-search=""
+        )
+        ul(class="py-1")
+          li(class="flex")
+            button(
+              type="button",
+              class="h-full w-full px-4 py-0.5 text-left font-ptRoot text-sm text-black/40 transition-all duration-300 hover:text-black",
+              data-custom-select-option=""
+            ) 1
+          li(class="flex")
+            button(
+              type="button",
+              class="h-full w-full px-4 py-0.5 text-left font-ptRoot text-sm text-black/40 transition-all duration-300 hover:text-black",
+              data-custom-select-option=""
+            ) 2
+          li(class="flex")
+            button(
+              type="button",
+              class="h-full w-full px-4 py-0.5 text-left font-ptRoot text-sm text-black/40 transition-all duration-300 hover:text-black",
+              data-custom-select-option=""
+            ) 4
+        span(class="focus-guard", data-focus-guard="", tabindex="0")
