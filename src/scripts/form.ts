@@ -87,7 +87,7 @@ function validateFormSubmit(event: SubmitEvent) {
   return isValid;
 }
 
-export function handleSubmitForm(event: SubmitEvent) {
+export function formSubmitHandler(event: SubmitEvent) {
   event.preventDefault();
 
   const target = event.target as HTMLFormElement;
