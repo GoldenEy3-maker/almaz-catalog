@@ -11,3 +11,7 @@ export function unlockScroll(delay = 0) {
     document.body.classList.remove("lock-scroll");
   }, delay);
 }
+
+export function getAttrFromSelector(selector: string) {
+  return selector.replace(/^\[|\]/g, "");
+}
