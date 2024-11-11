@@ -29,14 +29,14 @@ export default {
       fontSize: {
         // 32px at 640px and 40px at 1536px
         h1: ["clamp(2rem, 1.6429rem + 0.8929vw, 2.5rem)", "1.3"],
-        // 36px
-        h2: ["2.25rem", "1.3"],
-        // 24px
-        h3: ["1.5rem", "1.3"],
-        // 22px
-        h4: ["1.375rem", "1.35"],
-        // 20px
-        h5: ["1.25rem", "1"],
+        // 28px at 640px and 36px at 1536px
+        h2: ["clamp(1.75rem, 1.3929rem + 0.8929vw, 2.25rem)", "1.3"],
+        // 20px at 640px and 24px at 1536px
+        h3: ["clamp(1.25rem, 1.0714rem + 0.4464vw, 1.5rem)", "1.3"],
+        // 18px at 640px and 22px at 1536px
+        h4: ["clamp(1.125rem, 0.9464rem + 0.4464vw, 1.375rem)", "1.35"],
+        // 16px at 640px and 20px at 1536px
+        h5: ["clamp(1rem, 0.8214rem + 0.4464vw, 1.25rem)", "1"],
       },
       colors: {
         background: "#FFFFFF",
