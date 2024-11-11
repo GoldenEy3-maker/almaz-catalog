@@ -1,13 +1,37 @@
 extends ../layouts/root
 
 include ../../components/breadcrumbs
-include ../../components/filters
+include ../../components/catalog-detail-item
 
 block content
   main(class="col-[main] grid grid-cols-subgrid ~pt-[8.375rem]/[12.5625rem]")
-    div(class="col-span-full") 
+    div(class="col-span-full mb-14") 
       +breadcrumbs([{href: "index.html", value: "Каталог запчастей"}], "Мульчировщик PULSAR")(
         class="mb-[1.125rem]"
       )
       h1(class="text-h1 font-bold") Бороны
-      +filters(class="mt-9")
+    div(class="col-span-full space-y-[3.75rem] @container")
+      section
+        h2(class="text-h2 font-bold ~mb-7/10") Бороны Зубовые
+        div(
+          class="grid ~gap-x-6/10 ~gap-y-9/12 @sm:grid-cols-[repeat(auto-fill,minmax(22rem,1fr))] @[86rem]:grid-cols-[repeat(auto-fill,minmax(27rem,1fr))]"
+        )
+          +catalog-detail-item("#", "/assets/img/detail-img-2.webp", "DANA БДП-6×2У", "борона дисковая навесная двухрядная")
+          +catalog-detail-item("#", "/assets/img/detail-img-2.webp", "DANA БДП-6×2У", "борона дисковая навесная двухрядная")
+          +catalog-detail-item("#", "/assets/img/detail-img-2.webp", "DANA БДП-6×2У", "борона дисковая навесная двухрядная") 
+          +catalog-detail-item("#", "/assets/img/detail-img-2.webp", "DANA БДП-6×2У", "борона дисковая навесная двухрядная") 
+          +catalog-detail-item("#", "/assets/img/detail-img-2.webp", "DANA БДП-6×2У", "борона дисковая навесная двухрядная") 
+          +catalog-detail-item("#", "/assets/img/detail-img-2.webp", "DANA БДП-6×2У", "борона дисковая навесная двухрядная") 
+          +catalog-detail-item("#", "/assets/img/detail-img-2.webp", "DANA БДП-6×2У", "борона дисковая навесная двухрядная") 
+      section
+        h2(class="text-h2 font-bold ~mb-7/10") Бороны Зубовые
+        div(
+          class="grid ~gap-x-6/10 ~gap-y-9/12 @sm:grid-cols-[repeat(auto-fill,minmax(22rem,1fr))] @[86rem]:grid-cols-[repeat(auto-fill,minmax(27rem,1fr))]"
+        )
+          +catalog-detail-item("#", "/assets/img/detail-img-2.webp", "DANA БДП-6×2У", "борона дисковая навесная двухрядная")
+          +catalog-detail-item("#", "/assets/img/detail-img-2.webp", "DANA БДП-6×2У", "борона дисковая навесная двухрядная")
+          +catalog-detail-item("#", "/assets/img/detail-img-2.webp", "DANA БДП-6×2У", "борона дисковая навесная двухрядная") 
+          +catalog-detail-item("#", "/assets/img/detail-img-2.webp", "DANA БДП-6×2У", "борона дисковая навесная двухрядная") 
+          +catalog-detail-item("#", "/assets/img/detail-img-2.webp", "DANA БДП-6×2У", "борона дисковая навесная двухрядная") 
+          +catalog-detail-item("#", "/assets/img/detail-img-2.webp", "DANA БДП-6×2У", "борона дисковая навесная двухрядная") 
+          +catalog-detail-item("#", "/assets/img/detail-img-2.webp", "DANA БДП-6×2У", "борона дисковая навесная двухрядная") 

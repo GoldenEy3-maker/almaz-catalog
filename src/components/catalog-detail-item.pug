@@ -1,0 +1,15 @@
+mixin catalog-detail-item(href, img, title, description)
+  article(class="group relative font-ptRoot")
+    a(href=href, class="absolute inset-0 z-10")
+    div(
+      class="bg-black/5 transition-all duration-300 ~h-[12rem]/[20rem] group-hover:bg-black/30"
+    )
+      img(
+        class="h-full w-full object-contain brightness-95 transition-all duration-300 group-hover:brightness-[.7]",
+        src=img,
+        alt=""
+      )
+    h3(
+      class="text-h3 font-medium transition-all duration-300 ~mt-4/6 group-hover:text-primary"
+    )= title
+    p(class="text-lg text-description")= description
