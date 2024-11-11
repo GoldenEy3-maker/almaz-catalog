@@ -106,7 +106,12 @@ function watch() {
 function views() {
   return gulp
     .src(paths.views.src)
-    .pipe(pug())
+    .pipe(
+      pug({
+        pretty: true,
+        verbose: true,
+      }),
+    )
     .pipe(
       versions({
         value: "%MDS%",
@@ -114,7 +119,7 @@ function views() {
           key: "v",
           to: [{ type: "js", files: ["main.min.js"] }, "css", "image"],
         },
-      })
+      }),
     )
     .pipe(gulp.dest(paths.views.dest))
     .pipe(browserSync.stream());
@@ -150,7 +155,7 @@ function styles() {
         outputStyle: "compressed",
         silenceDeprecations: ["legacy-js-api"],
         includePaths: ["node_modules"],
-      }).on("error", sass.logError)
+      }).on("error", sass.logError),
     )
     .pipe(
       postcss([
@@ -158,7 +163,7 @@ function styles() {
         autoprefixer(),
         cssnano(),
         cssImport(),
-      ])
+      ]),
     )
     .pipe(rename({ basename: "styles", extname: ".css", suffix: ".min" }))
     .pipe(gulp.dest(paths.styles.dest))
@@ -211,7 +216,7 @@ function fonts() {
         await fs.writeFile("./src/styles/fonts.sass", data, { flag: "a+" });
 
         cb(null, chunk);
-      })
+      }),
     )
     .pipe(newer(paths.fonts.dest))
     .pipe(ttf2woff())
@@ -276,6 +281,6 @@ gulp.task(
   gulp.series(
     clean,
     cleanLocalFontImports,
-    gulp.parallel(views, scripts, webp, images, gulp.series(fonts, styles))
-  )
+    gulp.parallel(views, scripts, webp, images, gulp.series(fonts, styles)),
+  ),
 );
