@@ -1,9 +1,9 @@
 import { SelectorMap } from "./constants";
 
-function validateFormSubmit(event: SubmitEvent) {
-  const controls = (
-    event.currentTarget as HTMLFormElement
-  ).querySelectorAll<HTMLDivElement>(SelectorMap.FormControl);
+function validateForm(form: HTMLFormElement) {
+  const controls = form.querySelectorAll<HTMLDivElement>(
+    SelectorMap.FormControl,
+  );
 
   let isValid = true;
 
@@ -32,6 +32,7 @@ function validateFormSubmit(event: SubmitEvent) {
       if (messageContainer)
         messageContainer.textContent = target.dataset.patternText ?? null;
       target.ariaInvalid = "true";
+      console.log(target.value);
     } else {
       if (messageContainer) messageContainer.textContent = "";
       target.ariaInvalid = "false";
@@ -62,21 +63,21 @@ function validateFormSubmit(event: SubmitEvent) {
         SelectorMap.FormControlMessage,
       );
 
-      if (input?.required) {
+      if (input?.required !== undefined) {
         validateRequired(input, messageContainer);
         input.addEventListener("input", () =>
           validateRequired(input, messageContainer),
         );
       }
 
-      if (input?.pattern) {
+      if (input?.pattern !== undefined && input.pattern !== "") {
         validatePattern(input, messageContainer);
         input.addEventListener("input", () =>
           validatePattern(input, messageContainer),
         );
       }
 
-      if (input?.minLength) {
+      if (input?.minLength !== undefined && input.minLength !== -1) {
         validateMinLength(input, messageContainer);
         input.addEventListener("input", () => {
           validateMinLength(input, messageContainer);
@@ -92,7 +93,7 @@ export function formSubmitHandler(event: SubmitEvent) {
 
   const target = event.target as HTMLFormElement;
 
-  const isValid = validateFormSubmit(event);
+  const isValid = validateForm(target);
 
   const responseContainer = target.querySelector<HTMLParagraphElement>(
     SelectorMap.FormResponse,
