@@ -1,5 +1,5 @@
 mixin button(variant="default")
-  - var baseClasses = "px-12 inline-flex h-12 items-center justify-center font-bold";
+  - var baseClasses = "px-12 inline-flex h-12 items-center justify-center font-bold disabled:text-description disabled:bg-card";
   - var classVariants = { variant: { default: " bg-primary", outline: " border-2 border-primary" } };
   button(class=baseClasses+classVariants.variant[variant])&attributes(attributes)
     block
