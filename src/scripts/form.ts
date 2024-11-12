@@ -1,7 +1,7 @@
 import { SelectorMap } from "./constants";
 import { z } from "zod";
 
-function generateParser(input: HTMLInputElement) {
+function generateResolver(input: HTMLInputElement) {
   let parser = z.string({
     required_error: input.required ? "Обязательное поле" : undefined,
   });
@@ -25,10 +25,12 @@ function generateParser(input: HTMLInputElement) {
 
 function validateField(
   input: HTMLInputElement,
-  parser: z.ZodString,
+  resolver: z.ZodString,
   messageContainer?: HTMLParagraphElement | null,
 ) {
-  const result = parser.safeParse(input.value !== "" ? input.value : undefined);
+  const result = resolver.safeParse(
+    input.value !== "" ? input.value : undefined,
+  );
 
   if (result.error) {
     input.ariaInvalid = "true";
@@ -60,11 +62,11 @@ function validateForm(
 
     if (!input) return;
 
-    const parser = generateParser(input);
+    const resolver = generateResolver(input);
 
-    isValid = validateField(input, parser, messageContainer);
+    isValid = validateField(input, resolver, messageContainer);
     input.addEventListener("input", () => {
-      isValid = validateField(input, parser, messageContainer);
+      isValid = validateField(input, resolver, messageContainer);
       watchCallback?.(
         form.querySelector(
           `${SelectorMap.FormControl} input[aria-invalid=true]`,
