@@ -3,10 +3,12 @@ export const SelectorMap = {
   YearMask: "[data-year-mask]",
 
   // Form
+  Form: "[data-form]",
   FormControl: "[data-form-control]",
   FormControlMessage: "[data-form-control-message]",
   FormResponse: "[data-form-response]",
   FormWithValidationWatcher: "[data-form-validation-watcher]",
+  FieldWithSearchParams: "[data-field-with-search-params]",
 
   // Custom Select
   CustomSelectTrigger: "[data-custom-select-trigger]",

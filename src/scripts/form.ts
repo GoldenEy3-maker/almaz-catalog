@@ -2,7 +2,9 @@ import { SelectorMap } from "./constants";
 import { z } from "zod";
 
 function generateParser(input: HTMLInputElement) {
-  let parser = z.string({ required_error: "Обязательное поле" });
+  let parser = z.string({
+    required_error: input.required ? "Обязательное поле" : undefined,
+  });
 
   if (input.pattern) {
     parser = parser.regex(
@@ -196,5 +198,20 @@ export function initValidationWatcher() {
             );
         }
       });
+    });
+}
+
+export function initFieldsWithSearchParams() {
+  const fields = document.querySelectorAll<HTMLInputElement>(
+    SelectorMap.FieldWithSearchParams,
+  );
+  const searchParams = Object.fromEntries(
+    new URL(window.location.href).searchParams.entries(),
+  );
+
+  if (fields.length)
+    fields.forEach((field) => {
+      const linkedParam = searchParams[field.name];
+      if (linkedParam) field.value = linkedParam;
     });
 }
