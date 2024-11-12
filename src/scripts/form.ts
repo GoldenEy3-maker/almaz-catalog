@@ -1,89 +1,77 @@
 import { SelectorMap } from "./constants";
+import { z } from "zod";
 
-function validateForm(form: HTMLFormElement) {
+function generateParser(input: HTMLInputElement) {
+  let parser = z.string({ required_error: "Обязательное поле" });
+
+  if (input.pattern) {
+    parser = parser.regex(
+      new RegExp(`^(?:${input.pattern})$`),
+      input.getAttribute("data-pattern-text") ?? undefined,
+    );
+  }
+
+  if (input.minLength !== undefined && input.minLength !== -1) {
+    parser = parser.min(
+      input.minLength,
+      `Минимальное количество символов поля ${input.minLength}`,
+    );
+  }
+
+  return parser;
+}
+
+function validateField(
+  input: HTMLInputElement,
+  parser: z.ZodString,
+  messageContainer?: HTMLParagraphElement | null,
+) {
+  const result = parser.safeParse(input.value !== "" ? input.value : undefined);
+
+  if (result.error) {
+    input.ariaInvalid = "true";
+    if (messageContainer)
+      messageContainer.textContent = result.error?.flatten().formErrors[0];
+    return false;
+  }
+
+  input.ariaInvalid = "false";
+  if (messageContainer) messageContainer.textContent = "";
+  return true;
+}
+
+function validateForm(
+  form: HTMLFormElement,
+  watchCallback?: (isValid: boolean) => void,
+) {
   const controls = form.querySelectorAll<HTMLDivElement>(
     SelectorMap.FormControl,
   );
 
   let isValid = true;
 
-  function validateRequired(
-    target: HTMLInputElement,
-    messageContainer: HTMLParagraphElement | null,
-  ) {
-    if (target.value === "") {
-      isValid = false;
-      if (messageContainer) messageContainer.textContent = "Обязательное поле";
-      target.ariaInvalid = "true";
-    } else {
-      if (messageContainer) messageContainer.textContent = "";
-      target.ariaInvalid = "false";
-    }
-  }
+  controls.forEach((control) => {
+    const input = control.querySelector<HTMLInputElement>("input");
+    const messageContainer = control.querySelector<HTMLParagraphElement>(
+      SelectorMap.FormControlMessage,
+    );
 
-  function validatePattern(
-    target: HTMLInputElement,
-    messageContainer: HTMLParagraphElement | null,
-  ) {
-    if (!target.value && target.required) return;
+    if (!input) return;
 
-    if (!new RegExp(`^(?:${target.pattern})$`).test(target.value)) {
-      isValid = false;
-      if (messageContainer)
-        messageContainer.textContent = target.dataset.patternText ?? null;
-      target.ariaInvalid = "true";
-      console.log(target.value);
-    } else {
-      if (messageContainer) messageContainer.textContent = "";
-      target.ariaInvalid = "false";
-    }
-  }
+    const parser = generateParser(input);
 
-  function validateMinLength(
-    target: HTMLInputElement,
-    messageContainer: HTMLParagraphElement | null,
-  ) {
-    if (!target.value) return;
-
-    if (target.value.length < target.minLength) {
-      isValid = false;
-      if (messageContainer)
-        messageContainer.textContent = `Минимальное количество символов поля ${target.minLength}`;
-      target.ariaInvalid = "true";
-    } else {
-      if (messageContainer) messageContainer.textContent = "";
-      target.ariaInvalid = "false";
-    }
-  }
-
-  if (controls.length)
-    controls.forEach((control) => {
-      const input = control.querySelector<HTMLInputElement>("input");
-      const messageContainer = control.querySelector<HTMLParagraphElement>(
-        SelectorMap.FormControlMessage,
+    isValid = validateField(input, parser, messageContainer);
+    input.addEventListener("input", () => {
+      isValid = validateField(input, parser, messageContainer);
+      watchCallback?.(
+        form.querySelector(
+          `${SelectorMap.FormControl} input[aria-invalid=true]`,
+        )
+          ? false
+          : true,
       );
-
-      if (input?.required !== undefined) {
-        validateRequired(input, messageContainer);
-        input.addEventListener("input", () =>
-          validateRequired(input, messageContainer),
-        );
-      }
-
-      if (input?.pattern !== undefined && input.pattern !== "") {
-        validatePattern(input, messageContainer);
-        input.addEventListener("input", () =>
-          validatePattern(input, messageContainer),
-        );
-      }
-
-      if (input?.minLength !== undefined && input.minLength !== -1) {
-        validateMinLength(input, messageContainer);
-        input.addEventListener("input", () => {
-          validateMinLength(input, messageContainer);
-        });
-      }
     });
+  });
 
   return isValid;
 }
@@ -99,6 +87,8 @@ export function formSubmitHandler(event: SubmitEvent) {
     SelectorMap.FormResponse,
   );
   const redirectUrl = target.getAttribute("data-redirect");
+  const isValidationWatcher =
+    target.getAttribute("data-form-validation-watcher") !== undefined;
 
   if (!isValid) return;
 
@@ -110,7 +100,7 @@ export function formSubmitHandler(event: SubmitEvent) {
   const elements = target.elements;
 
   for (let i = 0; i < elements.length; i++) {
-    (elements[i] as HTMLInputElement | HTMLButtonElement).disabled = true;
+    elements[i].setAttribute("disabled", "");
   }
 
   if (responseContainer) {
@@ -139,6 +129,10 @@ export function formSubmitHandler(event: SubmitEvent) {
           responseContainer.textContent = "Что-то пошло не так!";
           responseContainer.ariaHidden = "false";
         }
+        if (isValidationWatcher)
+          for (let i = 0; i < elements.length; i++) {
+            elements[i].removeAttribute("disabled");
+          }
         return;
       }
 
@@ -148,6 +142,12 @@ export function formSubmitHandler(event: SubmitEvent) {
         window.location.href = redirectUrl;
         return;
       }
+
+      if (isValidationWatcher)
+        for (let i = 0; i < elements.length; i++) {
+          const isSubmitter = elements[i].closest("[type=submit]");
+          if (!isSubmitter) elements[i].removeAttribute("disabled");
+        }
     })
     .catch((error) => {
       if (responseContainer) {
@@ -155,10 +155,46 @@ export function formSubmitHandler(event: SubmitEvent) {
         responseContainer.ariaHidden = "false";
       }
       console.error(error);
+
+      if (isValidationWatcher)
+        for (let i = 0; i < elements.length; i++) {
+          elements[i].removeAttribute("disabled");
+        }
     })
     .finally(() => {
-      for (let i = 0; i < elements.length; i++) {
-        elements[i].removeAttribute("disabled");
-      }
+      if (!isValidationWatcher)
+        for (let i = 0; i < elements.length; i++) {
+          elements[i].removeAttribute("disabled");
+        }
+    });
+}
+
+export function initValidationWatcher() {
+  const formsWithValidationWatcher = document.querySelectorAll<HTMLFormElement>(
+    SelectorMap.FormWithValidationWatcher,
+  );
+
+  if (formsWithValidationWatcher.length)
+    formsWithValidationWatcher.forEach((form) => {
+      const submitters = form.querySelectorAll("[type=submit]");
+
+      if (submitters.length)
+        submitters.forEach((submitter) =>
+          submitter.setAttribute("disabled", ""),
+        );
+
+      validateForm(form, (isValid) => {
+        if (isValid) {
+          if (submitters.length)
+            submitters.forEach((submitter) =>
+              submitter.removeAttribute("disabled"),
+            );
+        } else {
+          if (submitters.length)
+            submitters.forEach((submitter) =>
+              submitter.setAttribute("disabled", ""),
+            );
+        }
+      });
     });
 }
