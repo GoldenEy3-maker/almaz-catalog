@@ -4,22 +4,23 @@ include ../../components/input
 
 block content
   main(class="col-[main] grid grid-cols-subgrid ~pt-[8.375rem]/[12.5625rem]")
-    section(class="col-[span_15]")
-      h1(class="mb-9 text-h1 font-bold") Результаты поиска
-      form(action="search.html")
+    section(class="col-span-full md:col-[span_15]")
+      h1(class="text-h1 font-bold ~mb-6/9") Результаты поиска
+      form(action="search.html", class="~mb-10/[4.5rem]")
         div(class="relative")
           +input(
             type="text",
             name="q",
             placeholder="Название детали",
             enterkeyhint="search",
-            class="!h-16 !px-7 !pr-16 text-xl font-medium",
+            inputmode="search",
+            class="font-medium ~text-base/xl !~h-12/16 !~px-4/7 !~pr-14/16",
             data-field-with-search-params=""
           )
           div(
             class="pointer-events-none absolute inset-y-0 right-5 inline-flex items-center justify-center"
           )
-            span(class="h-8 w-8")
+            span(class="~h-6/8 ~w-6/8")
               svg(
                 width="100%",
                 height="100%",
@@ -33,7 +34,71 @@ block content
                   d="M13.3919 13.0945L18.4222 18.1246L18.4221 15.889L14.4453 11.9121C15.1105 10.9328 15.4948 9.74817 15.4836 8.47478C15.4543 5.14466 12.731 2.46883 9.40085 2.49815C6.07073 2.52746 3.3949 5.25081 3.42421 8.58093C3.45353 11.911 6.17688 14.5869 9.507 14.5576C10.993 14.5445 12.3487 13.995 13.3919 13.0945ZM9.4894 12.5576C7.26381 12.5772 5.44373 10.7889 5.42414 8.56333C5.40455 6.33774 7.19286 4.51766 9.41845 4.49807C11.644 4.47848 13.4641 6.26679 13.4837 8.49239C13.5033 10.718 11.715 12.5381 9.4894 12.5576Z",
                   fill="currentColor"
                 )
-        p(class="mt-5 text-lg text-description") Нашлось 3 результата
-      ul(class="mt-[4.5rem]")
-        li(class="")
-          h3(class="text-h3 font-bold") Плуг (РЗЗ.05.03.000-06)
+        p(class="text-description ~text-sm/lg ~mt-4/5") Нашлось 3 результата
+      ul(class="flex flex-col ~gap-[0.875rem]/6")
+        li(class="border-b-2 border-card ~pb-[0.875rem]/6")
+          h3(class="text-h3 font-bold ~mb-2/3") Плуг (РЗЗ.05.03.000-06)
+          div(class="flex flex-wrap items-end justify-between gap-x-6 gap-y-2 ~mb-4/6")
+            p(class="~text-base/xl") Гайка шестигранная самостопорящаяся низкая
+            span(class="text-border ~text-xs/lg") РЗЗ.09.03.000-06
+          a(
+            href="production-year.html",
+            class="inline-flex items-center gap-2 font-medium text-primary ~text-sm/lg"
+          )
+            span Перейти к детали
+            span
+              svg(
+                width="14",
+                height="14",
+                viewbox="0 0 14 14",
+                fill="none",
+                xmlns="http://www.w3.org/2000/svg"
+              )
+                path(
+                  d="M6.34838 0.0377788L13.7856 6.46854C13.8529 6.52667 13.9069 6.59853 13.9439 6.67926C13.9809 6.75999 14 6.84771 14 6.93646C14 7.0252 13.9809 7.11292 13.9439 7.19365C13.9069 7.27438 13.8529 7.34625 13.7856 7.40438L6.34838 13.8332C6.32596 13.8526 6.29841 13.8652 6.26902 13.8695C6.23962 13.8737 6.20961 13.8695 6.18256 13.8573C6.15552 13.845 6.13258 13.8253 6.11647 13.8004C6.10036 13.7755 6.09177 13.7465 6.09172 13.7169L6.09172 12.1475C6.09172 12.0584 6.13061 11.9731 6.19866 11.9131L11.1043 7.67176L0.15555 7.67176C0.0699979 7.67176 7.47581e-08 7.60201 7.57747e-08 7.51675L8.96378e-08 6.35422C9.06545e-08 6.26897 0.0699979 6.19921 0.15555 6.19921L11.1043 6.19921L6.19866 1.9579C6.13061 1.89977 6.09172 1.81452 6.09172 1.72345L6.09172 0.154033C6.09172 0.0222787 6.24727 -0.0494109 6.34838 0.0377788Z",
+                  fill="currentColor"
+                )
+        li(class="border-b-2 border-card ~pb-[0.875rem]/6")
+          h3(class="text-h3 font-bold ~mb-2/3") Плуг (РЗЗ.05.03.000-06)
+          div(class="flex flex-wrap items-end justify-between gap-x-6 gap-y-2 ~mb-4/6")
+            p(class="~text-base/xl") Гайка шестигранная самостопорящаяся низкая
+            span(class="text-border ~text-xs/lg") РЗЗ.09.03.000-06
+          a(
+            href="production-year.html",
+            class="inline-flex items-center gap-2 font-medium text-primary ~text-sm/lg"
+          )
+            span Перейти к детали
+            span
+              svg(
+                width="14",
+                height="14",
+                viewbox="0 0 14 14",
+                fill="none",
+                xmlns="http://www.w3.org/2000/svg"
+              )
+                path(
+                  d="M6.34838 0.0377788L13.7856 6.46854C13.8529 6.52667 13.9069 6.59853 13.9439 6.67926C13.9809 6.75999 14 6.84771 14 6.93646C14 7.0252 13.9809 7.11292 13.9439 7.19365C13.9069 7.27438 13.8529 7.34625 13.7856 7.40438L6.34838 13.8332C6.32596 13.8526 6.29841 13.8652 6.26902 13.8695C6.23962 13.8737 6.20961 13.8695 6.18256 13.8573C6.15552 13.845 6.13258 13.8253 6.11647 13.8004C6.10036 13.7755 6.09177 13.7465 6.09172 13.7169L6.09172 12.1475C6.09172 12.0584 6.13061 11.9731 6.19866 11.9131L11.1043 7.67176L0.15555 7.67176C0.0699979 7.67176 7.47581e-08 7.60201 7.57747e-08 7.51675L8.96378e-08 6.35422C9.06545e-08 6.26897 0.0699979 6.19921 0.15555 6.19921L11.1043 6.19921L6.19866 1.9579C6.13061 1.89977 6.09172 1.81452 6.09172 1.72345L6.09172 0.154033C6.09172 0.0222787 6.24727 -0.0494109 6.34838 0.0377788Z",
+                  fill="currentColor"
+                )
+        li(class="border-b-2 border-card ~pb-[0.875rem]/6")
+          h3(class="text-h3 font-bold ~mb-2/3") Плуг (РЗЗ.05.03.000-06)
+          div(class="flex flex-wrap items-end justify-between gap-x-6 gap-y-2 ~mb-4/6")
+            p(class="~text-base/xl") Гайка шестигранная самостопорящаяся низкая
+            span(class="text-border ~text-xs/lg") РЗЗ.09.03.000-06
+          a(
+            href="production-year.html",
+            class="inline-flex items-center gap-2 font-medium text-primary ~text-sm/lg"
+          )
+            span Перейти к детали
+            span
+              svg(
+                width="14",
+                height="14",
+                viewbox="0 0 14 14",
+                fill="none",
+                xmlns="http://www.w3.org/2000/svg"
+              )
+                path(
+                  d="M6.34838 0.0377788L13.7856 6.46854C13.8529 6.52667 13.9069 6.59853 13.9439 6.67926C13.9809 6.75999 14 6.84771 14 6.93646C14 7.0252 13.9809 7.11292 13.9439 7.19365C13.9069 7.27438 13.8529 7.34625 13.7856 7.40438L6.34838 13.8332C6.32596 13.8526 6.29841 13.8652 6.26902 13.8695C6.23962 13.8737 6.20961 13.8695 6.18256 13.8573C6.15552 13.845 6.13258 13.8253 6.11647 13.8004C6.10036 13.7755 6.09177 13.7465 6.09172 13.7169L6.09172 12.1475C6.09172 12.0584 6.13061 11.9731 6.19866 11.9131L11.1043 7.67176L0.15555 7.67176C0.0699979 7.67176 7.47581e-08 7.60201 7.57747e-08 7.51675L8.96378e-08 6.35422C9.06545e-08 6.26897 0.0699979 6.19921 0.15555 6.19921L11.1043 6.19921L6.19866 1.9579C6.13061 1.89977 6.09172 1.81452 6.09172 1.72345L6.09172 0.154033C6.09172 0.0222787 6.24727 -0.0494109 6.34838 0.0377788Z",
+                  fill="currentColor"
+                )
