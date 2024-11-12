@@ -1,0 +1,50 @@
+extends ../layouts/root
+
+include ../../components/breadcrumbs
+include ../../components/input
+include ../../components/button
+
+block content
+  main(
+    class="col-[main] grid grid-cols-subgrid items-center ~pt-[8.375rem]/[12.5625rem]"
+  )
+    div(class="col-span-full") 
+      +breadcrumbs([{href: "index.html", value: "Каталог запчастей"}, {href: "catalog-detail.html", value: "Бороны"}], "DANA БДП-6×2У")(
+        class="mb-[1.125rem]"
+      )
+      h1(class="text-h1 font-bold") DANA БДП-6×2У
+    form(
+      action="/",
+      class="order-2 col-span-full mt-12 md2:order-1 md2:col-span-7",
+      novalidate="",
+      data-form-validation-watcher=""
+    )
+      h3(class="mb-3 text-h3 font-medium") Укажите год выпуска техники
+      p(class="text-description ~text-base/lg") Для техники разных годов выпуска, возможны расхождения в&nbsp;запасных частях.
+      div(
+        class="",
+        data-form-control="",
+        class="grid items-center gap-y-2 ~mt-7/8 ~mb-9/8 ~gap-x-6/10 min-[31.25rem]:grid-cols-[clamp(7rem,1rem+9.375vw,10rem)_1fr]"
+      )
+        label(for="equipment-year") Год выпуска модели
+        +input#equipment-year(
+          type="text",
+          placeholder="Например, 2015",
+          required="",
+          name="year",
+          inputmode="numeric",
+          data-year-mask="",
+          pattern="(19[789]\\\d|20[0\\\d]\\\d)",
+          data-pattern-text="Неверный формат года",
+          class="peer w-full min-[31.25rem]:max-w-[23.4375rem]",
+          maxLength="4"
+        )
+      +button(type="submit", disabled="", class="w-full min-[31.25rem]:w-auto") Смотреть каталог
+    div(
+      class="order-1 col-span-full mt-5 ~h-[10rem]/[25rem] md2:order-2 md2:col-[span_10/-1] md2:mt-0"
+    )
+      img(
+        class="h-full w-full object-contain",
+        src="assets/img/equipment-1.webp",
+        alt=""
+      )

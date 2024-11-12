@@ -1,6 +1,7 @@
 extends ../layouts/root.pug
 
 include ../../components/button
+include ../../components/input
 
 block content
   main(class="col-[main] grid grid-cols-subgrid ~pt-[8.375rem]/[14.5625rem]")
@@ -13,11 +14,11 @@ block content
         novalidate="",
         data-redirect="/"
       )
-        div(class="flex flex-col space-y-[0.625rem]", data-form-control)
+        div(class="flex flex-col space-y-[0.625rem]", data-form-control="")
           label(for="login", class="font-medium leading-none") Логин
-          input#login(
+          +input#login(
             type="text",
-            class="peer h-12 rounded-sm border border-border bg-background px-6 focus:outline-none",
+            class="peer",
             name="login",
             required="",
             autocapitalize="off",
@@ -26,20 +27,20 @@ block content
           )
           p(
             class="hidden text-destructive peer-aria-[invalid='true']:block",
-            data-form-control-message
+            data-form-control-message=""
           )
-        div(class="flex flex-col space-y-[0.625rem]", data-form-control)
+        div(class="flex flex-col space-y-[0.625rem]", data-form-control="")
           label(for="password", class="font-medium leading-none") Пароль
-          input#password(
+          +input#password(
             type="password",
-            class="peer h-12 rounded-sm border border-border bg-background px-6 focus:outline-none",
+            class="peer",
             name="password",
             required="",
             minlength="3"
           )
           p(
             class="hidden text-destructive peer-aria-[invalid='true']:block",
-            data-form-control-message
+            data-form-control-message=""
           )
         +button(type="submit", class="!mt-10") Войти
         p(

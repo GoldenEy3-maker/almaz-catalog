@@ -1,8 +1,12 @@
 export const SelectorMap = {
+  // Input masks
+  YearMask: "[data-year-mask]",
+
   // Form
   FormControl: "[data-form-control]",
   FormControlMessage: "[data-form-control-message]",
   FormResponse: "[data-form-response]",
+  FormWithValidationWatcher: "[data-form-validation-watcher]",
 
   // Custom Select
   CustomSelectTrigger: "[data-custom-select-trigger]",
