@@ -6,7 +6,9 @@ import {
   initValidationWatcher,
 } from "./form";
 import { yearMaskHandler } from "./mask";
+import { openModal } from "./modal";
 import { initSubmenu } from "./submenu";
+import { getAttrFromSelector } from "./utils";
 
 initSubmenu();
 initValidationWatcher();
@@ -24,13 +26,27 @@ document.addEventListener("input", (event) => {
   if (yearMaskInput) yearMaskHandler(yearMaskInput);
 });
 document.addEventListener("click", (event) => {
-  const incrementCounterTrigger = (
-    event.target as HTMLElement
-  ).closest<HTMLButtonElement>(SelectorMap.CounterIncrementTrigger);
-  const decrementCounterTrigger = (
-    event.target as HTMLElement
-  ).closest<HTMLButtonElement>(SelectorMap.CounterDecrementTrigger);
+  const target = event.target as HTMLElement;
+
+  const incrementCounterTrigger = target.closest<HTMLButtonElement>(
+    SelectorMap.CounterIncrementTrigger,
+  );
+  const decrementCounterTrigger = target.closest<HTMLButtonElement>(
+    SelectorMap.CounterDecrementTrigger,
+  );
+
+  const modalTrigger = target.closest<HTMLButtonElement>(
+    SelectorMap.ModalTrigger,
+  );
 
   if (incrementCounterTrigger) incrementCounter(incrementCounterTrigger);
   if (decrementCounterTrigger) decrementCounter(decrementCounterTrigger);
+
+  if (modalTrigger) {
+    const key = modalTrigger.getAttribute(
+      getAttrFromSelector(SelectorMap.ModalTrigger),
+    );
+    if (!key) return;
+    openModal(key, modalTrigger);
+  }
 });

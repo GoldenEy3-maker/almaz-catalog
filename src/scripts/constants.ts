@@ -23,6 +23,13 @@ export const SelectorMap = {
   CustomSelectOption: "[data-custom-select-option]",
   CustomSelectEmpty: "[data-custom-select-empty]",
 
+  // Modal
+  ModalOverlay: "[data-modal-overlay]",
+  ModalRoot: "[data-modal-root]",
+  ModalWrapper: "[data-modal-wrapper]",
+  ModalTrigger: "[data-modal-trigger]",
+  ModalClose: "[data-modal-close]",
+
   // FocusGuard
   FocusGuard: "[data-focus-guard]",
 } as const;
