@@ -21,6 +21,7 @@ export default {
     extend: {
       screens: {
         md2: "62rem",
+        xs: "26.25rem",
       },
       fontFamily: {
         gothamPro: ["GothaPro", ...fontFamily.sans],

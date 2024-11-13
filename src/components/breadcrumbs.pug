@@ -2,7 +2,7 @@ mixin breadcrumbs(prevPages, currentPage)
   ul(class="flex flex-wrap items-center font-ptRoot font-medium ~text-sm/lg")&attributes(attributes)
     each link in prevPages
       li(
-        class="after:mx-1.5 after:inline-flex after:h-2 after:w-[0.5625rem] after:bg-primary after:[mask:url(assets/img/arrow-right-sm.svg)_no-repeat_50%_50%] [&:nth-last-child(2)]:after:bg-border"
+        class="after:mx-1.5 after:inline-flex after:h-2 after:w-[0.5625rem] after:bg-primary after:[mask:url(assets/img/chevron-right-sm.svg)_no-repeat_50%_50%] [&:nth-last-child(2)]:after:bg-border"
       )
         a(href=link.href, class="text-primary")= link.value
     li(class="")

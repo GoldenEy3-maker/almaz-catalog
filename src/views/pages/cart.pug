@@ -1,0 +1,220 @@
+extends ../layouts/root
+
+include ../../components/breadcrumbs
+include ../../components/button
+
+block content
+  main(class="col-[main] grid grid-cols-subgrid ~pt-[8.375rem]/[12.5625rem]")
+    div(class="col-span-full") 
+      +breadcrumbs([{href: "index.html", value: "Каталог запчастей"}, {href: "catalog-detail.html", value: "Бороны"}, {href: "production-year.html", value: "DANA БДП-6×2У"}, {href: "#", value: "СБ Сница"}], "Корзина")(
+        class="mb-[1.875rem]"
+      )
+      h1(class="text-h1 font-bold") Моя корзина
+    form(
+      action="/api/create-order",
+      method="post",
+      novalidate="",
+      data-form="",
+      data-form-no-reset="",
+      data-form-success-redirect="/",
+      class="col-span-full mt-11 grid grid-cols-subgrid bg-card-background ~px-4/[2.375rem] ~pt-6/[2.375rem] ~pb-3/[2.375rem] md:col-[span_14] xl:col-span-10"
+    )
+      div(class="col-span-full mb-5 flex flex-wrap items-center justify-between gap-2")
+        h5(class="text-h5 font-bold") DANA БДП-6×2У
+        span(class="font-medium ~text-xs/base") 2015
+      div(class="col-span-full grid grid-cols-[1fr_auto] space-y-3 sm:grid-cols-3")
+        div(
+          class="col-span-full grid grid-cols-subgrid border-b-2 border-border pb-2 ~text-xs/sm font-medium text-description"
+        )
+          div
+            p Наименование детали
+          div(class="col-start-3 text-right") Количество, шт
+        div(class="col-span-full grid grid-cols-subgrid gap-x-4 border-b gap-y-1 border-border pb-2")
+          div(class="leading-[1.3] ~text-sm/base")
+            p Борона зубовая центральная с катками
+          div(
+            class="row-start-2 text-description sm:col-start-2 ~text-xs/base sm:row-start-1 sm:text-center"
+          ) 
+            p 47.967.09.002
+          div(class="flex justify-end") 
+            div(class="flex h-8 items-stretch gap-3")
+              button(type="button" class="text-description" data-counter-decrement="")
+                svg(
+                  width="16",
+                  height="2",
+                  viewbox="0 0 16 2",
+                  fill="none",
+                  xmlns="http://www.w3.org/2000/svg"
+                )
+                  path(
+                    d="M0.810547 1H15.0929",
+                    stroke="currentColor",
+                    stroke-width="2"
+                  )
+              input(
+                type="number",
+                min="1",
+                readonly="",
+                value="20",
+                name="1",
+                class="w-10 rounded-none border-2 border-description/40 bg-transparent text-center font-medium focus:outline-none"
+              )
+              button(type="button" class="text-description" data-counter-increment="")
+                svg(
+                  width="15",
+                  height="16",
+                  viewbox="0 0 15 16",
+                  fill="none",
+                  xmlns="http://www.w3.org/2000/svg"
+                )
+                  path(
+                    d="M0.716797 8H14.9992M7.858 0.928935V15.0711",
+                    stroke="currentColor",
+                    stroke-width="2"
+                  )
+        div(class="col-span-full grid grid-cols-subgrid border-b gap-x-4 gap-y-1 border-border pb-2")
+          div(class="leading-[1.3] ~text-sm/base")
+            p Кронштейн
+          div(
+            class="row-start-2 text-description sm:col-start-2 ~text-xs/base sm:row-start-1 sm:text-center"
+          ) 
+            p РЗЗ.09.03.020
+          div(class="flex justify-end") 
+            div(class="flex h-8 items-stretch gap-3")
+              button(type="button" class="text-description" data-counter-decrement="")
+                svg(
+                  width="16",
+                  height="2",
+                  viewbox="0 0 16 2",
+                  fill="none",
+                  xmlns="http://www.w3.org/2000/svg"
+                )
+                  path(
+                    d="M0.810547 1H15.0929",
+                    stroke="currentColor",
+                    stroke-width="2"
+                  )
+              input(
+                type="number",
+                min="1",
+                readonly="",
+                value="20",
+                name="1",
+                class="w-10 rounded-none border-2 border-description/40 bg-transparent text-center font-medium focus:outline-none"
+              )
+              button(type="button" class="text-description" data-counter-increment="")
+                svg(
+                  width="15",
+                  height="16",
+                  viewbox="0 0 15 16",
+                  fill="none",
+                  xmlns="http://www.w3.org/2000/svg"
+                )
+                  path(
+                    d="M0.716797 8H14.9992M7.858 0.928935V15.0711",
+                    stroke="currentColor",
+                    stroke-width="2"
+                  )
+      div(class="col-span-full mb-5 mt-9 flex flex-wrap items-center justify-between gap-2")
+        h5(class="text-h5 font-bold") DANA БДП-6×2У
+        span(class="font-medium ~text-xs/base") 2015
+      div(class="col-span-full grid grid-cols-[1fr_auto] space-y-3 sm:grid-cols-3")
+        div(
+          class="col-span-full grid grid-cols-subgrid border-b-2 border-border pb-2 ~text-xs/sm font-medium text-description"
+        )
+          div
+            p Наименование детали
+          div(class="col-start-3 text-right") Количество, шт
+        div(class="col-span-full grid grid-cols-subgrid gap-x-4 border-b gap-y-1 border-border pb-2")
+          div(class="leading-[1.3] ~text-sm/base")
+            p Борона зубовая центральная с катками
+          div(
+            class="row-start-2 text-description sm:col-start-2 ~text-xs/base sm:row-start-1 sm:text-center"
+          ) 
+            p 47.967.09.002
+          div(class="flex justify-end") 
+            div(class="flex h-8 items-stretch gap-3")
+              button(type="button" class="text-description" data-counter-decrement="")
+                svg(
+                  width="16",
+                  height="2",
+                  viewbox="0 0 16 2",
+                  fill="none",
+                  xmlns="http://www.w3.org/2000/svg"
+                )
+                  path(
+                    d="M0.810547 1H15.0929",
+                    stroke="currentColor",
+                    stroke-width="2"
+                  )
+              input(
+                type="number",
+                min="1",
+                readonly="",
+                value="20",
+                name="1",
+                class="w-10 rounded-none border-2 border-description/40 bg-transparent text-center font-medium focus:outline-none"
+              )
+              button(type="button" class="text-description" data-counter-increment="")
+                svg(
+                  width="15",
+                  height="16",
+                  viewbox="0 0 15 16",
+                  fill="none",
+                  xmlns="http://www.w3.org/2000/svg"
+                )
+                  path(
+                    d="M0.716797 8H14.9992M7.858 0.928935V15.0711",
+                    stroke="currentColor",
+                    stroke-width="2"
+                  )
+        div(class="col-span-full grid grid-cols-subgrid border-b gap-x-4 gap-y-1 border-border pb-2")
+          div(class="leading-[1.3] ~text-sm/base")
+            p Кронштейн
+          div(
+            class="row-start-2 text-description sm:col-start-2 ~text-xs/base sm:row-start-1 sm:text-center"
+          ) 
+            p РЗЗ.09.03.020
+          div(class="flex justify-end") 
+            div(class="flex h-8 items-stretch gap-3")
+              button(type="button" class="text-description" data-counter-decrement="")
+                svg(
+                  width="16",
+                  height="2",
+                  viewbox="0 0 16 2",
+                  fill="none",
+                  xmlns="http://www.w3.org/2000/svg"
+                )
+                  path(
+                    d="M0.810547 1H15.0929",
+                    stroke="currentColor",
+                    stroke-width="2"
+                  )
+              input(
+                type="number",
+                min="1",
+                readonly="",
+                value="20",
+                name="1",
+                class="w-10 rounded-none border-2 border-description/40 bg-transparent text-center font-medium focus:outline-none"
+              )
+              button(type="button" class="text-description" data-counter-increment="")
+                svg(
+                  width="15",
+                  height="16",
+                  viewbox="0 0 15 16",
+                  fill="none",
+                  xmlns="http://www.w3.org/2000/svg"
+                )
+                  path(
+                    d="M0.716797 8H14.9992M7.858 0.928935V15.0711",
+                    stroke="currentColor",
+                    stroke-width="2"
+                  )
+      div(class="col-span-full mt-10")
+        +button(type="submit")(class="max-xs:w-full") Оформить заказ
+      p(
+        class="col-span-full mt-6 text-destructive aria-hidden:hidden",
+        aria-hidden="true",
+        data-form-response=""
+      )
