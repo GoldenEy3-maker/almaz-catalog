@@ -10,15 +10,16 @@ block content
   )
     div(class="col-span-full") 
       +breadcrumbs([{href: "index.html", value: "Каталог запчастей"}, {href: "catalog-detail.html", value: "Бороны"}], "DANA БДП-6×2У")(
-        class="mb-[1.125rem]"
+        class="~mb-2/3"
       )
       h1(class="text-h1 font-bold") DANA БДП-6×2У
     form(
-      action="/",
+      action="/api/get-eqipment-by-year",
       class="order-2 col-span-full mt-12 md2:order-1 md2:col-span-7",
       novalidate="",
       data-form-validation-watcher="",
-      data-form=""
+      data-form="",
+      data-form-success-redirect="/"
     )
       h3(class="mb-3 text-h3 font-medium") Укажите год выпуска техники
       p(class="text-description ~text-base/lg") Для техники разных годов выпуска, возможны расхождения в&nbsp;запасных частях.
