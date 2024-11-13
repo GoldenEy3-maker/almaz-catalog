@@ -10,6 +10,10 @@ export const SelectorMap = {
   FormWithValidationWatcher: "[data-form-validation-watcher]",
   FieldWithSearchParams: "[data-field-with-search-params]",
 
+  // Counter
+  CounterIncrementTrigger: "[data-counter-increment]",
+  CounterDecrementTrigger: "[data-counter-decrement]",
+
   // Custom Select
   CustomSelectTrigger: "[data-custom-select-trigger]",
   CustomSelect: "[data-custom-select]",

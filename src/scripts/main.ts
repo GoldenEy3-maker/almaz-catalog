@@ -1,4 +1,5 @@
 import { SelectorMap } from "./constants";
+import { decrementCounter, incrementCounter } from "./counter";
 import {
   formSubmitHandler,
   initFieldsWithSearchParams,
@@ -12,7 +13,7 @@ initValidationWatcher();
 initFieldsWithSearchParams();
 
 document.addEventListener("submit", (event) => {
-  const formTarget = (event.target as HTMLElement).closest("[data-form]");
+  const formTarget = (event.target as HTMLElement).closest(SelectorMap.Form);
   if (formTarget) formSubmitHandler(event);
 });
 document.addEventListener("input", (event) => {
@@ -21,4 +22,15 @@ document.addEventListener("input", (event) => {
   );
 
   if (yearMaskInput) yearMaskHandler(yearMaskInput);
+});
+document.addEventListener("click", (event) => {
+  const incrementCounterTrigger = (
+    event.target as HTMLElement
+  ).closest<HTMLButtonElement>(SelectorMap.CounterIncrementTrigger);
+  const decrementCounterTrigger = (
+    event.target as HTMLElement
+  ).closest<HTMLButtonElement>(SelectorMap.CounterDecrementTrigger);
+
+  if (incrementCounterTrigger) incrementCounter(incrementCounterTrigger);
+  if (decrementCounterTrigger) decrementCounter(decrementCounterTrigger);
 });
