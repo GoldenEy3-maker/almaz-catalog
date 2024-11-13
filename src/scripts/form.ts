@@ -1,5 +1,6 @@
 import { SelectorMap } from "./constants";
 import { z } from "zod";
+import { getAttrFromSelector } from "./utils";
 
 function generateResolver(input: HTMLInputElement) {
   let parser = z.string({
@@ -90,9 +91,12 @@ export function formSubmitHandler(event: SubmitEvent) {
   const responseContainer = target.querySelector<HTMLParagraphElement>(
     SelectorMap.FormResponse,
   );
-  const redirectUrl = target.getAttribute("data-redirect");
+  const successRedirectUrl = target.getAttribute("data-form-success-redirect");
   const isValidationWatcher =
-    target.getAttribute("data-form-validation-watcher") !== undefined;
+    target.getAttribute(
+      getAttrFromSelector(SelectorMap.FormWithValidationWatcher),
+    ) !== null;
+  const isFormNoReset = target.getAttribute("data-form-no-reset") !== null;
 
   if (!isValid) return;
 
@@ -112,65 +116,67 @@ export function formSubmitHandler(event: SubmitEvent) {
     responseContainer.ariaHidden = "true";
   }
 
-  fetch(
-    target.method === "get"
-      ? `${target.action}?${urlParams.toString()}`
-      : target.action,
-    {
-      method: target.method,
-      body: target.method === "get" ? undefined : formData,
-    },
-  )
-    .then((response) => {
-      if (!response.ok) {
-        console.error(
-          "response error",
-          response.url,
-          response.status,
-          response.statusText,
-        );
+  setTimeout(() => {
+    fetch(
+      target.method === "get"
+        ? `${target.action}?${urlParams.toString()}`
+        : target.action,
+      {
+        method: target.method,
+        body: target.method === "get" ? undefined : formData,
+      },
+    )
+      .then((response) => {
+        if (!response.ok) {
+          console.error(
+            "response error",
+            response.url,
+            response.status,
+            response.statusText,
+          );
+          if (responseContainer) {
+            responseContainer.textContent = "Что-то пошло не так!";
+            responseContainer.ariaHidden = "false";
+          }
+          if (isValidationWatcher)
+            for (let i = 0; i < elements.length; i++) {
+              elements[i].removeAttribute("disabled");
+            }
+          return;
+        }
+
+        if (!isFormNoReset) target.reset();
+
+        if (successRedirectUrl) {
+          window.location.href = successRedirectUrl;
+          return;
+        }
+
+        if (isValidationWatcher)
+          for (let i = 0; i < elements.length; i++) {
+            const isSubmitter = elements[i].closest("[type=submit]");
+            if (!isSubmitter) elements[i].removeAttribute("disabled");
+          }
+      })
+      .catch((error) => {
         if (responseContainer) {
-          responseContainer.textContent = "Что-то пошло не так!";
+          responseContainer.textContent = error;
           responseContainer.ariaHidden = "false";
         }
+        console.error(error);
+
         if (isValidationWatcher)
           for (let i = 0; i < elements.length; i++) {
             elements[i].removeAttribute("disabled");
           }
-        return;
-      }
-
-      target.reset();
-
-      if (redirectUrl) {
-        window.location.href = redirectUrl;
-        return;
-      }
-
-      if (isValidationWatcher)
-        for (let i = 0; i < elements.length; i++) {
-          const isSubmitter = elements[i].closest("[type=submit]");
-          if (!isSubmitter) elements[i].removeAttribute("disabled");
-        }
-    })
-    .catch((error) => {
-      if (responseContainer) {
-        responseContainer.textContent = error;
-        responseContainer.ariaHidden = "false";
-      }
-      console.error(error);
-
-      if (isValidationWatcher)
-        for (let i = 0; i < elements.length; i++) {
-          elements[i].removeAttribute("disabled");
-        }
-    })
-    .finally(() => {
-      if (!isValidationWatcher)
-        for (let i = 0; i < elements.length; i++) {
-          elements[i].removeAttribute("disabled");
-        }
-    });
+      })
+      .finally(() => {
+        if (!isValidationWatcher)
+          for (let i = 0; i < elements.length; i++) {
+            elements[i].removeAttribute("disabled");
+          }
+      });
+  }, 2000);
 }
 
 export function initValidationWatcher() {
