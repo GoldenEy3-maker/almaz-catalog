@@ -1,5 +1,9 @@
-mixin button(variant="default")
+mixin button(variant="default", asLink=false)
   - var baseClasses = "px-12 inline-flex h-12 items-center justify-center font-bold disabled:text-description disabled:bg-card";
   - var classVariants = { variant: { default: " bg-primary", outline: " border-2 border-primary" } };
-  button(class=baseClasses+classVariants.variant[variant])&attributes(attributes)
-    block
+  if asLink == true
+    a(class=baseClasses+classVariants.variant[variant])&attributes(attributes)
+      block
+  else
+    button(class=baseClasses+classVariants.variant[variant])&attributes(attributes)
+      block
