@@ -62,6 +62,36 @@ export default {
         description: "#8C8C8E",
         destructive: "#E70400",
       },
+      keyframes: {
+        modalOpen: {
+          from: {
+            opacity: "0",
+            visiblity: "hidden",
+            translate: "0 50px",
+          },
+          to: {
+            opacity: "1",
+            visibility: "visible",
+            translate: "0",
+          },
+        },
+        modalClose: {
+          from: {
+            opacity: "1",
+            visibility: "visible",
+            translate: "0",
+          },
+          to: {
+            opacity: "0",
+            visiblity: "hidden",
+            translate: "0 50px",
+          },
+        },
+      },
+      animation: {
+        modalOpen: "modalOpen ease forwards",
+        modalClose: "modalClose ease forwards",
+      },
     },
   },
   plugins: [

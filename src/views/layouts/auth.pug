@@ -1,5 +1,6 @@
 include ../../components/header
 include ../../components/footer
+include ../../components/dialog-logout
 
 doctype html
 html(lang="ru")
@@ -11,7 +12,13 @@ html(lang="ru")
     title Каталог запчастей
   body
     div(class="main-container max-container min-h-svh grid-rows-[1fr_auto]")
-      +header
+      +header(true)
       block content
         main content
       +footer
+    div(
+      class="fixed inset-0 z-20 bg-black/50 transition-all duration-300 aria-hidden:invisible aria-hidden:opacity-0",
+      data-modal-overlay="",
+      aria-hidden="true"
+    )
+    +dialog-logout

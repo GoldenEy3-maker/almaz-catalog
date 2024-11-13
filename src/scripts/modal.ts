@@ -5,7 +5,7 @@ const modalOverlay = document.querySelector<HTMLElement>(
   SelectorMap.ModalOverlay,
 );
 
-const _modalAnimationDuration = 600;
+const _modalAnimationDuration = 300;
 
 let _activeModalTrigger: HTMLElement | null = null;
 
@@ -73,8 +73,9 @@ export function openModal(key: string, trigger: HTMLElement | null = null) {
   const root = templateContent.querySelector<HTMLElement>(
     SelectorMap.ModalRoot,
   );
-
   if (!root) return;
+
+  const wrapper = root.querySelector<HTMLElement>(SelectorMap.ModalWrapper);
 
   const autofocus = templateContent.querySelector<HTMLElement>(
     "[autofocus]:not([disabled])",
@@ -87,6 +88,12 @@ export function openModal(key: string, trigger: HTMLElement | null = null) {
   );
 
   root.style.animationDuration = _modalAnimationDuration + "ms";
+  root.style.transitionDuration = _modalAnimationDuration + "ms";
+
+  if (wrapper) {
+    wrapper.style.animationDuration = _modalAnimationDuration + "ms";
+    wrapper.style.transitionDuration = _modalAnimationDuration + "ms";
+  }
 
   root.addEventListener(
     "pointerdown",
@@ -118,7 +125,11 @@ export function openModal(key: string, trigger: HTMLElement | null = null) {
     { signal: onCloseController.signal },
   );
 
-  if (modalOverlay) modalOverlay.ariaHidden = "false";
+  if (modalOverlay) {
+    modalOverlay.ariaHidden = "false";
+    modalOverlay.style.animationDuration = _modalAnimationDuration + "ms";
+    modalOverlay.style.transitionDuration = _modalAnimationDuration + "ms";
+  }
 
   document.body.appendChild(templateContent);
 

@@ -1,4 +1,4 @@
-extends ../layouts/root
+extends ../layouts/auth
 
 include ../../components/breadcrumbs
 include ../../components/button
@@ -24,21 +24,23 @@ block content
         span(class="font-medium ~text-xs/base") 2015
       div(class="col-span-full grid grid-cols-[1fr_auto] space-y-3 sm:grid-cols-3")
         div(
-          class="col-span-full grid grid-cols-subgrid border-b-2 border-border pb-2 ~text-xs/sm font-medium text-description"
+          class="col-span-full grid grid-cols-subgrid border-b-2 border-border pb-2 font-medium text-description ~text-xs/sm"
         )
           div
             p Наименование детали
           div(class="col-start-3 text-right") Количество, шт
-        div(class="col-span-full grid grid-cols-subgrid gap-x-4 border-b gap-y-1 border-border pb-2")
+        div(
+          class="col-span-full grid grid-cols-subgrid gap-x-4 gap-y-1 border-b border-border pb-2"
+        )
           div(class="leading-[1.3] ~text-sm/base")
             p Борона зубовая центральная с катками
           div(
-            class="row-start-2 text-description sm:col-start-2 ~text-xs/base sm:row-start-1 sm:text-center"
+            class="row-start-2 text-description ~text-xs/base sm:col-start-2 sm:row-start-1 sm:text-center"
           ) 
             p 47.967.09.002
           div(class="flex justify-end") 
             div(class="flex h-8 items-stretch gap-3")
-              button(type="button" class="text-description" data-counter-decrement="")
+              button(type="button", class="text-description", data-counter-decrement="")
                 svg(
                   width="16",
                   height="2",
@@ -59,7 +61,7 @@ block content
                 name="1",
                 class="w-10 rounded-none border-2 border-description/40 bg-transparent text-center font-medium focus:outline-none"
               )
-              button(type="button" class="text-description" data-counter-increment="")
+              button(type="button", class="text-description", data-counter-increment="")
                 svg(
                   width="15",
                   height="16",
@@ -72,16 +74,18 @@ block content
                     stroke="currentColor",
                     stroke-width="2"
                   )
-        div(class="col-span-full grid grid-cols-subgrid border-b gap-x-4 gap-y-1 border-border pb-2")
+        div(
+          class="col-span-full grid grid-cols-subgrid gap-x-4 gap-y-1 border-b border-border pb-2"
+        )
           div(class="leading-[1.3] ~text-sm/base")
             p Кронштейн
           div(
-            class="row-start-2 text-description sm:col-start-2 ~text-xs/base sm:row-start-1 sm:text-center"
+            class="row-start-2 text-description ~text-xs/base sm:col-start-2 sm:row-start-1 sm:text-center"
           ) 
             p РЗЗ.09.03.020
           div(class="flex justify-end") 
             div(class="flex h-8 items-stretch gap-3")
-              button(type="button" class="text-description" data-counter-decrement="")
+              button(type="button", class="text-description", data-counter-decrement="")
                 svg(
                   width="16",
                   height="2",
@@ -102,7 +106,7 @@ block content
                 name="1",
                 class="w-10 rounded-none border-2 border-description/40 bg-transparent text-center font-medium focus:outline-none"
               )
-              button(type="button" class="text-description" data-counter-increment="")
+              button(type="button", class="text-description", data-counter-increment="")
                 svg(
                   width="15",
                   height="16",
@@ -115,26 +119,30 @@ block content
                     stroke="currentColor",
                     stroke-width="2"
                   )
-      div(class="col-span-full mb-5 mt-9 flex flex-wrap items-center justify-between gap-2")
+      div(
+        class="col-span-full mb-5 mt-9 flex flex-wrap items-center justify-between gap-2"
+      )
         h5(class="text-h5 font-bold") DANA БДП-6×2У
         span(class="font-medium ~text-xs/base") 2015
       div(class="col-span-full grid grid-cols-[1fr_auto] space-y-3 sm:grid-cols-3")
         div(
-          class="col-span-full grid grid-cols-subgrid border-b-2 border-border pb-2 ~text-xs/sm font-medium text-description"
+          class="col-span-full grid grid-cols-subgrid border-b-2 border-border pb-2 font-medium text-description ~text-xs/sm"
         )
           div
             p Наименование детали
           div(class="col-start-3 text-right") Количество, шт
-        div(class="col-span-full grid grid-cols-subgrid gap-x-4 border-b gap-y-1 border-border pb-2")
+        div(
+          class="col-span-full grid grid-cols-subgrid gap-x-4 gap-y-1 border-b border-border pb-2"
+        )
           div(class="leading-[1.3] ~text-sm/base")
             p Борона зубовая центральная с катками
           div(
-            class="row-start-2 text-description sm:col-start-2 ~text-xs/base sm:row-start-1 sm:text-center"
+            class="row-start-2 text-description ~text-xs/base sm:col-start-2 sm:row-start-1 sm:text-center"
           ) 
             p 47.967.09.002
           div(class="flex justify-end") 
             div(class="flex h-8 items-stretch gap-3")
-              button(type="button" class="text-description" data-counter-decrement="")
+              button(type="button", class="text-description", data-counter-decrement="")
                 svg(
                   width="16",
                   height="2",
@@ -155,7 +163,7 @@ block content
                 name="1",
                 class="w-10 rounded-none border-2 border-description/40 bg-transparent text-center font-medium focus:outline-none"
               )
-              button(type="button" class="text-description" data-counter-increment="")
+              button(type="button", class="text-description", data-counter-increment="")
                 svg(
                   width="15",
                   height="16",
@@ -168,16 +176,18 @@ block content
                     stroke="currentColor",
                     stroke-width="2"
                   )
-        div(class="col-span-full grid grid-cols-subgrid border-b gap-x-4 gap-y-1 border-border pb-2")
+        div(
+          class="col-span-full grid grid-cols-subgrid gap-x-4 gap-y-1 border-b border-border pb-2"
+        )
           div(class="leading-[1.3] ~text-sm/base")
             p Кронштейн
           div(
-            class="row-start-2 text-description sm:col-start-2 ~text-xs/base sm:row-start-1 sm:text-center"
+            class="row-start-2 text-description ~text-xs/base sm:col-start-2 sm:row-start-1 sm:text-center"
           ) 
             p РЗЗ.09.03.020
           div(class="flex justify-end") 
             div(class="flex h-8 items-stretch gap-3")
-              button(type="button" class="text-description" data-counter-decrement="")
+              button(type="button", class="text-description", data-counter-decrement="")
                 svg(
                   width="16",
                   height="2",
@@ -198,7 +208,7 @@ block content
                 name="1",
                 class="w-10 rounded-none border-2 border-description/40 bg-transparent text-center font-medium focus:outline-none"
               )
-              button(type="button" class="text-description" data-counter-increment="")
+              button(type="button", class="text-description", data-counter-increment="")
                 svg(
                   width="15",
                   height="16",
