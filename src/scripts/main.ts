@@ -1,5 +1,6 @@
 import { SelectorMap } from "./constants";
 import { decrementCounter, incrementCounter } from "./counter";
+import { initEquipmentPartLinksHandler } from "./equipment";
 import {
   formSubmitHandler,
   initFieldsWithSearchParams,
@@ -13,6 +14,7 @@ import { getAttrFromSelector } from "./utils";
 initSubmenu();
 initValidationWatcher();
 initFieldsWithSearchParams();
+initEquipmentPartLinksHandler();
 
 document.addEventListener("submit", (event) => {
   const formTarget = (event.target as HTMLElement).closest(SelectorMap.Form);

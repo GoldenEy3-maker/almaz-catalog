@@ -56,8 +56,8 @@ const paths = {
     dest: "./dist/",
   },
   webp: {
-    src: "./src/assets/img/**/*.{jpg,jpeg,png}",
-    watch: "./src/assets/img/**/*.{jpg,jpeg,png}",
+    src: "./src/assets/img/**/*.{jpg,jpeg,png,webp}",
+    watch: "./src/assets/img/**/*.{jpg,jpeg,png,webp}",
     dest: "./dist/assets/img/",
   },
   images: {
@@ -109,7 +109,6 @@ function views() {
     .pipe(
       pug({
         pretty: true,
-        verbose: true,
       }),
     )
     .pipe(

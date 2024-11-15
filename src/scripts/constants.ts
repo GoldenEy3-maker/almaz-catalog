@@ -23,6 +23,10 @@ export const SelectorMap = {
   CustomSelectOption: "[data-custom-select-option]",
   CustomSelectEmpty: "[data-custom-select-empty]",
 
+  // Equipment
+  EquipmentPartLink: "[data-equipment-part-link]",
+  EquipmentSchema: "[data-equipment-schema]",
+
   // Modal
   ModalOverlay: "[data-modal-overlay]",
   ModalRoot: "[data-modal-root]",
