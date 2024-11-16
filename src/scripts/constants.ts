@@ -1,6 +1,6 @@
 export const SelectorMap = {
-  // Input masks
-  YearMask: "[data-year-mask]",
+  // Header
+  Header: "[data-header]",
 
   // Form
   Form: "[data-form]",
@@ -36,4 +36,7 @@ export const SelectorMap = {
 
   // FocusGuard
   FocusGuard: "[data-focus-guard]",
+
+  // Input masks
+  YearMask: "[data-year-mask]",
 } as const;

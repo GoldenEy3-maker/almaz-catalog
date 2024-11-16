@@ -18,6 +18,34 @@ export function initEquipmentPartLinksHandler() {
 
   if (rects.length === 0) return;
 
+  function scrollToLink(linkOffsetTop: number) {
+    const headerHeight = document.querySelector<HTMLElement>(
+      SelectorMap.Header,
+    )?.offsetHeight;
+    const viewportTopPos = headerHeight
+      ? window.scrollY + headerHeight
+      : window.scrollY;
+    const viewportBottomPos = window.innerHeight + viewportTopPos;
+
+    console.log("top", viewportTopPos);
+    console.log("bottom", viewportBottomPos);
+
+    const topDiff = linkOffsetTop - viewportTopPos;
+    const bottomDiff = linkOffsetTop - viewportBottomPos;
+
+    if (topDiff <= 0) {
+      scrollTo({
+        top: window.scrollY + topDiff - 40,
+        behavior: "smooth",
+      });
+    } else if (bottomDiff >= 0) {
+      scrollTo({
+        top: window.scrollY + bottomDiff + 40,
+        behavior: "smooth",
+      });
+    }
+  }
+
   function clearActive(element: HTMLElement | null) {
     if (element) {
       element.setAttribute("aria-current", "false");
@@ -37,6 +65,7 @@ export function initEquipmentPartLinksHandler() {
     clearActive(_activeLink);
     const link = LinksMap[id];
     if (!link) return;
+    scrollToLink(link.offsetTop);
     // scrollTo({
     //   top: window.scrollY + link.getBoundingClientRect().top - 160,
     //   behavior: "smooth",
