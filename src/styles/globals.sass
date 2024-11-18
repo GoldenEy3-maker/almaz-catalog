@@ -6,6 +6,8 @@
 @tailwind utilities
 
 @layer base
+  html
+    scroll-behavior: smooth
   body
     &.lock-scroll
       padding-right: var(--scrollbar-width, 0)
@@ -20,6 +22,10 @@
 
   input[type=number]
     -moz-appearance: textfield
+
+  @media (prefers-reduced-motion: reduce)
+    html
+      scroll-behavior: auto
 
 @layer utilities
   .main-container
