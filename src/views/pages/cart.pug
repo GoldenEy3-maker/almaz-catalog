@@ -2,6 +2,7 @@ extends ../layouts/auth
 
 include ../../components/breadcrumbs
 include ../../components/button
+include ../../components/counter
 
 block content
   main(class="col-[main] grid grid-cols-subgrid ~pt-[8.375rem]/[12.5625rem]")
@@ -32,93 +33,27 @@ block content
         div(
           class="col-span-full grid grid-cols-subgrid gap-x-4 gap-y-1 border-b border-border pb-2"
         )
-          div(class="leading-[1.3] ~text-sm/base")
-            p Борона зубовая центральная с катками
-          div(
-            class="row-start-2 text-description ~text-xs/base sm:col-start-2 sm:row-start-1 sm:text-center"
-          ) 
-            p 47.967.09.002
+          div(class="space-y-1 sm:contents")
+            div(class="leading-[1.3] ~text-sm/base")
+              p Борона зубовая центральная с катками
+            div(
+              class="row-start-2 text-description ~text-xs/base sm:col-start-2 sm:row-start-1 sm:text-center"
+            ) 
+              p 47.967.09.002
           div(class="flex justify-end") 
-            div(class="flex h-8 items-stretch gap-3")
-              button(type="button", class="text-description", data-counter-decrement="")
-                svg(
-                  width="16",
-                  height="2",
-                  viewbox="0 0 16 2",
-                  fill="none",
-                  xmlns="http://www.w3.org/2000/svg"
-                )
-                  path(
-                    d="M0.810547 1H15.0929",
-                    stroke="currentColor",
-                    stroke-width="2"
-                  )
-              input(
-                type="number",
-                min="1",
-                readonly="",
-                value="20",
-                name="1",
-                class="w-10 rounded-none border-2 border-description/40 bg-transparent text-center font-medium focus:outline-none"
-              )
-              button(type="button", class="text-description", data-counter-increment="")
-                svg(
-                  width="15",
-                  height="16",
-                  viewbox="0 0 15 16",
-                  fill="none",
-                  xmlns="http://www.w3.org/2000/svg"
-                )
-                  path(
-                    d="M0.716797 8H14.9992M7.858 0.928935V15.0711",
-                    stroke="currentColor",
-                    stroke-width="2"
-                  )
+            +counter
         div(
           class="col-span-full grid grid-cols-subgrid gap-x-4 gap-y-1 border-b border-border pb-2"
         )
-          div(class="leading-[1.3] ~text-sm/base")
-            p Кронштейн
-          div(
-            class="row-start-2 text-description ~text-xs/base sm:col-start-2 sm:row-start-1 sm:text-center"
-          ) 
-            p РЗЗ.09.03.020
+          div(class="space-y-1 sm:contents")
+            div(class="leading-[1.3] ~text-sm/base")
+              p Кронштейн
+            div(
+              class="row-start-2 text-description ~text-xs/base sm:col-start-2 sm:row-start-1 sm:text-center"
+            ) 
+              p РЗЗ.09.03.020
           div(class="flex justify-end") 
-            div(class="flex h-8 items-stretch gap-3")
-              button(type="button", class="text-description", data-counter-decrement="")
-                svg(
-                  width="16",
-                  height="2",
-                  viewbox="0 0 16 2",
-                  fill="none",
-                  xmlns="http://www.w3.org/2000/svg"
-                )
-                  path(
-                    d="M0.810547 1H15.0929",
-                    stroke="currentColor",
-                    stroke-width="2"
-                  )
-              input(
-                type="number",
-                min="1",
-                readonly="",
-                value="20",
-                name="1",
-                class="w-10 rounded-none border-2 border-description/40 bg-transparent text-center font-medium focus:outline-none"
-              )
-              button(type="button", class="text-description", data-counter-increment="")
-                svg(
-                  width="15",
-                  height="16",
-                  viewbox="0 0 15 16",
-                  fill="none",
-                  xmlns="http://www.w3.org/2000/svg"
-                )
-                  path(
-                    d="M0.716797 8H14.9992M7.858 0.928935V15.0711",
-                    stroke="currentColor",
-                    stroke-width="2"
-                  )
+            +counter
       div(
         class="col-span-full mb-5 mt-9 flex flex-wrap items-center justify-between gap-2"
       )
@@ -134,93 +69,27 @@ block content
         div(
           class="col-span-full grid grid-cols-subgrid gap-x-4 gap-y-1 border-b border-border pb-2"
         )
-          div(class="leading-[1.3] ~text-sm/base")
-            p Борона зубовая центральная с катками
-          div(
-            class="row-start-2 text-description ~text-xs/base sm:col-start-2 sm:row-start-1 sm:text-center"
-          ) 
-            p 47.967.09.002
+          div(class="space-y-1 sm:contents")
+            div(class="leading-[1.3] ~text-sm/base")
+              p Борона зубовая центральная с катками
+            div(
+              class="row-start-2 text-description ~text-xs/base sm:col-start-2 sm:row-start-1 sm:text-center"
+            ) 
+              p 47.967.09.002
           div(class="flex justify-end") 
-            div(class="flex h-8 items-stretch gap-3")
-              button(type="button", class="text-description", data-counter-decrement="")
-                svg(
-                  width="16",
-                  height="2",
-                  viewbox="0 0 16 2",
-                  fill="none",
-                  xmlns="http://www.w3.org/2000/svg"
-                )
-                  path(
-                    d="M0.810547 1H15.0929",
-                    stroke="currentColor",
-                    stroke-width="2"
-                  )
-              input(
-                type="number",
-                min="1",
-                readonly="",
-                value="20",
-                name="1",
-                class="w-10 rounded-none border-2 border-description/40 bg-transparent text-center font-medium focus:outline-none"
-              )
-              button(type="button", class="text-description", data-counter-increment="")
-                svg(
-                  width="15",
-                  height="16",
-                  viewbox="0 0 15 16",
-                  fill="none",
-                  xmlns="http://www.w3.org/2000/svg"
-                )
-                  path(
-                    d="M0.716797 8H14.9992M7.858 0.928935V15.0711",
-                    stroke="currentColor",
-                    stroke-width="2"
-                  )
+            +counter
         div(
           class="col-span-full grid grid-cols-subgrid gap-x-4 gap-y-1 border-b border-border pb-2"
         )
-          div(class="leading-[1.3] ~text-sm/base")
-            p Кронштейн
-          div(
-            class="row-start-2 text-description ~text-xs/base sm:col-start-2 sm:row-start-1 sm:text-center"
-          ) 
-            p РЗЗ.09.03.020
+          div(class="space-y-1 sm:contents")
+            div(class="leading-[1.3] ~text-sm/base")
+              p Кронштейн
+            div(
+              class="row-start-2 text-description ~text-xs/base sm:col-start-2 sm:row-start-1 sm:text-center"
+            ) 
+              p РЗЗ.09.03.020
           div(class="flex justify-end") 
-            div(class="flex h-8 items-stretch gap-3")
-              button(type="button", class="text-description", data-counter-decrement="")
-                svg(
-                  width="16",
-                  height="2",
-                  viewbox="0 0 16 2",
-                  fill="none",
-                  xmlns="http://www.w3.org/2000/svg"
-                )
-                  path(
-                    d="M0.810547 1H15.0929",
-                    stroke="currentColor",
-                    stroke-width="2"
-                  )
-              input(
-                type="number",
-                min="1",
-                readonly="",
-                value="20",
-                name="1",
-                class="w-10 rounded-none border-2 border-description/40 bg-transparent text-center font-medium focus:outline-none"
-              )
-              button(type="button", class="text-description", data-counter-increment="")
-                svg(
-                  width="15",
-                  height="16",
-                  viewbox="0 0 15 16",
-                  fill="none",
-                  xmlns="http://www.w3.org/2000/svg"
-                )
-                  path(
-                    d="M0.716797 8H14.9992M7.858 0.928935V15.0711",
-                    stroke="currentColor",
-                    stroke-width="2"
-                  )
+            +counter
       div(class="col-span-full mt-10")
         +button(type="submit")(class="max-xs:w-full") Оформить заказ
       p(
