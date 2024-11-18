@@ -3,11 +3,11 @@ include ./button
 mixin dialog-logout
   template#logout
     div(
-      class="group fixed inset-0 z-20 grid place-items-center overflow-auto",
+      class="group fixed inset-0 z-20 grid place-items-center overflow-hidden",
       data-modal-root="logout"
     )
       div(
-        class="animate-modalOpen group-aria-hidden:animate-modalClose w-full max-w-[44.625rem] bg-card-background ~px-[1.25rem]/[3.125rem] ~pt-[1.5rem]/[1.875rem] ~pb-[1.875rem]/[3.375rem]",
+        class="max-h-svh w-full max-w-[44.625rem] animate-modalOpen overflow-auto bg-card-background ~px-[1.25rem]/[3.125rem] ~pt-[1.5rem]/[1.875rem] ~pb-[1.875rem]/[3.375rem] group-aria-hidden:animate-modalClose",
         data-modal-wrapper=""
       )
         div(class="flex items-center justify-end")
