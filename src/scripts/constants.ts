@@ -1,6 +1,7 @@
 export const SelectorMap = {
-  // Header
   Header: "[data-header]",
+
+  CartCounter: "[data-cart-counter]",
 
   // Form
   Form: "[data-form]",
@@ -36,9 +37,7 @@ export const SelectorMap = {
   ModalTrigger: "[data-modal-trigger]",
   ModalClose: "[data-modal-close]",
 
-  // FocusGuard
   FocusGuard: "[data-focus-guard]",
 
-  // Input masks
   YearMask: "[data-year-mask]",
 } as const;

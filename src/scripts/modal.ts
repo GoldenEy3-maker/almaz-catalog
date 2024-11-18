@@ -1,5 +1,10 @@
 import { SelectorMap } from "./constants";
-import { getAttrFromSelector, lockScroll, unlockScroll } from "./utils";
+import {
+  getAttrFromSelector,
+  lockScroll,
+  parseJSONWidthQuotes,
+  unlockScroll,
+} from "./utils";
 
 const modalOverlay = document.querySelector<HTMLElement>(
   SelectorMap.ModalOverlay,
@@ -93,6 +98,36 @@ export function openModal(key: string, trigger: HTMLElement | null = null) {
   if (wrapper) {
     wrapper.style.animationDuration = _modalAnimationDuration + "ms";
     wrapper.style.transitionDuration = _modalAnimationDuration + "ms";
+  }
+
+  if (trigger) {
+    const attrProps = trigger.getAttribute("data-modal-props");
+    if (attrProps) {
+      const props = parseJSONWidthQuotes(attrProps);
+      Object.entries(props).forEach(([key, value]) => {
+        const el = templateContent.querySelector<HTMLElement>(
+          `${key}:not(input)`,
+        );
+        const input = templateContent.querySelector<HTMLInputElement>(
+          `input${key}`,
+        );
+        if (el) {
+          if (value != "undefined") {
+            el.textContent = String(value);
+          } else {
+            const parent = el.parentElement;
+            if (parent) {
+              parent.remove();
+              wrapper?.setAttribute("data-layout-changed", "true");
+            }
+          }
+        }
+        if (input) {
+          if (key.includes("input-name")) input.name = String(value);
+          else input.value = String(value);
+        }
+      });
+    }
   }
 
   root.addEventListener(
