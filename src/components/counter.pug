@@ -1,0 +1,31 @@
+mixin counter
+  div(class="flex h-8 items-stretch gap-3")
+    button(type="button", class="text-description", data-counter-decrement="")
+      svg(
+        width="16",
+        height="2",
+        viewbox="0 0 16 2",
+        fill="none",
+        xmlns="http://www.w3.org/2000/svg"
+      )
+        path(d="M0.810547 1H15.0929", stroke="currentColor", stroke-width="2")
+    input(
+      type="number",
+      value="20",
+      name="1",
+      data-counter-input="",
+      class="w-10 rounded-none border-2 border-description/40 bg-transparent text-center font-medium focus:outline-none"
+    )
+    button(type="button", class="text-description", data-counter-increment="")
+      svg(
+        width="15",
+        height="16",
+        viewbox="0 0 15 16",
+        fill="none",
+        xmlns="http://www.w3.org/2000/svg"
+      )
+        path(
+          d="M0.716797 8H14.9992M7.858 0.928935V15.0711",
+          stroke="currentColor",
+          stroke-width="2"
+        )

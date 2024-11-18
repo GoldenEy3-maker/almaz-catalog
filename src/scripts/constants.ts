@@ -9,8 +9,10 @@ export const SelectorMap = {
   FormResponse: "[data-form-response]",
   FormWithValidationWatcher: "[data-form-validation-watcher]",
   FieldWithSearchParams: "[data-field-with-search-params]",
+  FormSuccessSubmitterReplace: "[data-form-success-submitter-replace]",
 
   // Counter
+  CounterInput: "[data-counter-input]",
   CounterIncrementTrigger: "[data-counter-increment]",
   CounterDecrementTrigger: "[data-counter-decrement]",
 

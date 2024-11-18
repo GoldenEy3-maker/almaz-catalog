@@ -1,5 +1,9 @@
 import { SelectorMap } from "./constants";
-import { decrementCounter, incrementCounter } from "./counter";
+import {
+  blurCounterHandler,
+  decrementCounter,
+  incrementCounter,
+} from "./counter";
 import { initEquipmentPartLinksHandler } from "./equipment";
 import {
   formSubmitHandler,
@@ -26,6 +30,15 @@ document.addEventListener("input", (event) => {
   );
 
   if (yearMaskInput) yearMaskHandler(yearMaskInput);
+});
+document.addEventListener("focusout", (event) => {
+  const target = event.target as HTMLElement;
+
+  const counterInput = target.closest<HTMLInputElement>(
+    SelectorMap.CounterInput,
+  );
+
+  if (counterInput) blurCounterHandler(counterInput);
 });
 document.addEventListener("click", (event) => {
   const target = event.target as HTMLElement;

@@ -84,6 +84,7 @@ function validateForm(
 export function formSubmitHandler(event: SubmitEvent) {
   event.preventDefault();
 
+  const submitter = event.submitter;
   const target = event.target as HTMLFormElement;
 
   const isValid = validateForm(target);
@@ -97,6 +98,9 @@ export function formSubmitHandler(event: SubmitEvent) {
       getAttrFromSelector(SelectorMap.FormWithValidationWatcher),
     ) !== null;
   const isFormNoReset = target.getAttribute("data-form-no-reset") !== null;
+  const submitterReplace = submitter?.getAttribute(
+    getAttrFromSelector(SelectorMap.FormSuccessSubmitterReplace),
+  );
 
   if (!isValid) return;
 
@@ -157,6 +161,14 @@ export function formSubmitHandler(event: SubmitEvent) {
             const isSubmitter = elements[i].closest("[type=submit]");
             if (!isSubmitter) elements[i].removeAttribute("disabled");
           }
+
+        if (submitterReplace) {
+          const replacer = target.querySelector(`#${submitterReplace}`);
+          if (replacer) {
+            replacer.setAttribute("aria-hidden", "false");
+            submitter?.setAttribute("aria-hidden", "true");
+          }
+        }
       })
       .catch((error) => {
         if (responseContainer) {

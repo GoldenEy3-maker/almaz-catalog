@@ -6,6 +6,11 @@ export function incrementCounter(trigger: HTMLButtonElement) {
   input.value = (input.valueAsNumber + 1).toString();
 }
 
+export function blurCounterHandler(input: HTMLInputElement) {
+  if (input.value === "" || input.valueAsNumber < +input.min)
+    input.value = input.min === "" ? "1" : input.min;
+}
+
 export function decrementCounter(trigger: HTMLButtonElement) {
   const input = trigger.nextElementSibling as HTMLInputElement | null;
 
