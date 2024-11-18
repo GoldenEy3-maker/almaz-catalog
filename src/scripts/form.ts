@@ -1,6 +1,7 @@
 import { SelectorMap } from "./constants";
 import { z } from "zod";
 import { getAttrFromSelector } from "./utils";
+import { incrementCartCounter } from "./cart-counter";
 
 function generateResolver(input: HTMLInputElement) {
   let parser = z.string({
@@ -101,6 +102,8 @@ export function formSubmitHandler(event: SubmitEvent) {
   const submitterReplace = submitter?.getAttribute(
     getAttrFromSelector(SelectorMap.FormSuccessSubmitterReplace),
   );
+  const isSuccessIncrementCartCounter =
+    target.getAttribute("data-form-success-increment-cart-counter") !== null;
 
   if (!isValid) return;
 
@@ -169,6 +172,8 @@ export function formSubmitHandler(event: SubmitEvent) {
             submitter?.setAttribute("aria-hidden", "true");
           }
         }
+
+        if (isSuccessIncrementCartCounter) incrementCartCounter();
       })
       .catch((error) => {
         if (responseContainer) {
@@ -188,7 +193,7 @@ export function formSubmitHandler(event: SubmitEvent) {
             elements[i].removeAttribute("disabled");
           }
       });
-  }, 2000);
+  }, 1000);
 }
 
 export function initValidationWatcher() {

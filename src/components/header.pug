@@ -214,8 +214,10 @@ mixin header(isAuth=false)
           span Корзина
           span(class="relative text-primary ~h-[1.125rem]/[1.625rem]")
             span(
-              class="absolute -right-1 -top-1 inline-flex h-3 min-w-3 items-center justify-center rounded-full bg-destructive px-[0.15rem] text-[0.5rem] leading-none text-background"
-            ) 2
+              class="absolute -right-1 -top-1 inline-flex h-3 min-w-3 items-center justify-center rounded-full bg-destructive px-[0.15rem] text-[0.5rem] leading-none text-background aria-hidden:hidden",
+              data-cart-counter="",
+              aria-hidden="true"
+            ) 0
             svg(
               width="27",
               height="100%",
