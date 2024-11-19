@@ -1,6 +1,10 @@
 export const SelectorMap = {
   Header: "[data-header]",
 
+  // Submenu
+  Submenu: "[data-submenu]",
+  SubmenuTrigger: "[data-submenu-trigger]",
+
   CartCounter: "[data-cart-counter]",
 
   // Form
@@ -27,7 +31,12 @@ export const SelectorMap = {
   CustomSelectEmpty: "[data-custom-select-empty]",
 
   // Suggestions
-  SuggestionsAction: "[data-]",
+  SuggestionsAction: "[data-suggestions-action]",
+  SuggestionsMenu: "[data-suggestions-menu]",
+  SuggestionsMenuContainer: "[data-suggestions-menu-container]",
+  SuggestionsMenuItem: "[data-suggestions-menu-item]",
+  SuggestionsMenuEmpty: "[data-suggestions-menu-empty]",
+  SuggestionsAllResults: "[data-suggestions-all-results]",
 
   // Equipment
   EquipmentPartLink: "[data-equipment-part-link]",
