@@ -1,6 +1,6 @@
 mixin submenu
   div(
-    class="absolute inset-x-0 top-0 z-10 h-svh overflow-auto bg-background transition-all duration-300 ~pt-20/32 aria-hidden:invisible aria-hidden:pt-0 aria-hidden:opacity-0",
+    class="absolute inset-x-0 top-0 z-10 h-svh overflow-auto bg-background pt-[8.375rem] transition-all duration-300 aria-hidden:invisible aria-hidden:pt-0 aria-hidden:opacity-0 md:~md:~pt-24/32",
     data-submenu="",
     aria-hidden="true"
   ) 
@@ -8,6 +8,44 @@ mixin submenu
       div(
         class="col-[main] grid grid-cols-subgrid gap-x-6 ~gap-y-[2.5rem]/[5rem] ~pb-[2.5rem]/[3.75rem]"
       )
+        div(class="col-span-full mb-4 flex flex-1 gap-9 md:hidden")
+          a(
+            href="https://almaztd.ru/",
+            target="_blank",
+            class="inline-flex items-center gap-1"
+          )
+            span Основной сайт
+            span(class="text-primary")
+              svg(
+                width="20",
+                height="20",
+                viewbox="0 0 20 20",
+                fill="none",
+                xmlns="http://www.w3.org/2000/svg"
+              )
+                path(
+                  d="M4.83157 14.6537L13.4936 5.99165H6.06901L6.00537 4.99463H15.1978V14.187L14.2007 14.1234V6.69876L5.53868 15.3608L4.83157 14.6537Z",
+                  fill="currentColor"
+                )
+          a(
+            href="https://my.almaztd.ru/",
+            target="_blank",
+            class="inline-flex items-center gap-1"
+          )
+            span Личный кабинет
+            span(class="text-primary")
+              svg(
+                width="20",
+                height="20",
+                viewbox="0 0 20 20",
+                fill="none",
+                xmlns="http://www.w3.org/2000/svg"
+              )
+                path(
+                  d="M4.83157 14.6537L13.4936 5.99165H6.06901L6.00537 4.99463H15.1978V14.187L14.2007 14.1234V6.69876L5.53868 15.3608L4.83157 14.6537Z",
+                  fill="currentColor"
+                )
+
         div(class="col-span-full sm:col-span-9 md2:col-span-6 xl:col-span-4")
           h4(class="mb-5 text-h4 font-medium") Бороны
           ul(class="space-y-3")

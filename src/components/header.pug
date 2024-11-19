@@ -78,7 +78,11 @@ mixin header(isAuth=false)
               class="absolute inset-x-0 top-1/2 block h-0.5 w-full shrink-0 -translate-y-1/2 bg-current transition-all duration-300 group-aria-[current='true']:opacity-0"
             )
         div(class="flex flex-1 justify-end gap-9 max-md:hidden")
-          a(href="#", class="inline-flex items-center gap-1 ~md:~text-sm/base")
+          a(
+            href="https://almaztd.ru/",
+            target="_blank",
+            class="inline-flex items-center gap-1 ~md:~text-sm/base"
+          )
             span Основной сайт
             span(class="text-primary")
               svg(
@@ -92,7 +96,11 @@ mixin header(isAuth=false)
                   d="M4.83157 14.6537L13.4936 5.99165H6.06901L6.00537 4.99463H15.1978V14.187L14.2007 14.1234V6.69876L5.53868 15.3608L4.83157 14.6537Z",
                   fill="currentColor"
                 )
-          a(href="#", class="inline-flex items-center gap-1 ~md:~text-sm/base")
+          a(
+            href="https://my.almaztd.ru/",
+            target="_blank",
+            class="inline-flex items-center gap-1 ~md:~text-sm/base"
+          )
             span Личный кабинет
             span(class="text-primary")
               svg(
@@ -108,7 +116,7 @@ mixin header(isAuth=false)
                 )
       +submenu
     div(
-      class="col-[main] flex pb-3 pt-4 ~gap-5/10 [.lock-scroll_&]:pr-[var(--scrollbar-width)]"
+      class="z-30 col-[main] flex bg-background pb-3 pt-4 ~gap-5/10 md:z-0 [.lock-scroll_&]:pr-[var(--scrollbar-width)]"
     )
       button(
         type="button",
