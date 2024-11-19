@@ -60,42 +60,10 @@ export function initEquipmentPartLinksHandler() {
     clearActive(_activeLink);
     const link = LinksMap[id];
     if (!link) return;
-    scrollToLink(link.offsetTop, link.offsetHeight);
-    // scrollTo({
-    //   top: window.scrollY + link.getBoundingClientRect().top - 160,
-    //   behavior: "smooth",
-    // });
+    // scrollToLink(link.offsetTop, link.offsetHeight);
     link.setAttribute("aria-current", "true");
     _activeLink = link;
   }
-
-  const RectsMap = Array.from(rects).reduce<Record<string, HTMLElement>>(
-    (acc, rect) => {
-      const attrId = rect.getAttribute("id");
-      if (!attrId) return acc;
-      const id = attrId.slice(attrId.lastIndexOf("-") + 1);
-      acc[id] = rect;
-
-      rect.addEventListener("focusin", (event) => {
-        highlightEquipmentLink(id);
-      });
-
-      rect.addEventListener("focusout", () => {
-        clearActive(_activeLink);
-      });
-
-      rect.addEventListener("pointerenter", (event) => {
-        highlightEquipmentLink(id);
-      });
-
-      rect.addEventListener("pointerleave", (event) => {
-        clearActive(_activeLink);
-      });
-
-      return acc;
-    },
-    {},
-  );
 
   const LinksMap = Array.from(links).reduce<Record<string, HTMLElement>>(
     (acc, link) => {
@@ -119,6 +87,50 @@ export function initEquipmentPartLinksHandler() {
 
       link.addEventListener("pointerleave", (event) => {
         clearActive(_activeRect);
+      });
+
+      return acc;
+    },
+    {},
+  );
+
+  const RectsMap = Array.from(rects).reduce<Record<string, HTMLElement>>(
+    (acc, rect) => {
+      const attrId = rect.getAttribute("id");
+      if (!attrId) return acc;
+      const id = attrId.slice(attrId.lastIndexOf("-") + 1);
+      const link = LinksMap[id];
+
+      if (link) {
+        const cartModalTrigger = link.querySelector(
+          "[data-modal-trigger='cart']",
+        );
+
+        if (cartModalTrigger) {
+          const cartModalTriggerProps =
+            cartModalTrigger?.getAttribute("data-modal-props");
+          rect.setAttribute("data-modal-trigger", "cart");
+          if (cartModalTriggerProps)
+            rect.setAttribute("data-modal-props", cartModalTriggerProps);
+        }
+      }
+
+      acc[id] = rect;
+
+      rect.addEventListener("focusin", (event) => {
+        highlightEquipmentLink(id);
+      });
+
+      rect.addEventListener("focusout", () => {
+        clearActive(_activeLink);
+      });
+
+      rect.addEventListener("pointerenter", (event) => {
+        highlightEquipmentLink(id);
+      });
+
+      rect.addEventListener("pointerleave", (event) => {
+        clearActive(_activeLink);
       });
 
       return acc;
