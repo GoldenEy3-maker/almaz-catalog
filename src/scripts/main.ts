@@ -13,6 +13,11 @@ import {
 import { yearMaskHandler } from "./mask";
 import { openModal } from "./modal";
 import { initSubmenu } from "./submenu";
+import {
+  suggestionsBlurHandler,
+  suggestionsFocusHandler,
+  suggestionsInputHandler,
+} from "./suggestions";
 import { getAttrFromSelector } from "./utils";
 
 initSubmenu();
@@ -24,13 +29,28 @@ document.addEventListener("submit", (event) => {
   const formTarget = (event.target as HTMLElement).closest(SelectorMap.Form);
   if (formTarget) formSubmitHandler(event);
 });
+
 document.addEventListener("input", (event) => {
-  const yearMaskInput = (event.target as HTMLElement).closest<HTMLInputElement>(
-    SelectorMap.YearMask,
+  const target = event.target as HTMLElement;
+  const yearMaskInput = target.closest<HTMLInputElement>(SelectorMap.YearMask);
+  const suggestionsInput = target.closest<HTMLInputElement>(
+    SelectorMap.SuggestionsAction,
   );
 
   if (yearMaskInput) yearMaskHandler(yearMaskInput);
+  if (suggestionsInput) suggestionsInputHandler(suggestionsInput);
 });
+
+document.addEventListener("focusin", (event) => {
+  const target = event.target as HTMLElement;
+
+  const suggestionsInput = target.closest<HTMLInputElement>(
+    SelectorMap.SuggestionsAction,
+  );
+
+  if (suggestionsInput) suggestionsFocusHandler(suggestionsInput);
+});
+
 document.addEventListener("focusout", (event) => {
   const target = event.target as HTMLElement;
 
@@ -38,8 +58,18 @@ document.addEventListener("focusout", (event) => {
     SelectorMap.CounterInput,
   );
 
+  const suggestionsInput = target.closest<HTMLInputElement>(
+    SelectorMap.SuggestionsAction,
+  );
+
   if (counterInput) blurCounterHandler(counterInput);
+  if (suggestionsInput)
+    suggestionsBlurHandler(
+      suggestionsInput,
+      event.relatedTarget as HTMLElement | null,
+    );
 });
+
 document.addEventListener("click", (event) => {
   const target = event.target as HTMLElement;
 
