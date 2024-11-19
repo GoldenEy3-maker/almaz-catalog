@@ -137,32 +137,51 @@ mixin header(isAuth=false)
           )
       form(
         action="search.html",
-        class="relative h-[2.875rem] max-w-[23.4375rem] flex-1 max-md:hidden"
+        class="relative max-w-[23.4375rem] flex-1 max-md:hidden"
       )
-        +input(
-          type="text",
-          name="q",
-          placeholder="Название детали",
-          inputmode="search",
-          enterkeyhint="search",
-          class="!h-full !px-5 !pr-14"
-        )
-        span(
-          class="pointer-events-none absolute inset-y-0 right-5 inline-flex items-center justify-center"
-        )
-          svg(
-            width="23",
-            height="23",
-            viewbox="0 0 23 23",
-            fill="none",
-            xmlns="http://www.w3.org/2000/svg"
+        div(class="relative h-[2.875rem]")
+          +input(
+            type="text",
+            name="q",
+            placeholder="Название детали",
+            inputmode="search",
+            enterkeyhint="search",
+            data-suggestions-action="/api/search",
+            data-suggestions-menu="search-suggestions-list",
+            class="!h-full !px-5 !pr-14"
           )
-            path(
-              fill-rule="evenodd",
-              clip-rule="evenodd",
-              d="M13.3919 13.0945L18.4222 18.1246L18.4221 15.889L14.4453 11.9121C15.1105 10.9328 15.4948 9.74817 15.4836 8.47478C15.4543 5.14466 12.731 2.46883 9.40085 2.49815C6.07073 2.52746 3.3949 5.25081 3.42421 8.58093C3.45353 11.911 6.17688 14.5869 9.507 14.5576C10.993 14.5445 12.3487 13.995 13.3919 13.0945ZM9.4894 12.5576C7.26381 12.5772 5.44373 10.7889 5.42414 8.56333C5.40455 6.33774 7.19286 4.51766 9.41845 4.49807C11.644 4.47848 13.4641 6.26679 13.4837 8.49239C13.5033 10.718 11.715 12.5381 9.4894 12.5576Z",
-              fill="currentColor"
+          span(
+            class="pointer-events-none absolute inset-y-0 right-5 inline-flex items-center justify-center"
+          )
+            svg(
+              width="23",
+              height="23",
+              viewbox="0 0 23 23",
+              fill="none",
+              xmlns="http://www.w3.org/2000/svg"
             )
+              path(
+                fill-rule="evenodd",
+                clip-rule="evenodd",
+                d="M13.3919 13.0945L18.4222 18.1246L18.4221 15.889L14.4453 11.9121C15.1105 10.9328 15.4948 9.74817 15.4836 8.47478C15.4543 5.14466 12.731 2.46883 9.40085 2.49815C6.07073 2.52746 3.3949 5.25081 3.42421 8.58093C3.45353 11.911 6.17688 14.5869 9.507 14.5576C10.993 14.5445 12.3487 13.995 13.3919 13.0945ZM9.4894 12.5576C7.26381 12.5772 5.44373 10.7889 5.42414 8.56333C5.40455 6.33774 7.19286 4.51766 9.41845 4.49807C11.644 4.47848 13.4641 6.26679 13.4837 8.49239C13.5033 10.718 11.715 12.5381 9.4894 12.5576Z",
+                fill="currentColor"
+              )
+        #search-suggestions-list(
+          class="absolute inset-x-0 top-full flex flex-col items-start border border-t-0 border-border bg-background shadow-md transition-all duration-300 aria-hidden:invisible aria-hidden:top-[80%] aria-hidden:opacity-0",
+          aria-hidden="true"
+        )
+          template#suggestions-empty
+            p(class="px-5 py-3") Ничего не найдено
+          template#suggestions-item
+            a(
+              href="equipment.html",
+              class="w-full px-5 py-3 hover:bg-primary/20 focus:outline-none focus-visible:bg-primary/20"
+            ) 
+          button(
+            type="submit",
+            class="mx-5 mb-4 mt-2 text-primary",
+            data-suggestions-all-results=""
+          ) Все результаты
       div(class="flex flex-1 justify-end ~gap-5/10")
         if isAuth == true
           button(

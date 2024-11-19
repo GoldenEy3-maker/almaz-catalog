@@ -26,6 +26,9 @@ export const SelectorMap = {
   CustomSelectOption: "[data-custom-select-option]",
   CustomSelectEmpty: "[data-custom-select-empty]",
 
+  // Suggestions
+  SuggestionsAction: "[data-]",
+
   // Equipment
   EquipmentPartLink: "[data-equipment-part-link]",
   EquipmentSchema: "[data-equipment-schema]",
