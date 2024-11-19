@@ -4,7 +4,7 @@ include ./counter
 mixin dialog-cart
   template#cart
     div(
-      class="group fixed inset-0 z-20 grid place-items-center overflow-hidden",
+      class="group fixed inset-0 z-20 grid place-items-end overflow-hidden sm:place-items-center",
       data-modal-root="cart"
     )
       div(
@@ -55,7 +55,7 @@ mixin dialog-cart
                 ) 
                   p(data-part-article="") 
               div(class="flex justify-end") 
-                +counter(data-part-id-input-name="")
+                +counter(data-part-id-input-name="", data-part-set="")
             div(
               class="col-span-full mt-3 grid grid-cols-subgrid items-baseline text-description ~text-sm/base"
             )
