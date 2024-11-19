@@ -45,7 +45,7 @@ document.addEventListener("focusin", (event) => {
   const target = event.target as HTMLElement;
 
   const suggestionsInput = target.closest<HTMLInputElement>(
-    SelectorMap.SuggestionsAction,
+    `${SelectorMap.SuggestionsAction}:not([data-suggestions-focus-events-disabled])`,
   );
 
   if (suggestionsInput) suggestionsFocusHandler(suggestionsInput);
@@ -59,7 +59,7 @@ document.addEventListener("focusout", (event) => {
   );
 
   const suggestionsInput = target.closest<HTMLInputElement>(
-    SelectorMap.SuggestionsAction,
+    `${SelectorMap.SuggestionsAction}:not([data-suggestions-focus-events-disabled])`,
   );
 
   if (counterInput) blurCounterHandler(counterInput);

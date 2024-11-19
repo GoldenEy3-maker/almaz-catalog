@@ -2,30 +2,12 @@ import { z } from "zod";
 import { SelectorMap } from "./constants";
 import { getAttrFromSelector, getRandomIntInclusive } from "./utils";
 
-type SuggestionsMenuStore = {
-  action: string | null;
-  menu: HTMLElement | null;
-  menuContainer: HTMLElement | null;
-  item: HTMLTemplateElement | null;
-  empty: HTMLTemplateElement | null;
-  allResultsBtn: HTMLButtonElement | null;
-  fetchDebounceTimeoutId: NodeJS.Timeout | null;
-};
-
 const SuggestionsDataSchema = z.object({
   id: z.string(),
   title: z.string(),
 });
 
-const _suggestionsMenuStore: SuggestionsMenuStore = {
-  action: null,
-  menu: null,
-  menuContainer: null,
-  item: null,
-  empty: null,
-  allResultsBtn: null,
-  fetchDebounceTimeoutId: null,
-};
+let _suggestionsFetchDebounceTimeoutId: NodeJS.Timeout | undefined = undefined;
 
 function getSuggestionsAction(input: HTMLInputElement) {
   const action = input.getAttribute(
@@ -33,7 +15,7 @@ function getSuggestionsAction(input: HTMLInputElement) {
   );
   if (!action || action === "")
     throw new Error("Suggestions input must have filled action attr");
-  _suggestionsMenuStore.action = action;
+
   return action;
 }
 
@@ -45,7 +27,6 @@ function getSuggestionsMenu(input: HTMLInputElement) {
     throw new Error("Suggestions input must have filled menu attr");
   const menu = document.getElementById(menuRef);
   if (!menu) throw new Error("Cannot find suggetions menu by given ref");
-  _suggestionsMenuStore.menu = menu;
   return menu;
 }
 
@@ -58,7 +39,6 @@ function getSuggestionsMenuContainer(input: HTMLInputElement) {
   const container = document.getElementById(containerRef);
   if (!container)
     throw new Error("Cannot find suggetions menu container by given ref");
-  _suggestionsMenuStore.menuContainer = container;
   return container;
 }
 
@@ -70,7 +50,6 @@ function getSuggestionsMenuItem(input: HTMLInputElement) {
     throw new Error("Suggestions input must have filled menu item attr");
   const item = document.querySelector<HTMLTemplateElement>(`#${itemRef}`);
   if (!item) throw new Error("Cannot find suggetions menu item by given ref");
-  _suggestionsMenuStore.item = item;
   return item;
 }
 
@@ -82,7 +61,6 @@ function getSuggestionsMenuEmpty(input: HTMLInputElement) {
     throw new Error("Suggestions input must have filled menu empty attr");
   const empty = document.querySelector<HTMLTemplateElement>(`#${emptyRef}`);
   if (!empty) throw new Error("Cannot find suggetions menu empty by given ref");
-  _suggestionsMenuStore.empty = empty;
   return empty;
 }
 
@@ -90,17 +68,13 @@ function getSuggestionsMenuAllResultsBtn(menu: HTMLElement) {
   const btn = menu.querySelector<HTMLButtonElement>(
     SelectorMap.SuggestionsAllResults,
   );
-  _suggestionsMenuStore.allResultsBtn = btn;
   return btn;
 }
 
 function clearSuggestionsMenuContainer(input: HTMLInputElement) {
-  const menuContainer =
-    _suggestionsMenuStore.menuContainer ?? getSuggestionsMenuContainer(input);
-  const menu = _suggestionsMenuStore.menu ?? getSuggestionsMenu(input);
-  const allResultsBtn =
-    _suggestionsMenuStore.allResultsBtn ??
-    getSuggestionsMenuAllResultsBtn(menu);
+  const menuContainer = getSuggestionsMenuContainer(input);
+  const menu = getSuggestionsMenu(input);
+  const allResultsBtn = getSuggestionsMenuAllResultsBtn(menu);
 
   allResultsBtn?.setAttribute("aria-hidden", "false");
   menuContainer.innerHTML = "";
@@ -108,7 +82,7 @@ function clearSuggestionsMenuContainer(input: HTMLInputElement) {
 
 export function suggestionsFocusHandler(input: HTMLInputElement) {
   const controller = new AbortController();
-  const menu = _suggestionsMenuStore.menu ?? getSuggestionsMenu(input);
+  const menu = getSuggestionsMenu(input);
   const isInputEmpty = input.value !== "";
 
   if (isInputEmpty) menu.ariaHidden = "false";
@@ -139,7 +113,7 @@ export function suggestionsBlurHandler(
   relatedTarget: HTMLElement | null,
 ) {
   const controller = new AbortController();
-  const menu = _suggestionsMenuStore.menu ?? getSuggestionsMenu(input);
+  const menu = getSuggestionsMenu(input);
 
   menu.addEventListener(
     "focusout",
@@ -159,21 +133,16 @@ export function suggestionsBlurHandler(
 }
 
 export function suggestionsInputHandler(input: HTMLInputElement) {
-  const action = _suggestionsMenuStore.action ?? getSuggestionsAction(input);
-  const menu = _suggestionsMenuStore.menu ?? getSuggestionsMenu(input);
-  const menuContainer =
-    _suggestionsMenuStore.menuContainer ?? getSuggestionsMenuContainer(input);
-  const itemTemplate =
-    _suggestionsMenuStore.item ?? getSuggestionsMenuItem(input);
-  const emptyTemplate =
-    _suggestionsMenuStore.empty ?? getSuggestionsMenuEmpty(input);
-  const allResultsBtn =
-    _suggestionsMenuStore.allResultsBtn ??
-    getSuggestionsMenuAllResultsBtn(menu);
+  const action = getSuggestionsAction(input);
+  const menu = getSuggestionsMenu(input);
+  const menuContainer = getSuggestionsMenuContainer(input);
+  const itemTemplate = getSuggestionsMenuItem(input);
+  const emptyTemplate = getSuggestionsMenuEmpty(input);
+  const allResultsBtn = getSuggestionsMenuAllResultsBtn(menu);
 
-  if (_suggestionsMenuStore.fetchDebounceTimeoutId) {
-    clearTimeout(_suggestionsMenuStore.fetchDebounceTimeoutId);
-    _suggestionsMenuStore.fetchDebounceTimeoutId = null;
+  if (_suggestionsFetchDebounceTimeoutId) {
+    clearTimeout(_suggestionsFetchDebounceTimeoutId);
+    _suggestionsFetchDebounceTimeoutId = undefined;
   }
 
   if (input.value === "") {
@@ -181,7 +150,7 @@ export function suggestionsInputHandler(input: HTMLInputElement) {
     return;
   }
 
-  _suggestionsMenuStore.fetchDebounceTimeoutId = setTimeout(async () => {
+  _suggestionsFetchDebounceTimeoutId = setTimeout(async () => {
     try {
       // const res = await fetch(`${action}?${input.name ?? "q"}=${input.value}`);
       // if (!res.ok) throw new Error(res.statusText);
