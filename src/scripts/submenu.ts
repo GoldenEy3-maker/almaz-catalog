@@ -22,7 +22,12 @@ export function initSubmenu() {
     submenu.style.transitionDuration = _animationDuration + "ms";
     submenu.style.animationDuration = _animationDuration + "ms";
     submenu.ariaHidden = submenu.ariaHidden === "true" ? "false" : "true";
-    if (submenu.ariaHidden === "false") lockScroll();
-    else unlockScroll(_animationDuration);
+    if (submenu.ariaHidden === "false") {
+      trigger.ariaCurrent = "true";
+      lockScroll();
+    } else {
+      trigger.ariaCurrent = "false";
+      unlockScroll(_animationDuration);
+    }
   });
 }
