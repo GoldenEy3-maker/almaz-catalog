@@ -231,7 +231,7 @@ export function initFieldsWithSearchParams() {
     SelectorMap.FieldWithSearchParams,
   );
   const searchParams = Object.fromEntries(
-    new URL(window.location.href).searchParams.entries(),
+    new URLSearchParams(window.location.search).entries(),
   );
 
   if (fields.length)
