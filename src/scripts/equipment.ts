@@ -18,29 +18,6 @@ export function initEquipmentPartLinksHandler() {
 
   if (rects.length === 0) return;
 
-  function scrollToLink(linkOffsetTop: number, linkHeight: number) {
-    const headerHeight = document.querySelector<HTMLElement>(
-      SelectorMap.Header,
-    )?.offsetHeight;
-    const viewportTopPos = headerHeight
-      ? window.scrollY + headerHeight
-      : window.scrollY;
-    const viewportBottomPos = window.innerHeight + window.scrollY;
-
-    const topDiff = linkOffsetTop - viewportTopPos;
-    const bottomDiff = linkOffsetTop + linkHeight - viewportBottomPos;
-
-    if (topDiff <= 0) {
-      scrollTo({
-        top: window.scrollY + topDiff - 20,
-      });
-    } else if (bottomDiff >= 0) {
-      scrollTo({
-        top: window.scrollY + bottomDiff + 40,
-      });
-    }
-  }
-
   function clearActive(element: HTMLElement | null) {
     if (element) {
       element.setAttribute("aria-current", "false");
@@ -60,9 +37,31 @@ export function initEquipmentPartLinksHandler() {
     clearActive(_activeLink);
     const link = LinksMap[id];
     if (!link) return;
-    // scrollToLink(link.offsetTop, link.offsetHeight);
     link.setAttribute("aria-current", "true");
     _activeLink = link;
+  }
+
+  function scrollToLinkBySearchParamsId() {
+    const searchParams = new URLSearchParams(window.location.search);
+    const equipmentLinkId = searchParams.get("equipmentLinkId");
+    if (!equipmentLinkId) return;
+    const link = LinksMap[equipmentLinkId];
+    if (!link) return;
+    const headerHeight =
+      document.querySelector<HTMLElement>(SelectorMap.Header)?.offsetHeight ??
+      0;
+
+    const y = window.scrollY + link.offsetTop - window.innerHeight / 2;
+
+    scrollTo({
+      top: y,
+    });
+
+    link.ariaCurrent = "true";
+
+    setTimeout(() => {
+      link.ariaCurrent = "false";
+    }, 1000);
   }
 
   const LinksMap = Array.from(links).reduce<Record<string, HTMLElement>>(
@@ -137,4 +136,6 @@ export function initEquipmentPartLinksHandler() {
     },
     {},
   );
+
+  scrollToLinkBySearchParamsId();
 }
