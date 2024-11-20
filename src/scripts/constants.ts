@@ -33,9 +33,9 @@ export const SelectorMap = {
   // Suggestions
   SuggestionsAction: "[data-suggestions-action]",
   SuggestionsMenu: "[data-suggestions-menu]",
-  SuggestionsMenuContainer: "[data-suggestions-menu-container]",
-  SuggestionsMenuItem: "[data-suggestions-menu-item]",
-  SuggestionsMenuEmpty: "[data-suggestions-menu-empty]",
+  SuggestionsMenuContainer: "[data-suggestions-container]",
+  SuggestionsMenuItem: "[data-suggestions-item]",
+  SuggestionsMenuEmpty: "[data-suggestions-empty]",
   SuggestionsAllResults: "[data-suggestions-all-results]",
 
   // Equipment

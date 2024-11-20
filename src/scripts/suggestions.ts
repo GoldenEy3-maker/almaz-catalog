@@ -30,36 +30,27 @@ function getSuggestionsMenu(input: HTMLInputElement) {
   return menu;
 }
 
-function getSuggestionsMenuContainer(input: HTMLInputElement) {
-  const containerRef = input.getAttribute(
-    getAttrFromSelector(SelectorMap.SuggestionsMenuContainer),
+function getSuggestionsMenuContainer(menu: HTMLElement) {
+  const container = menu.querySelector<HTMLElement>(
+    SelectorMap.SuggestionsMenuContainer,
   );
-  if (!containerRef || containerRef === "")
-    throw new Error("Suggestions input must have filled menu container attr");
-  const container = document.getElementById(containerRef);
   if (!container)
     throw new Error("Cannot find suggetions menu container by given ref");
   return container;
 }
 
-function getSuggestionsMenuItem(input: HTMLInputElement) {
-  const itemRef = input.getAttribute(
-    getAttrFromSelector(SelectorMap.SuggestionsMenuItem),
+function getSuggestionsMenuItem(menu: HTMLElement) {
+  const item = menu.querySelector<HTMLTemplateElement>(
+    SelectorMap.SuggestionsMenuItem,
   );
-  if (!itemRef || itemRef === "")
-    throw new Error("Suggestions input must have filled menu item attr");
-  const item = document.querySelector<HTMLTemplateElement>(`#${itemRef}`);
   if (!item) throw new Error("Cannot find suggetions menu item by given ref");
   return item;
 }
 
-function getSuggestionsMenuEmpty(input: HTMLInputElement) {
-  const emptyRef = input.getAttribute(
-    getAttrFromSelector(SelectorMap.SuggestionsMenuEmpty),
+function getSuggestionsMenuEmpty(menu: HTMLElement) {
+  const empty = menu.querySelector<HTMLTemplateElement>(
+    SelectorMap.SuggestionsMenuEmpty,
   );
-  if (!emptyRef || emptyRef === "")
-    throw new Error("Suggestions input must have filled menu empty attr");
-  const empty = document.querySelector<HTMLTemplateElement>(`#${emptyRef}`);
   if (!empty) throw new Error("Cannot find suggetions menu empty by given ref");
   return empty;
 }
@@ -72,8 +63,8 @@ function getSuggestionsMenuAllResultsBtn(menu: HTMLElement) {
 }
 
 function clearSuggestionsMenuContainer(input: HTMLInputElement) {
-  const menuContainer = getSuggestionsMenuContainer(input);
   const menu = getSuggestionsMenu(input);
+  const menuContainer = getSuggestionsMenuContainer(menu);
   const allResultsBtn = getSuggestionsMenuAllResultsBtn(menu);
 
   allResultsBtn?.setAttribute("aria-hidden", "false");
@@ -135,9 +126,9 @@ export function suggestionsBlurHandler(
 export function suggestionsInputHandler(input: HTMLInputElement) {
   const action = getSuggestionsAction(input);
   const menu = getSuggestionsMenu(input);
-  const menuContainer = getSuggestionsMenuContainer(input);
-  const itemTemplate = getSuggestionsMenuItem(input);
-  const emptyTemplate = getSuggestionsMenuEmpty(input);
+  const menuContainer = getSuggestionsMenuContainer(menu);
+  const itemTemplate = getSuggestionsMenuItem(menu);
+  const emptyTemplate = getSuggestionsMenuEmpty(menu);
   const allResultsBtn = getSuggestionsMenuAllResultsBtn(menu);
 
   if (_suggestionsFetchDebounceTimeoutId) {

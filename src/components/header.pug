@@ -150,9 +150,6 @@ mixin header(isAuth=false)
             autocomplete="off",
             data-suggestions-action="/api/search",
             data-suggestions-menu="search-suggestions-menu",
-            data-suggestions-menu-container="search-suggestions-container",
-            data-suggestions-menu-item="suggestions-item",
-            data-suggestions-menu-empty="suggestions-empty",
             class="!h-full !px-5 !pr-14"
           )
           span(
@@ -175,10 +172,10 @@ mixin header(isAuth=false)
           class="absolute inset-x-0 top-full border border-t-0 border-border bg-background shadow-md transition-all duration-300 aria-hidden:invisible aria-hidden:top-[80%] aria-hidden:opacity-0",
           aria-hidden="true"
         )
-          #search-suggestions-container(class="flex flex-col items-start")
-          template#suggestions-empty
+          div(class="flex flex-col items-start", data-suggestions-container="")
+          template(data-suggestions-empty="")
             p(class="px-5 py-3") Ничего не найдено
-          template#suggestions-item
+          template(data-suggestions-item="")
             a(
               href="equipment.html",
               class="w-full px-5 py-3 hover:bg-primary/20 focus:outline-none focus-visible:bg-primary/20"

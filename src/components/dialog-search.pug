@@ -40,9 +40,6 @@ mixin dialog-search
               data-suggestions-focus-events-disabled="",
               data-suggestions-action="/api/search",
               data-suggestions-menu="search-suggestions-menu-mobile",
-              data-suggestions-menu-container="search-suggestions-container-mobile",
-              data-suggestions-menu-item="suggestions-item-mobile",
-              data-suggestions-menu-empty="suggestions-empty-mobile",
               class="!h-full !px-5 !pr-14"
             )
             span(
@@ -65,10 +62,10 @@ mixin dialog-search
             class="mt-7 transition-all duration-300 aria-hidden:invisible aria-hidden:opacity-0",
             aria-hidden="true"
           )
-            #search-suggestions-container-mobile(class="flex flex-col items-start")
-            template#suggestions-empty-mobile
+            div(class="flex flex-col items-start", data-suggestions-container="")
+            template(data-suggestions-empty="")
               p(class="") Ничего не найдено
-            template#suggestions-item-mobile
+            template(data-suggestions-item="")
               a(
                 href="equipment.html",
                 class="w-full py-3 focus:outline-none focus-visible:bg-primary/20"
