@@ -16,6 +16,8 @@ import { initSubmenu } from "./submenu";
 import {
   suggestionsBlurHandler,
   suggestionsFocusHandler,
+  suggestionsFocusNextHandler,
+  suggestionsFocusPrevHandler,
   suggestionsInputHandler,
 } from "./suggestions";
 import { getAttrFromSelector } from "./utils";
@@ -94,4 +96,9 @@ document.addEventListener("click", (event) => {
     if (!key) return;
     openModal(key, modalTrigger);
   }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.code === "ArrowDown") suggestionsFocusNextHandler(event);
+  if (event.code === "ArrowUp") suggestionsFocusPrevHandler(event);
 });

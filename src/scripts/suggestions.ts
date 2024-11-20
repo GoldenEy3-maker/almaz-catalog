@@ -71,6 +71,95 @@ function clearSuggestionsMenuContainer(input: HTMLInputElement) {
   menuContainer.innerHTML = "";
 }
 
+let _suggestionsFocusIndex = 0;
+
+export function suggestionsFocusNextHandler(event: KeyboardEvent) {
+  const controller = new AbortController();
+  const inputs = document.querySelectorAll<HTMLInputElement>(
+    SelectorMap.SuggestionsMenu,
+  );
+
+  if (inputs.length)
+    inputs.forEach((input) => {
+      const menuRef = input.getAttribute(
+        getAttrFromSelector(SelectorMap.SuggestionsMenu),
+      );
+      if (!menuRef) return;
+      const menu = document.querySelector(`#${menuRef}[aria-hidden='false']`);
+      if (!menu) return;
+      const links = Array.from(menu.querySelectorAll("a"));
+      if (!links.length) return;
+
+      event.preventDefault();
+
+      if (
+        !document.activeElement?.closest(`#${menuRef}[aria-hidden='false']`) ||
+        document.activeElement === links.at(-1)
+      ) {
+        _suggestionsFocusIndex = 0;
+      } else {
+        _suggestionsFocusIndex++;
+      }
+
+      links[_suggestionsFocusIndex]?.focus();
+
+      document.addEventListener(
+        "keydown",
+        (event) => {
+          if (event.code === "ArrowUp" || event.code === "ArrowDown") return;
+
+          input.focus();
+          controller.abort();
+        },
+        { signal: controller.signal },
+      );
+    });
+}
+
+export function suggestionsFocusPrevHandler(event: KeyboardEvent) {
+  const controller = new AbortController();
+  const inputs = document.querySelectorAll<HTMLInputElement>(
+    SelectorMap.SuggestionsMenu,
+  );
+
+  if (inputs.length)
+    inputs.forEach((input) => {
+      const menuRef = input.getAttribute(
+        getAttrFromSelector(SelectorMap.SuggestionsMenu),
+      );
+      if (!menuRef) return;
+      const menu = document.querySelector(`#${menuRef}[aria-hidden='false']`);
+      if (!menu) return;
+      const links = Array.from(menu.querySelectorAll("a"));
+      if (!links.length) return;
+
+      event.preventDefault();
+
+      if (
+        !document.activeElement?.closest(`#${menuRef}[aria-hidden='false']`)
+      ) {
+        _suggestionsFocusIndex = 0;
+      } else if (document.activeElement === links[0]) {
+        _suggestionsFocusIndex = links.length - 1;
+      } else {
+        _suggestionsFocusIndex--;
+      }
+
+      links[_suggestionsFocusIndex]?.focus();
+
+      document.addEventListener(
+        "keydown",
+        (event) => {
+          if (event.code === "ArrowUp" || event.code === "ArrowDown") return;
+
+          input.focus();
+          controller.abort();
+        },
+        { signal: controller.signal },
+      );
+    });
+}
+
 export function suggestionsFocusHandler(input: HTMLInputElement) {
   const controller = new AbortController();
   const menu = getSuggestionsMenu(input);
