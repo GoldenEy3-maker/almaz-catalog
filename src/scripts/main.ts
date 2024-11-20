@@ -16,8 +16,7 @@ import { initSubmenu } from "./submenu";
 import {
   suggestionsBlurHandler,
   suggestionsFocusHandler,
-  suggestionsFocusNextHandler,
-  suggestionsFocusPrevHandler,
+  suggestionsArrowFocusHandler,
   suggestionsInputHandler,
 } from "./suggestions";
 import { getAttrFromSelector } from "./utils";
@@ -99,6 +98,6 @@ document.addEventListener("click", (event) => {
 });
 
 document.addEventListener("keydown", (event) => {
-  if (event.code === "ArrowDown") suggestionsFocusNextHandler(event);
-  if (event.code === "ArrowUp") suggestionsFocusPrevHandler(event);
+  if (event.code === "ArrowDown" || event.code === "ArrowUp")
+    suggestionsArrowFocusHandler(event);
 });
