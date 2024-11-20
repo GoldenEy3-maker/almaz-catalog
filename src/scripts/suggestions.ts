@@ -122,7 +122,12 @@ export function suggestionsArrowFocusHandler(event: KeyboardEvent) {
       document.addEventListener(
         "keydown",
         (event) => {
-          if (event.code === "ArrowUp" || event.code === "ArrowDown") return;
+          if (
+            event.code === "ArrowUp" ||
+            event.code === "ArrowDown" ||
+            event.code === "Enter"
+          )
+            return;
 
           input.focus();
           controller.abort();
