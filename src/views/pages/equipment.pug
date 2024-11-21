@@ -20,48 +20,54 @@ block content
       class="order-2 col-span-full grid grid-cols-[auto_1fr_auto] md2:order-1 md2:col-span-7"
     )
       each part in [{id: "1", title: "Сница", article: "47.967.01", isExpandable: true, set: "1"}, {id: "2", title: "Секция центральная", article: "47.1250.02", isExpandable: true, set: "1"}, {id: "3", title: "Секция левая", article: "47.990.03", isExpandable: true, set: "1"}, {id: "4", title: "Секция правая", article: "47.990.04", isExpandable: true, set: "1"}, {id: "5", title: "Блок дисковый передний боковой", article: "47.990.05 СБ", isExpandable: true, set: "1"}, {id: "6", title: "Блок дисковый передний боковой", article: "47.990.05 СБ-01", isExpandable: true, set: "1"}, {id: "7", title: "Блок дисковый передний центральный", article: "47.990.06 СБ", isExpandable: true, set: "1"}, {id: "8", title: "Блок дисковый передний центральный", article: "47.990.06 СБ-01", isExpandable: true, set: "1"}, {id: "9", title: "Блок дисковый задний боковой", article: "47.990.07 СБ", isExpandable: true, set: "1"}, {id: "10", title: "Блок дисковый задний боковой", article: "47.990.07 СБ-01", isExpandable: true, set: "1"}, {id: "11", title: "Блок дисковый задний центральный", article: "47.990.08 СБ", isExpandable: true, set: "1"}, {id: "12", title: "Блок дисковый задний центральный", article: "47.990.08 СБ-01", isExpandable: true, set: "1"}, {id: "13", title: "Колесо центральное", article: "47.967.09.1 СБ", isExpandable: true, set: "1"}, {id: "14", title: "Колесо центральное", article: "47.967.09.1-01 СБ", isExpandable: true, set: "1"}, {id: "15", title: "Колесо боковое", article: "47.967.10 СБ", isExpandable: true, set: "1"}, {id: "16", title: "Колесо боковое", article: "47.967.10-01 СБ", isExpandable: true, set: "1"}, {id: "17", title: "Фиксатор", article: "47.967.11 СБ", isExpandable: false, set: "2"}, {id: "18", title: "Ось", article: "47.967.003", isExpandable: false, set: "1"}, {id: "19", title: "Ключ", article: "47.967.13", isExpandable: false, set: "5"}, {id: "20", title: "Борона зубовая центральная с катками", article: "47.990.14 СБ", isExpandable: true, set: "1"}, {id: "21", title: "Борона зубовая левая", article: "47.990.15. СБ", isExpandable: true, set: "1"}, {id: "22", title: "Борона зубовая левая", article: "47.990.16. СБ", isExpandable: true, set: "1"}, {id: "23", title: "Фиксатор", article: "47.990.20 СБ", isExpandable: false, set: "4"}, {id: "30", title: "Рычаг", article: "47.967.12 СБ", isExpandable: false, set: "5"}, {id: "31", title: "Ось", article: "47.967.002", isExpandable: false, set: "1"}]
-        - var baseLiClasses = "relative col-span-full grid grid-cols-subgrid items-baseline gap-[0.875rem] border-b border-border px-5 py-3 hover:bg-primary/30 aria-[current='true']:bg-primary/30 transition-all duration-300";
-        - var classVariants = { variant: { default: "", isExpandable: " bg-card-background", withoutArticle: " !items-center" } };
         li(
-          class=baseLiClasses+classVariants.variant[part.isExpandable ? "isExpandable" : "default"]+classVariants.variant[part.article ? "default" : "withoutArticle"],
+          class="group relative col-span-full grid grid-cols-subgrid gap-[0.875rem] border-b border-border ~min-h-[3.5rem]/[3.75rem]",
+          class={"bg-card-background": part.isExpandable},
           data-equipment-part-link=part.id
         )
           if part.isExpandable
-            a(href="equipment-detail.html", class="absolute inset-0")
-          div(class="flex items-start gap-x-2")
+            a(
+              href="equipment-detail.html",
+              class="peer absolute inset-0 z-10 transition duration-300 hover:bg-primary-foreground/20 focus:outline-none focus-visible:bg-primary-foreground/20 group-aria-[current='true']:bg-primary-foreground/20"
+            )
+          else
+            span(
+              class="absolute inset-0 z-10 transition duration-300 hover:bg-primary-foreground/20 group-aria-[current='true']:bg-primary-foreground/20"
+            )
+          div(
+            class="group flex gap-x-2 py-3 pl-5 transition duration-300 ~text-sm/base peer-hover:text-primary"
+          )
             if part.isExpandable == true
               span
                 svg(
-                  width="13",
-                  height="13",
-                  viewbox="0 0 13 13",
+                  width="15",
+                  height="14",
+                  viewBox="0 0 15 14",
                   fill="none",
                   xmlns="http://www.w3.org/2000/svg"
                 )
                   path(
-                    d="M6.5 0V13",
+                    d="M8.15837 12L13 6.99996M13 6.99996L8.15837 2M13 6.99996H1",
                     stroke="currentColor",
-                    stroke-width="1.5"
-                  )
-                  path(
-                    d="M13 6.5L3.57628e-07 6.5",
-                    stroke="currentColor",
-                    stroke-width="1.5"
+                    stroke-width="1.5",
+                    stroke-linecap="square"
                   )
             span(
-              class="min-w-5 flex-1 text-right font-medium leading-none text-description ~text-sm/base"
+              class="min-w-5 flex-1 text-right font-medium !leading-tight text-description transition duration-300 peer-hover:group-[]:text-primary"
             )= part.id
-          div(class="flex flex-1 items-center justify-between")
-            div(class="flex flex-col text-left")
-              p(class="font-medium ~text-sm/base")= part.title
-              span(class="text-xs leading-none text-description")= part.article
+          div(class="group flex")
+            div(class="flex flex-1 flex-col py-3 text-left")
+              p(
+                class="font-medium !leading-tight transition duration-300 ~text-sm/base peer-hover:group-[]:text-primary"
+              )= part.title
+              span(class="mt-1 text-xs leading-none text-description")= part.article
           button(
             type="button",
-            class="z-10 flex items-center justify-center self-center",
+            class="z-10 flex h-full w-16 items-center justify-center text-primary transition duration-300 hover:bg-primary hover:text-white focus:outline-none focus-visible:bg-primary focus-visible:text-white",
             data-modal-trigger="cart",
             data-modal-props="{&quot;[data-part-title]&quot;:&quot;" + part.title + "&quot;,&quot;[data-part-article]&quot;:&quot;" + part.article + "&quot;,&quot;[data-part-set]&quot;:&quot;" + part.set + "&quot;,&quot;[data-part-id-input-name]&quot;:&quot;" + part.id + "&quot;}"
           )
-            span(class="inline-block h-7 w-6 text-primary")
+            span(class="inline-block h-7 w-6")
               svg(
                 width="27",
                 height="24",

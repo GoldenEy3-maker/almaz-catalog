@@ -44,6 +44,7 @@ export default {
         foreground: "#000000",
         primary: {
           DEFAULT: "#FABA2C",
+          foreground: "#FAB92B",
         },
         border: {
           DEFAULT: "#CACACA",
