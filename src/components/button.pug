@@ -1,9 +1,13 @@
 mixin button(variant="default", asLink=false)
-  - var baseClasses = "px-12 inline-flex h-12 items-center justify-center font-bold disabled:text-description disabled:bg-card";
-  - var classVariants = { variant: { default: " bg-primary", outline: " border-2 border-primary" } };
   if asLink == true
-    a(class=baseClasses+classVariants.variant[variant])&attributes(attributes)
+    a(
+      class="inline-flex h-12 items-center justify-center px-12 font-bold disabled:bg-card disabled:text-description",
+      class={"bg-primary": variant == "default", "border-2 border-primary": variant == "outline"}
+    )&attributes(attributes)
       block
   else
-    button(class=baseClasses+classVariants.variant[variant])&attributes(attributes)
+    button(
+      class="inline-flex h-12 items-center justify-center px-12 font-bold disabled:bg-card disabled:text-description",
+      class={"bg-primary": variant == "default", "border-2 border-primary": variant == "outline"}
+    )&attributes(attributes)
       block
