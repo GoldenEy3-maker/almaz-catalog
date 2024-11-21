@@ -192,7 +192,7 @@ mixin header(isAuth=false)
             class="inline-flex items-center font-bold ~text-sm/base ~gap-1.5/3",
             data-modal-trigger="logout"
           )
-            span КленТракторТех
+            span(class="whitespace-nowrap max-[31.25rem]:hidden") КлёнТракторТех
             span(class="text-primary ~h-[1.125rem]/6")
               svg(
                 width="24",
@@ -210,7 +210,7 @@ mixin header(isAuth=false)
             href="auth.html",
             class="inline-flex items-center font-bold ~text-sm/base ~gap-1.5/3"
           )
-            span Войти в аккаунт
+            span(class="max-[31.25rem]:hidden") Войти в аккаунт
             span(class="text-primary ~h-[1.125rem]/6")
               svg(
                 width="24",
@@ -227,7 +227,7 @@ mixin header(isAuth=false)
           href="cart.html",
           class="inline-flex items-center font-medium ~text-sm/base ~gap-1.5/3"
         )
-          span Корзина
+          span(class="max-[31.25rem]:hidden") Корзина
           span(class="relative text-primary ~h-[1.125rem]/[1.625rem]")
             span(
               class="absolute -right-1 -top-1 inline-flex h-3 min-w-3 items-center justify-center rounded-full bg-destructive px-[0.15rem] text-[0.5rem] leading-none text-background aria-hidden:hidden",
