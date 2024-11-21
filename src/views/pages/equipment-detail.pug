@@ -32,10 +32,10 @@ block content
               class="absolute inset-0 z-10 transition duration-300 hover:bg-primary-foreground/20 group-aria-[current='true']:bg-primary-foreground/20"
             )
           div(
-            class="group flex gap-x-2 py-3 pl-5 transition duration-300 ~text-sm/base peer-hover:text-primary"
+            class="flex gap-x-2 py-3 pl-5 text-description ~text-sm/base peer-hover:text-primary"
           )
             if part.isExpandable == true
-              span
+              span(class="transition duration-300")
                 svg(
                   width="15",
                   height="14",
@@ -50,8 +50,9 @@ block content
                     stroke-linecap="square"
                   )
             span(
-              class="min-w-5 flex-1 text-right font-medium !leading-tight text-description transition duration-300 peer-hover:group-[]:text-primary"
+              class="min-w-5 flex-1 text-right font-medium !leading-tight transition duration-300"
             )= part.id
+
           div(class="group flex")
             div(class="flex flex-1 flex-col py-3 text-left")
               p(
