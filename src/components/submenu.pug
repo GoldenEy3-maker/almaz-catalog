@@ -1,10 +1,13 @@
 mixin submenu
   div(
-    class="absolute inset-x-0 top-0 z-10 h-svh overflow-auto bg-background pt-[8.375rem] transition-all duration-300 aria-hidden:pointer-events-none aria-hidden:invisible aria-hidden:pt-0 aria-hidden:opacity-0 md:~md:~pt-24/32",
+    class="group absolute z-10 h-screen w-screen bg-black/40 transition-all duration-300 aria-hidden:pointer-events-none aria-hidden:invisible aria-hidden:opacity-0",
     data-submenu="",
     aria-hidden="true"
-  ) 
-    div(class="main-container")
+  )
+    div(
+      class="main-container max-h-svh overflow-auto bg-background pt-[8.375rem] transition-all duration-300 group-aria-hidden:pt-0 md:~md:~pt-24/32",
+      data-submenu-wrapper=""
+    )
       div(
         class="col-[main] grid grid-cols-subgrid gap-x-6 ~gap-y-[2.5rem]/[5rem] ~pb-[2.5rem]/[3.75rem]"
       )

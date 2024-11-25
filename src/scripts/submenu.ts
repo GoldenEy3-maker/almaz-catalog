@@ -3,10 +3,12 @@ import { lockScroll, unlockScroll } from "./utils";
 
 export function initSubmenu() {
   const _animationDuration = 300;
+
   const trigger = document.querySelector<HTMLElement>(
     SelectorMap.SubmenuTrigger,
   );
   const submenu = document.querySelector<HTMLElement>(SelectorMap.Submenu);
+
   if (!trigger || !submenu) return;
 
   submenu.addEventListener("focusout", (event) => {
@@ -30,17 +32,32 @@ export function initSubmenu() {
     }
   });
 
+  function openSubmenu() {
+    trigger?.setAttribute("aria-current", "true");
+    submenu?.setAttribute("aria-hidden", "false");
+    lockScroll();
+  }
+
+  function closeSubmenu() {
+    trigger?.setAttribute("aria-current", "false");
+    submenu?.setAttribute("aria-hidden", "true");
+    unlockScroll(_animationDuration);
+  }
+
   trigger.addEventListener("click", () => {
     submenu.style.transitionDuration = _animationDuration + "ms";
     submenu.style.animationDuration = _animationDuration + "ms";
-    submenu.ariaHidden = submenu.ariaHidden === "true" ? "false" : "true";
 
-    if (submenu.ariaHidden === "false") {
-      trigger.ariaCurrent = "true";
-      lockScroll();
-    } else {
-      trigger.ariaCurrent = "false";
-      unlockScroll(_animationDuration);
+    submenu.ariaHidden === "true" ? openSubmenu() : closeSubmenu();
+  });
+
+  submenu.addEventListener("click", (event) => {
+    const target = event.target as HTMLElement;
+    if (
+      !target.closest(SelectorMap.SubmenuWrapper) ||
+      !target.closest(SelectorMap.Header)
+    ) {
+      closeSubmenu();
     }
   });
 }

@@ -3,6 +3,7 @@ export const SelectorMap = {
 
   // Submenu
   Submenu: "[data-submenu]",
+  SubmenuWrapper: "[data-submenu-wrapper]",
   SubmenuTrigger: "[data-submenu-trigger]",
 
   CartCounter: "[data-cart-counter]",
