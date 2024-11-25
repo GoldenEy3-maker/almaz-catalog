@@ -233,7 +233,7 @@ export function suggestionsInputHandler(input: HTMLInputElement) {
           const templateContent = itemTemplate.content.cloneNode(true);
 
           const link = templateContent.firstChild as HTMLAnchorElement;
-          link.href += `?equipmentLinkId=${resolvedItem.id}`;
+          link.href += `?linkHashId=${resolvedItem.id}`;
           link.textContent = resolvedItem.title;
 
           menuContainer.appendChild(link);
