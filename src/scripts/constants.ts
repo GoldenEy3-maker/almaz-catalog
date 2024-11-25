@@ -52,4 +52,7 @@ export const SelectorMap = {
   FocusGuard: "[data-focus-guard]",
 
   YearMask: "[data-year-mask]",
+
+  AnyFocusableNode:
+    "a:not([aria-hidden='true']), button:not([disabled]):not([aria-hidden='true']), input:not([disabled]):not([aria-hidden='true']), [tabindex]:not([disabled]):not([tabindex='-1']):not([aria-hidden='true']), select:not([disabled]):not([aria-hidden='true']), textarea:not([disabled]):not([aria-hidden='true'])",
 } as const;
