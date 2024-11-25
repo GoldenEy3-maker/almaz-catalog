@@ -1,5 +1,6 @@
 import { SelectorMap } from "./constants";
 import { getAttrFromSelector } from "./utils";
+import { openModal } from "./modal";
 
 export function initEquipmentPartLinksHandler() {
   const links = document.querySelectorAll<HTMLElement>(
@@ -41,23 +42,27 @@ export function initEquipmentPartLinksHandler() {
     _activeLink = link;
   }
 
-  function scrollToLinkBySearchParamsId() {
+  function scrollToLinkByHashId() {
     const searchParams = new URLSearchParams(window.location.search);
-    const equipmentLinkId = searchParams.get("equipmentLinkId");
+    const equipmentLinkId = searchParams.get("linkHashId");
+    // const equipmentLinkId = window.location.hash.replace("#", "");
     if (!equipmentLinkId) return;
     const link = LinksMap[equipmentLinkId];
     if (!link) return;
-    const headerHeight =
-      document.querySelector<HTMLElement>(SelectorMap.Header)?.offsetHeight ??
-      0;
 
-    const y = window.scrollY + link.offsetTop - window.innerHeight / 2;
+    const focusable = link.querySelector<HTMLButtonElement>(
+      "button[data-modal-trigger]",
+    );
 
     scrollTo({
-      top: y,
+      top:
+        window.scrollY -
+        (window.scrollY - (link.offsetTop - window.innerHeight / 2)),
     });
 
     link.ariaCurrent = "true";
+
+    focusable?.focus({ preventScroll: true });
 
     setTimeout(() => {
       link.ariaCurrent = "false";
@@ -116,12 +121,27 @@ export function initEquipmentPartLinksHandler() {
 
       acc[id] = rect;
 
+      const controller = new AbortController();
+
       rect.addEventListener("focusin", (event) => {
         highlightEquipmentLink(id);
+
+        rect.addEventListener(
+          "keydown",
+          (event) => {
+            if (event.code === "Enter") {
+              const modalKey = rect.getAttribute("data-modal-trigger");
+              if (!modalKey) return;
+              openModal(modalKey, rect);
+            }
+          },
+          { signal: controller.signal },
+        );
       });
 
       rect.addEventListener("focusout", () => {
         clearActive(_activeLink);
+        controller.abort();
       });
 
       rect.addEventListener("pointerenter", (event) => {
@@ -137,5 +157,5 @@ export function initEquipmentPartLinksHandler() {
     {},
   );
 
-  scrollToLinkBySearchParamsId();
+  scrollToLinkByHashId();
 }

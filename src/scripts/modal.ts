@@ -47,7 +47,6 @@ export function openModal(key: string, trigger: HTMLElement | null = null) {
     );
 
     if (triggerKey === key) {
-      closeModal(key);
       onCloseController.abort();
 
       return;
@@ -82,14 +81,12 @@ export function openModal(key: string, trigger: HTMLElement | null = null) {
 
   const wrapper = root.querySelector<HTMLElement>(SelectorMap.ModalWrapper);
 
-  const autofocus = templateContent.querySelector<HTMLElement>(
+  const autofocus = root.querySelector<HTMLElement>(
     "[autofocus]:not([disabled])",
   );
-  const focusGuard = templateContent.querySelector<HTMLElement>(
-    SelectorMap.FocusGuard,
-  );
-  const focusable = templateContent.querySelector<HTMLElement>(
-    'a, button:not([disabled]), input:not([disabled]), [tabindex]:not([disabled]):not([tabindex="-1"]), select:not([disabled]), textarea:not([disabled])',
+  const focusGuard = root.querySelector<HTMLElement>(SelectorMap.FocusGuard);
+  const focusable = Array.from(
+    root.querySelectorAll<HTMLElement>(SelectorMap.AnyFocusableNode),
   );
 
   root.style.animationDuration = _modalAnimationDuration + "ms";
@@ -105,12 +102,8 @@ export function openModal(key: string, trigger: HTMLElement | null = null) {
     if (attrProps) {
       const props = parseJSONWidthQuotes(attrProps);
       Object.entries(props).forEach(([key, value]) => {
-        const el = templateContent.querySelector<HTMLElement>(
-          `${key}:not(input)`,
-        );
-        const input = templateContent.querySelector<HTMLInputElement>(
-          `input${key}`,
-        );
+        const el = root.querySelector<HTMLElement>(`${key}:not(input)`);
+        const input = root.querySelector<HTMLInputElement>(`input${key}`);
         if (el) {
           if (value != "undefined") {
             el.textContent = String(value);
@@ -141,24 +134,27 @@ export function openModal(key: string, trigger: HTMLElement | null = null) {
     { signal: onCloseController.signal },
   );
 
-  document.addEventListener(
-    "click",
-    (event) => {
-      const closeTrigger = (event.target as HTMLElement).closest(
-        SelectorMap.ModalClose,
-      );
-      if (closeTrigger) {
-        const closeTriggerKey = closeTrigger.getAttribute(
-          getAttrFromSelector(SelectorMap.ModalClose),
+  // Delay an event in the event loop to handle an enter key down event on an html element like svg
+  setTimeout(() => {
+    document.addEventListener(
+      "click",
+      (event) => {
+        const closeTrigger = (event.target as HTMLElement).closest(
+          SelectorMap.ModalClose,
         );
-        closeModal(
-          closeTriggerKey && closeTriggerKey !== "" ? closeTriggerKey : key,
-        );
-        onCloseController.abort();
-      }
-    },
-    { signal: onCloseController.signal },
-  );
+        if (closeTrigger) {
+          const closeTriggerKey = closeTrigger.getAttribute(
+            getAttrFromSelector(SelectorMap.ModalClose),
+          );
+          closeModal(
+            closeTriggerKey && closeTriggerKey !== "" ? closeTriggerKey : key,
+          );
+          onCloseController.abort();
+        }
+      },
+      { signal: onCloseController.signal },
+    );
+  }, 0);
 
   if (modalOverlay) {
     modalOverlay.ariaHidden = "false";
@@ -166,18 +162,38 @@ export function openModal(key: string, trigger: HTMLElement | null = null) {
     modalOverlay.style.transitionDuration = _modalAnimationDuration + "ms";
   }
 
-  document.body.appendChild(templateContent);
-
-  (autofocus ?? focusable)?.focus({ preventScroll: true });
+  focusable[0]?.addEventListener(
+    "blur",
+    (event) => {
+      if (
+        event.relatedTarget &&
+        !(event.relatedTarget as HTMLElement).closest(
+          SelectorMap.ModalWrapper,
+        ) &&
+        !root.ariaHidden
+      ) {
+        Array.from(
+          root.querySelectorAll<HTMLElement>(SelectorMap.AnyFocusableNode),
+        )
+          .at(-2)
+          ?.focus();
+      }
+    },
+    { signal: onCloseController.signal },
+  );
 
   if (focusGuard)
     focusGuard.addEventListener(
       "focus",
       () => {
-        focusable?.focus();
+        focusable[0]?.focus();
       },
       { signal: onCloseController.signal },
     );
+
+  document.body.appendChild(templateContent);
+
+  (autofocus ?? focusable[0])?.focus({ preventScroll: true });
 
   document.addEventListener(
     "keydown",
