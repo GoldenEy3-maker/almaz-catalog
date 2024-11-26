@@ -207,7 +207,7 @@ function fonts() {
         const data = `
           @font-face
             font-family: "${fontName}"
-            src: url("/assets/fonts/${filename}.woff2") format("woff2"), url("/assets/fonts/${filename}.woff") format("woff")
+            src: url("assets/fonts/${filename}.woff2") format("woff2"), url("assets/fonts/${filename}.woff") format("woff")
             font-weight: ${weight ?? "normal"}
             font-style: ${isItalic ? "italic" : "normal"}
         `;
