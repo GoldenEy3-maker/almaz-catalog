@@ -55,7 +55,11 @@ mixin dialog-cart
                 ) 
                   p(data-part-article="") 
               div(class="flex justify-end") 
-                +counter(data-part-id-input-name="", data-part-set="")
+                input(type="text", hidden="", name="id", data-part-id="")
+                +counter(
+                  name="qnt",
+                  data-part-initial-count=""
+                )
             div(
               class="col-span-full mt-3 grid grid-cols-subgrid items-baseline text-description ~text-sm/base"
             )
