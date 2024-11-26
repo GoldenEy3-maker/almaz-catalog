@@ -167,9 +167,18 @@ export function formSubmitHandler(event: SubmitEvent) {
 
         if (submitterReplace) {
           const replacer = target.querySelector(`#${submitterReplace}`);
+
           if (replacer) {
             replacer.setAttribute("aria-hidden", "false");
             submitter?.setAttribute("aria-hidden", "true");
+
+            const counter = target.querySelector(SelectorMap.CounterInput);
+
+            if (counter)
+              counter.addEventListener("counter:change", () => {
+                replacer?.setAttribute("aria-hidden", "true");
+                submitter?.setAttribute("aria-hidden", "false");
+              });
           }
         }
 

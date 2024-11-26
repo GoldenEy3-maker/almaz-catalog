@@ -1,6 +1,7 @@
 import { SelectorMap } from "./constants";
 import {
   blurCounterHandler,
+  counterInputHandler,
   decrementCounter,
   incrementCounter,
 } from "./counter";
@@ -37,9 +38,13 @@ document.addEventListener("input", (event) => {
   const suggestionsInput = target.closest<HTMLInputElement>(
     SelectorMap.SuggestionsAction,
   );
+  const counterInput = target.closest<HTMLInputElement>(
+    SelectorMap.CounterInput,
+  );
 
   if (yearMaskInput) yearMaskHandler(yearMaskInput);
   if (suggestionsInput) suggestionsInputHandler(suggestionsInput);
+  if (counterInput) counterInputHandler(counterInput);
 });
 
 document.addEventListener("focusin", (event) => {
