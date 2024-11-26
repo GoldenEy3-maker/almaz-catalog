@@ -121,27 +121,20 @@ export function initEquipmentPartLinksHandler() {
 
       acc[id] = rect;
 
-      const controller = new AbortController();
-
       rect.addEventListener("focusin", (event) => {
         highlightEquipmentLink(id);
 
-        rect.addEventListener(
-          "keydown",
-          (event) => {
-            if (event.code === "Enter") {
-              const modalKey = rect.getAttribute("data-modal-trigger");
-              if (!modalKey) return;
-              openModal(modalKey, rect);
-            }
-          },
-          { signal: controller.signal },
-        );
+        rect.addEventListener("keydown", (event) => {
+          if (event.code === "Enter") {
+            const modalKey = rect.getAttribute("data-modal-trigger");
+            if (!modalKey) return;
+            openModal(modalKey, rect);
+          }
+        });
       });
 
       rect.addEventListener("focusout", () => {
         clearActive(_activeLink);
-        controller.abort();
       });
 
       rect.addEventListener("pointerenter", (event) => {
