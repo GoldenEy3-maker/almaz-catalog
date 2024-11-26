@@ -1,0 +1,28 @@
+include ../../components/header
+include ../../components/footer
+include ../../components/dialog-logout
+include ../../components/dialog-cart
+include ../../components/dialog-search
+
+doctype html
+html(lang="ru")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet", href="styles.min.css")
+    script(src="main.min.js", defer) 
+    title Каталог запчастей
+  body
+    div(class="main-container max-container min-h-svh grid-rows-[1fr_auto]")
+      +header(true)
+      block content
+        main content
+      +footer
+    div(
+      class="fixed inset-0 z-20 bg-black/50 transition-all duration-300 aria-hidden:invisible aria-hidden:opacity-0",
+      data-modal-overlay="",
+      aria-hidden="true"
+    )
+    +dialog-logout
+    +dialog-cart
+    +dialog-search
