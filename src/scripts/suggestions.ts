@@ -209,18 +209,18 @@ export function suggestionsInputHandler(input: HTMLInputElement) {
 
   _suggestionsFetchDebounceTimeoutId = setTimeout(async () => {
     try {
-      // const res = await fetch(`${action}?${input.name ?? "q"}=${input.value}`);
-      // if (!res.ok) throw new Error(res.statusText);
-      // const data = (await res.json()) as z.infer<
-      //   typeof SuggestionsDataSchema
-      // >[];
-      const data = [
-        { id: "1", title: "Болт М12-6gx80 (S18) ГОСТ 7798-70" },
-        { id: "2", title: "Болт М12x1,25-6gx90 ГОСТ 7798-70" },
-        { id: "3", title: "Болт М8 - 6g  20.58.019" },
-        { id: "4", title: "Болт М12-6gx80 (S18) ГОСТ 7798-70" },
-        { id: "5", title: "Болт М12x1,25-6gx90 ГОСТ 7798-70" },
-      ] as z.infer<typeof SuggestionsDataSchema>[];
+      const res = await fetch(`${action}?${input.name ?? "q"}=${input.value}`);
+      if (!res.ok) throw new Error(res.statusText);
+      const data = (await res.json()) as z.infer<
+        typeof SuggestionsDataSchema
+      >[];
+      // const data = [
+      //   { id: "1", title: "Болт М12-6gx80 (S18) ГОСТ 7798-70" },
+      //   { id: "2", title: "Болт М12x1,25-6gx90 ГОСТ 7798-70" },
+      //   { id: "3", title: "Болт М8 - 6g  20.58.019" },
+      //   { id: "4", title: "Болт М12-6gx80 (S18) ГОСТ 7798-70" },
+      //   { id: "5", title: "Болт М12x1,25-6gx90 ГОСТ 7798-70" },
+      // ] as z.infer<typeof SuggestionsDataSchema>[];
 
       const randomData = data.slice(0, getRandomIntInclusive(0, 5));
 
