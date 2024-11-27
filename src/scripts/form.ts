@@ -124,17 +124,17 @@ export function formSubmitHandler(event: SubmitEvent) {
     );
 
     const groupBodyKeys = bodyKeys.reduce<Record<string, HTMLInputElement[]>>(
-      (acc, cur) => {
-        const key = cur.getAttribute("data-form-body-key");
+      (acc, input) => {
+        const key = input.getAttribute("data-form-body-key");
 
         if (!key) return acc;
 
-        const item = acc[key];
+        const inputs = acc[key];
 
-        if (item) {
-          acc[key].push(cur);
+        if (inputs) {
+          acc[key].push(input);
         } else {
-          acc[key] = [cur];
+          acc[key] = [input];
         }
 
         return acc;
