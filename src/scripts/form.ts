@@ -1,7 +1,7 @@
 import { SelectorMap } from "./constants";
 import { z } from "zod";
 import { getAttrFromSelector } from "./utils";
-import { incrementCartCounter } from "./cart-counter";
+import { setCartCounter } from "./cart-counter";
 
 function generateResolver(input: HTMLInputElement) {
   let parser = z.string({
@@ -102,8 +102,9 @@ export function formSubmitHandler(event: SubmitEvent) {
   const submitterReplace = submitter?.getAttribute(
     "data-form-success-submitter-replace",
   );
-  const isSuccessIncrementCartCounter =
-    target.getAttribute("data-form-success-increment-cart-counter") !== null;
+  const successSetCartCounterKey = target.getAttribute(
+    "data-form-success-set-cart-counter",
+  );
 
   const requestAsArray = target.getAttribute("data-form-request-as-array");
 
@@ -163,86 +164,91 @@ export function formSubmitHandler(event: SubmitEvent) {
     responseContainer.ariaHidden = "true";
   }
 
-  setTimeout(() => {
-    fetch(
-      target.method === "get"
-        ? `${target.action}?${urlParams.toString()}`
-        : target.action,
-      {
-        method: target.method,
-        body: target.method === "get" ? undefined : JSON.stringify(body),
-      },
-    )
-      .then((response) => {
-        if (!response.ok) {
-          console.error(
-            "response error",
-            response.url,
-            response.status,
-            response.statusText,
-          );
-          if (responseContainer) {
-            responseContainer.textContent = "Что-то пошло не так!";
-            responseContainer.ariaHidden = "false";
-          }
-          if (isValidationWatcher)
-            for (let i = 0; i < elements.length; i++) {
-              elements[i].removeAttribute("disabled");
-            }
-          return;
-        }
+  fetch(
+    target.method === "get"
+      ? `${target.action}?${urlParams.toString()}`
+      : target.action,
+    {
+      method: target.method,
+      body: target.method === "get" ? undefined : JSON.stringify(body),
+    },
+  )
+    .then((response) => {
+      if (!response.ok) {
+        console.error(response.url, response.status, response.statusText);
 
-        if (!isFormNoReset) target.reset();
-
-        if (successRedirectUrl) {
-          window.location.href = successRedirectUrl;
-          return;
-        }
-
-        if (isValidationWatcher)
-          for (let i = 0; i < elements.length; i++) {
-            const isSubmitter = elements[i].closest("[type=submit]");
-            if (!isSubmitter) elements[i].removeAttribute("disabled");
-          }
-
-        if (submitterReplace) {
-          const replacer = target.querySelector(`#${submitterReplace}`);
-
-          if (replacer) {
-            replacer.setAttribute("aria-hidden", "false");
-            submitter?.setAttribute("aria-hidden", "true");
-
-            const counter = target.querySelector(SelectorMap.CounterInput);
-
-            if (counter)
-              counter.addEventListener("counter:change", () => {
-                replacer?.setAttribute("aria-hidden", "true");
-                submitter?.setAttribute("aria-hidden", "false");
-              });
-          }
-        }
-
-        if (isSuccessIncrementCartCounter) incrementCartCounter();
-      })
-      .catch((error) => {
         if (responseContainer) {
-          responseContainer.textContent = error;
+          responseContainer.textContent = "Что-то пошло не так!";
           responseContainer.ariaHidden = "false";
         }
-        console.error(error);
-
         if (isValidationWatcher)
           for (let i = 0; i < elements.length; i++) {
             elements[i].removeAttribute("disabled");
           }
-      })
-      .finally(() => {
-        if (!isValidationWatcher)
-          for (let i = 0; i < elements.length; i++) {
-            elements[i].removeAttribute("disabled");
-          }
-      });
-  }, 1000);
+        return;
+      }
+
+      if (!isFormNoReset) target.reset();
+
+      if (successRedirectUrl) {
+        window.location.href = successRedirectUrl;
+        return;
+      }
+
+      if (isValidationWatcher)
+        for (let i = 0; i < elements.length; i++) {
+          const isSubmitter = elements[i].closest("[type=submit]");
+          if (!isSubmitter) elements[i].removeAttribute("disabled");
+        }
+
+      if (submitterReplace) {
+        const replacer = target.querySelector(`#${submitterReplace}`);
+
+        if (replacer) {
+          replacer.setAttribute("aria-hidden", "false");
+          submitter?.setAttribute("aria-hidden", "true");
+
+          const counter = target.querySelector(SelectorMap.CounterInput);
+
+          if (counter)
+            counter.addEventListener("counter:change", () => {
+              replacer?.setAttribute("aria-hidden", "true");
+              submitter?.setAttribute("aria-hidden", "false");
+            });
+        }
+      }
+
+      if (successSetCartCounterKey && successSetCartCounterKey !== "") {
+        response
+          .json()
+          .then((data) => {
+            if (successSetCartCounterKey in data) {
+              setCartCounter(data[successSetCartCounterKey]);
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    })
+    .catch((error) => {
+      if (responseContainer) {
+        responseContainer.textContent = error;
+        responseContainer.ariaHidden = "false";
+      }
+      console.error(error);
+
+      if (isValidationWatcher)
+        for (let i = 0; i < elements.length; i++) {
+          elements[i].removeAttribute("disabled");
+        }
+    })
+    .finally(() => {
+      if (!isValidationWatcher)
+        for (let i = 0; i < elements.length; i++) {
+          elements[i].removeAttribute("disabled");
+        }
+    });
 }
 
 export function initValidationWatcher() {
