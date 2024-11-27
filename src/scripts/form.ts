@@ -100,10 +100,12 @@ export function formSubmitHandler(event: SubmitEvent) {
     ) !== null;
   const isFormNoReset = target.getAttribute("data-form-no-reset") !== null;
   const submitterReplace = submitter?.getAttribute(
-    getAttrFromSelector(SelectorMap.FormSuccessSubmitterReplace),
+    "data-form-success-submitter-replace",
   );
   const isSuccessIncrementCartCounter =
     target.getAttribute("data-form-success-increment-cart-counter") !== null;
+
+  const requestAsArray = target.getAttribute("data-form-request-as-array");
 
   if (!isValid) return;
 
@@ -112,7 +114,45 @@ export function formSubmitHandler(event: SubmitEvent) {
   // @ts-expect-error FormData in URLSearchParams constructor
   const urlParams = new URLSearchParams(formData);
 
+  let body: {} | FormData = formData;
+
   const elements = target.elements;
+
+  if (requestAsArray && requestAsArray !== "") {
+    const bodyKeys = Array.from(
+      target.querySelectorAll<HTMLInputElement>("input[data-form-body-key]"),
+    );
+
+    const groupBodyKeys = bodyKeys.reduce<Record<string, HTMLInputElement[]>>(
+      (acc, cur) => {
+        const key = cur.getAttribute("data-form-body-key");
+
+        if (!key) return acc;
+
+        const item = acc[key];
+
+        if (item) {
+          acc[key].push(cur);
+        } else {
+          acc[key] = [cur];
+        }
+
+        return acc;
+      },
+      {},
+    );
+
+    body = {
+      [requestAsArray]: Object.entries(groupBodyKeys).map(([_, inputs]) => {
+        const data = inputs.reduce((acc, input) => {
+          acc[input.name] = input.value;
+          return acc;
+        }, {});
+
+        return data;
+      }),
+    };
+  }
 
   for (let i = 0; i < elements.length; i++) {
     elements[i].setAttribute("disabled", "");
@@ -130,7 +170,7 @@ export function formSubmitHandler(event: SubmitEvent) {
         : target.action,
       {
         method: target.method,
-        body: target.method === "get" ? undefined : formData,
+        body: target.method === "get" ? undefined : JSON.stringify(body),
       },
     )
       .then((response) => {
