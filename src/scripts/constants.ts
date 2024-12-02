@@ -39,6 +39,7 @@ export const SelectorMap = {
   SuggestionsAllResults: "[data-suggestions-all-results]",
 
   // Equipment
+  EquipmentLinksList: "[data-equipment-links-list]",
   EquipmentPartLink: "[data-equipment-part-link]",
   EquipmentSchema: "[data-equipment-schema]",
 
