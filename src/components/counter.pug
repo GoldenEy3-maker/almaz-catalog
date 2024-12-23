@@ -1,6 +1,6 @@
 mixin counter
-  div(class="flex h-8 items-stretch gap-3")
-    button(type="button", class="text-description", data-counter-decrement="")
+  div(class="counter")
+    button(type="button", class="counter__trigger", data-counter-decrement="")
       svg(
         width="16",
         height="2",
@@ -15,9 +15,9 @@ mixin counter
       min="1",
       name="1",
       data-counter-input="",
-      class="w-10 rounded-none border-2 border-description/40 bg-transparent text-center font-medium focus:outline-none"
+      class="counter__input"
     )&attributes(attributes)
-    button(type="button", class="text-description", data-counter-increment="")
+    button(type="button", class="counter__trigger", data-counter-increment="")
       svg(
         width="15",
         height="16",

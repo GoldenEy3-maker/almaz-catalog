@@ -1,5 +1,4 @@
 include ./submenu
-include ./input
 
 mixin header(isAuth=false)
   header(
@@ -141,7 +140,7 @@ mixin header(isAuth=false)
         class="relative max-w-[23.4375rem] flex-1 max-md:hidden"
       )
         div(class="relative z-10 h-[2.875rem]")
-          +input(
+          input(
             type="text",
             name="q",
             placeholder="Название детали",
@@ -150,7 +149,7 @@ mixin header(isAuth=false)
             autocomplete="off",
             data-suggestions-action="/api/search",
             data-suggestions-menu="search-suggestions-menu",
-            class="!h-full !px-5 !pr-14"
+            class="input !h-full !px-5 !pr-14"
           )
           span(
             class="pointer-events-none absolute inset-y-0 right-5 inline-flex items-center justify-center"

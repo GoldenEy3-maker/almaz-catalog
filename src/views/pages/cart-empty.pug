@@ -1,7 +1,6 @@
 extends ../layouts/auth
 
 include ../../components/breadcrumbs
-include ../../components/button
 include ../../components/counter
 
 block content
@@ -16,4 +15,4 @@ block content
     )
       h3(class="~text-xl/[1.75rem]") В корзине пусто
       p(class="mt-3 !leading-tight ~text-base/lg") Выберите запчасти в&nbsp;каталоге и&nbsp;они окажутся на&nbsp;этой странице, потом вы&nbsp;сможете оформить заказ
-      +button("default", true)(href="index.html", class="mt-10") Перейти в каталог
+      a(href="index.html", class="button mt-10") Перейти в каталог

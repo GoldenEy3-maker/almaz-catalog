@@ -1,5 +1,3 @@
-include ./button
-
 mixin dialog-search
   template#search
     div(
@@ -30,7 +28,7 @@ mixin dialog-search
               )
         form(action="search.html", class="relative mt-5")
           div(class="relative z-10 h-[2.875rem]")
-            +input(
+            input(
               type="text",
               name="q",
               placeholder="Название детали",
@@ -41,7 +39,7 @@ mixin dialog-search
               data-suggestions-focus-events-disabled="",
               data-suggestions-action="/api/search",
               data-suggestions-menu="search-suggestions-menu-mobile",
-              class="!h-full !px-5 !pr-14"
+              class="input !h-full !px-5 !pr-14"
             )
             span(
               class="pointer-events-none absolute inset-y-0 right-5 inline-flex items-center justify-center"

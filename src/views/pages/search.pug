@@ -1,20 +1,18 @@
 extends ../layouts/auth
 
-include ../../components/input
-
 block content
   main(class="col-[main] grid grid-cols-subgrid ~pt-[8.375rem]/[12.5625rem]")
     section(class="col-span-full md:col-[span_15]")
       h1(class="text-h1 font-bold ~mb-6/9") Результаты поиска
       form(action="search.html", class="~mb-10/[4.5rem]")
         div(class="relative")
-          +input(
+          input(
             type="text",
             name="q",
             placeholder="Название детали",
             enterkeyhint="search",
             inputmode="search",
-            class="font-medium ~text-base/xl !~h-12/16 !~px-4/7 !~pr-14/16",
+            class="input font-medium ~text-base/xl !~h-12/16 !~px-4/7 !~pr-14/16",
             data-field-with-search-params=""
           )
           div(

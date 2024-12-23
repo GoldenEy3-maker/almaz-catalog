@@ -107,9 +107,11 @@ export function openModal(key: string, trigger: HTMLElement | null = null) {
         const input = root.querySelector<HTMLInputElement>(`input${key}`);
         if (el) {
           if (value != "undefined") {
-            el.textContent = String(value);
+            if (key.includes("href") && "href" in el) el.href = String(value);
+            else el.textContent = String(value);
           } else {
-            const parent = el.parentElement;
+            const parent =
+              el.closest("[data-parent-to-remove]") ?? el.parentElement;
             if (parent) {
               parent.remove();
               wrapper?.setAttribute("data-layout-changed", "true");

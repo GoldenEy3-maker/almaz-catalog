@@ -1,5 +1,3 @@
-include ./button
-
 mixin dialog-logout
   template#logout
     div(
@@ -38,6 +36,6 @@ mixin dialog-logout
             data-form="",
             data-form-success-redirect="auth.html"
           )
-            +button(type="submit")(class="w-full") Выйти из аккаунта
-          +button("outline")(type="button", data-modal-close="") Нет, я передумал
+            button(type="submit")(class="button w-full") Выйти из аккаунта
+          button(type="button", class="button outlined", data-modal-close="") Нет, я передумал
       span(tabindex="0", class="focus-guard", data-focus-guard="")

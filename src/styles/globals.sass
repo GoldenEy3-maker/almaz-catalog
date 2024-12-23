@@ -47,3 +47,90 @@
     width: 0
     height: 0
     opacity: 0
+
+@layer components
+  .breadcrumbs
+    display: flex
+    flex-wrap: wrap
+    align-items: center
+    font-weight: 500
+    @apply font-ptRoot ~text-sm/lg
+    li
+      &:not(:last-child)::after
+        content: ''
+        display: inline-flex
+        height: 0.5rem
+        width: 0.5625rem
+        margin-inline: 0.375rem
+        mask: url("assets/img/chevron-right-sm.svg") no-repeat 50% 50%
+        @apply bg-primary
+      &:nth-last-child(2)
+        &::after
+          @apply bg-border
+      a
+        @apply text-primary
+      span
+        @apply text-border
+  .form-response
+    &[aria-hidden="true"]
+      display: none
+    @apply text-destructive
+  .form-control
+    display: flex
+    flex-direction: column
+    & > * + *
+      margin-top: 0.625rem
+    &__label
+      font-weight: 500
+      line-height: 1
+    &__input
+      &[aria-invalid='true'] + .form-control__message
+        display: block
+    &__message
+      display: none
+      @apply text-destructive
+  .input
+    height: 3rem
+    width: 100%
+    border-radius: 0
+    padding-inline: 1.5rem
+    &:placeholder
+      @apply text-description
+    &:placeholder-shown
+      @apply truncate
+    &:focus
+      @apply outline-none
+    @apply border border-border bg-background
+  .button
+    display: inline-flex
+    align-items: center
+    justify-content: center
+    padding-inline: 3rem
+    font-weight: 700
+    height: 3rem
+    @apply bg-primary
+
+    &:disabled
+      @apply bg-card text-description
+
+    &.outlined
+      background-color: transparent
+      @apply border-2 border-primary
+  .counter
+    display: flex
+    height: 2rem
+    align-items: stretch
+    gap: 0.75rem
+
+    &__input
+      width: 2.5rem
+      border-radius: 0
+      background-color: transparent
+      text-align: center
+      font-weight: 500
+      &:focus
+        @apply outline-none
+      @apply border-2 border-description/40
+
+    &__trigger
+      @apply text-description

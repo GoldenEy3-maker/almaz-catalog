@@ -1,8 +1,6 @@
 extends ../layouts/auth
 
 include ../../components/breadcrumbs
-include ../../components/input
-include ../../components/button
 
 block content
   main(
@@ -30,7 +28,7 @@ block content
         class="grid items-center gap-y-2 ~mt-7/8 ~mb-9/8 ~gap-x-6/10 min-[31.25rem]:grid-cols-[clamp(7rem,1rem+9.375vw,10rem)_1fr]"
       )
         label(for="equipment-year") Год выпуска модели
-        +input#equipment-year(
+        input#equipment-year(
           type="text",
           placeholder="Например, 2015",
           required="",
@@ -40,11 +38,11 @@ block content
           data-year-mask="",
           pattern="(19[789]\\\d|20[0\\\d]\\\d)",
           data-pattern-text="Неверный формат года",
-          class="peer w-full min-[31.25rem]:max-w-[23.4375rem]",
+          class="input peer w-full min-[31.25rem]:max-w-[23.4375rem]",
           maxLength="4"
         )
         p(class="col-span-full text-destructive", data-form-response="")
-      +button(type="submit", disabled="", class="w-full min-[31.25rem]:w-auto") Смотреть каталог
+      button(type="submit", disabled="", class="button w-full min-[31.25rem]:w-auto") Смотреть каталог
     div(
       class="order-1 col-span-full mt-5 ~h-[10rem]/[25rem] md2:order-2 md2:col-[span_10/-1] md2:mt-0"
     )

@@ -1,8 +1,5 @@
 extends ../layouts/unauth.pug
 
-include ../../components/button
-include ../../components/input
-
 block content
   main(class="col-[main] grid grid-cols-subgrid ~pt-[8.375rem]/[14.5625rem]")
     section(class="col-span-full flex flex-col items-center") 
@@ -15,37 +12,27 @@ block content
         data-form-success-redirect="index.html",
         data-form=""
       )
-        div(class="flex flex-col space-y-[0.625rem]", data-form-control="")
-          label(for="login", class="font-medium leading-none") Логин
-          +input#login(
+        div(class="form-control", data-form-control="")
+          label(for="login", class="form-control__label") Логин
+          input#login(
             type="text",
-            class="peer",
+            class="form-control__input",
             name="login",
             required="",
             autocapitalize="off",
             autocomplete="off",
             spellcheck="false"
           )
-          p(
-            class="hidden text-destructive peer-aria-[invalid='true']:block",
-            data-form-control-message=""
-          )
-        div(class="flex flex-col space-y-[0.625rem]", data-form-control="")
-          label(for="password", class="font-medium leading-none") Пароль
-          +input#password(
+          p(class="form-control__message", data-form-control-message="")
+        div(class="form-control", data-form-control="")
+          label(for="password", class="form-control__label") Пароль
+          input#password(
             type="password",
-            class="peer",
+            class="form-control__input",
             name="password",
             required="",
             minlength="3"
           )
-          p(
-            class="hidden text-destructive peer-aria-[invalid='true']:block",
-            data-form-control-message=""
-          )
-        +button(type="submit", class="!mt-10") Войти
-        p(
-          class="text-destructive aria-hidden:hidden",
-          data-form-response="",
-          aria-hidden="true"
-        ) 
+          p(class="form-control__message", data-form-control-message="")
+        button(type="submit", class="button !mt-10") Войти
+        p(class="form-response", data-form-response="", aria-hidden="true") 

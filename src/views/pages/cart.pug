@@ -1,7 +1,6 @@
 extends ../layouts/auth
 
 include ../../components/breadcrumbs
-include ../../components/button
 include ../../components/counter
 
 block content
@@ -120,7 +119,7 @@ block content
             )
             +counter(name="qnt", data-form-body-key="4")
       div(class="col-span-full mt-10")
-        +button(type="submit")(class="max-xs:w-full") Оформить заказ
+        button(type="submit")(class="button max-xs:w-full") Оформить заказ
       p(
         class="col-span-full mt-6 text-destructive aria-hidden:hidden",
         aria-hidden="true",
