@@ -122,21 +122,32 @@ export function openModal(key: string, trigger: HTMLElement | null = null) {
           if (key.includes("input-name")) input.name = String(value);
           else input.value = String(value);
         }
-        if (key.includes("form-submitter-replacer") && Array.isArray(value)) {
-          const [formSelector, replacerKey] = value as string[];
-          const form = root.querySelector<HTMLFormElement>(formSelector);
-          if (!form) return;
-          handleFormSubmitterReplacer(
-            form,
-            replacerKey,
-            (replacer, submitter) => {
-              const counter = form.querySelector(SelectorMap.CounterInput);
-              counter?.addEventListener("counter:change", () => {
-                replacer.setAttribute("aria-hidden", "true");
-                submitter.setAttribute("aria-hidden", "false");
-              });
+        if (key.includes("form-submitter-replacer")) {
+          Object.entries(value as Record<string, string>).forEach(
+            ([formSelector, replacerKey]) => {
+              const form = root.querySelector<HTMLFormElement>(formSelector);
+              if (!form) return;
+              handleFormSubmitterReplacer(
+                form,
+                replacerKey,
+                (replacer, submitter) => {
+                  const counter = form.querySelector(SelectorMap.CounterInput);
+                  counter?.addEventListener("counter:change", () => {
+                    replacer.setAttribute("aria-hidden", "true");
+                    submitter.setAttribute("aria-hidden", "false");
+                  });
+                },
+              );
             },
           );
+        }
+        if (key.includes("el-set-attr")) {
+          Object.entries(
+            value as Record<string, { attr: string; value: string }>,
+          ).forEach(([selector, { attr, value }]) => {
+            const el = root.querySelector<HTMLElement>(selector);
+            if (el) el.setAttribute(attr, value);
+          });
         }
       });
     }

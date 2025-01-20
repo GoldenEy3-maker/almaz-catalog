@@ -222,12 +222,12 @@ export function suggestionsInputHandler(input: HTMLInputElement) {
       //   { id: "5", title: "Болт М12x1,25-6gx90 ГОСТ 7798-70" },
       // ] as z.infer<typeof SuggestionsDataSchema>[];
 
-      const randomData = data.slice(0, getRandomIntInclusive(0, 5));
+      // const randomData = data.slice(0, getRandomIntInclusive(0, 5));
 
       clearSuggestionsMenuContainer(input);
 
-      if (randomData.length) {
-        randomData.forEach((item) => {
+      if (data.length) {
+        data.forEach((item) => {
           const resolvedItem = SuggestionsDataSchema.parse(item);
 
           const templateContent = itemTemplate.content.cloneNode(true);

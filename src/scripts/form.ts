@@ -1,7 +1,8 @@
 import { SelectorMap } from "./constants";
 import { z } from "zod";
-import { getAttrFromSelector } from "./utils";
+import { getAttrFromSelector, parseJSONWidthQuotes } from "./utils";
 import { setCartCounter } from "./cart-counter";
+import { initEquipmentPartLinksHandler } from "./equipment";
 
 function generateResolver(input: HTMLInputElement) {
   let parser = z.string({
@@ -123,6 +124,7 @@ export function formSubmitHandler(event: SubmitEvent) {
   const successSetCartCounterKey = target.getAttribute(
     "data-form-success-set-cart-counter",
   );
+  const equipmentPartId = target.getAttribute("data-form-equipment-part-id");
 
   const requestAsArray = target.getAttribute("data-form-request-as-array");
 
@@ -188,7 +190,12 @@ export function formSubmitHandler(event: SubmitEvent) {
       : target.action,
     {
       method: target.method,
-      body: target.method === "get" ? undefined : JSON.stringify(body),
+      body:
+        target.method === "get"
+          ? undefined
+          : body instanceof FormData
+            ? body
+            : JSON.stringify(body),
     },
   )
     .then((response) => {
@@ -243,6 +250,42 @@ export function formSubmitHandler(event: SubmitEvent) {
           .catch((error) => {
             console.error(error);
           });
+      }
+
+      if (equipmentPartId && equipmentPartId !== "") {
+        const equipmentLinksList = document.querySelector<HTMLUListElement>(
+          SelectorMap.EquipmentLinksList,
+        );
+        if (equipmentLinksList) {
+          const equipmentPartLink =
+            equipmentLinksList.querySelector<HTMLElement>(
+              `[data-equipment-part-link='${equipmentPartId}']`,
+            );
+          if (equipmentPartLink) {
+            const modalTriggerCart =
+              equipmentPartLink.querySelector<HTMLButtonElement>(
+                `[${getAttrFromSelector(SelectorMap.ModalTrigger)}="cart"]`,
+              );
+            if (modalTriggerCart) {
+              modalTriggerCart.classList.add("in-cart");
+
+              const propsAttr =
+                modalTriggerCart.getAttribute("data-modal-props");
+              if (propsAttr) {
+                const props = parseJSONWidthQuotes(propsAttr);
+                props["[data-form-submitter-replacer]"] = {
+                  [SelectorMap.Form]: "to-cart",
+                };
+                props["[data-part-initial-count]"] = urlParams.get("qnt");
+                modalTriggerCart.setAttribute(
+                  "data-modal-props",
+                  JSON.stringify(props),
+                );
+                initEquipmentPartLinksHandler();
+              }
+            }
+          }
+        }
       }
     })
     .catch((error) => {

@@ -134,3 +134,12 @@
 
     &__trigger
       @apply text-description
+
+  .equipment-links-list
+    [data-modal-trigger]
+      &.in-cart
+        svg:not([data-part-in-cart="true"])
+          display: none
+      &:not(.in-cart)
+        svg[data-part-in-cart="true"]
+          display: none
