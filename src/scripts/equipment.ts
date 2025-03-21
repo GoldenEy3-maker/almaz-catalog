@@ -25,29 +25,38 @@ export function initEquipmentPartLinksHandler() {
 
   if (rects.length === 0) return;
 
-  let _activeRect: HTMLElement | null = null;
+  let _activeRects: HTMLElement[] = [];
   let _activeLink: HTMLElement | null = null;
 
   let _timeoutId: NodeJS.Timeout | undefined = undefined;
 
-  function clearActive(element: HTMLElement | null) {
+  function clearActive(element: HTMLElement | HTMLElement[] | null) {
     if (element) {
-      element.setAttribute("aria-current", "false");
-      element = null;
+      if (Array.isArray(element)) {
+        element.forEach((el) => {
+          el.setAttribute("aria-current", "false");
+          element = null;
+        });
+      } else {
+        element.setAttribute("aria-current", "false");
+        element = null;
+      }
     }
   }
 
   function highlightEquipmentRect(id: string) {
-    clearActive(_activeRect);
-    const rect = RectsMap[id];
-    if (!rect) return;
-    rect.setAttribute("aria-current", "true");
-    _activeRect = rect;
+    clearActive(_activeRects);
+    const rects = RectsMap.get(id);
+    if (!rects) return;
+    rects.forEach((rect) => {
+      rect.setAttribute("aria-current", "true");
+      _activeRects.push(rect);
+    });
   }
 
   function highlightEquipmentLink(id: string) {
     clearActive(_activeLink);
-    const link = LinksMap[id];
+    const link = LinksMap.get(id);
     if (!link) return;
     link.setAttribute("aria-current", "true");
     _activeLink = link;
@@ -58,7 +67,7 @@ export function initEquipmentPartLinksHandler() {
     const equipmentLinkId = searchParams.get("linkHashId");
     // const equipmentLinkId = window.location.hash.replace("#", "");
     if (!equipmentLinkId) return;
-    const link = LinksMap[equipmentLinkId];
+    const link = LinksMap.get(equipmentLinkId);
     if (!link) return;
 
     const focusable = link.querySelector<HTMLButtonElement>(
@@ -108,20 +117,20 @@ export function initEquipmentPartLinksHandler() {
     });
   }
 
-  const LinksMap = Array.from(links).reduce<Record<string, HTMLElement>>(
+  const LinksMap = Array.from(links).reduce<Map<string, HTMLElement>>(
     (acc, link) => {
       const id = link.getAttribute(
         getAttrFromSelector(SelectorMap.EquipmentPartLink),
       );
       if (!id) return acc;
-      acc[id] = link;
+      acc.set(id, link);
 
       link.addEventListener("focusin", (event) => {
         highlightEquipmentRect(id);
       });
 
       link.addEventListener("focusout", () => {
-        clearActive(_activeRect);
+        clearActive(_activeRects);
       });
 
       link.addEventListener("pointerenter", (event) => {
@@ -129,20 +138,20 @@ export function initEquipmentPartLinksHandler() {
       });
 
       link.addEventListener("pointerleave", (event) => {
-        clearActive(_activeRect);
+        clearActive(_activeRects);
       });
 
       return acc;
     },
-    {},
+    new Map<string, HTMLElement>(),
   );
 
-  const RectsMap = Array.from(rects).reduce<Record<string, HTMLElement>>(
+  const RectsMap = Array.from(rects).reduce<Map<string, HTMLElement[]>>(
     (acc, rect) => {
       const attrId = rect.getAttribute("id");
       if (!attrId) return acc;
       const id = attrId.slice(attrId.lastIndexOf("-") + 1);
-      const link = LinksMap[id];
+      const link = LinksMap.get(id);
 
       if (link) {
         const cartModalTrigger = link.querySelector(
@@ -158,7 +167,11 @@ export function initEquipmentPartLinksHandler() {
         }
       }
 
-      acc[id] = rect;
+      if (acc.has(id)) {
+        acc.set(id, [...acc.get(id)!, rect]);
+      } else {
+        acc.set(id, [rect]);
+      }
 
       rect.addEventListener("focusin", (event) => {
         highlightEquipmentLink(id);
@@ -176,10 +189,12 @@ export function initEquipmentPartLinksHandler() {
         clearActive(_activeLink);
       });
 
-      rect.addEventListener("pointerenter", (event) => {
-        highlightEquipmentLink(id);
-        _timeoutId = setTimeout(() => scrollToLinkOnRectHover(link), 200);
-      });
+      if (link) {
+        rect.addEventListener("pointerenter", (event) => {
+          highlightEquipmentLink(id);
+          _timeoutId = setTimeout(() => scrollToLinkOnRectHover(link), 200);
+        });
+      }
 
       rect.addEventListener("pointerleave", (event) => {
         if (_timeoutId) {
@@ -191,7 +206,7 @@ export function initEquipmentPartLinksHandler() {
 
       return acc;
     },
-    {},
+    new Map<string, HTMLElement[]>(),
   );
 
   scrollToLinkByHashId();
