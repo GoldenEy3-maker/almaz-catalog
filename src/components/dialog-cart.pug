@@ -44,7 +44,7 @@ mixin dialog-cart
         )
           input(type="hidden", name="type", data-part-type="")
           div(
-            class="flex items-center justify-between gap-x-4 gap-y-1 border-b border-border pb-3"
+            class="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-border pb-3"
           )
             div
               input(type="text", hidden="", name="id", data-part-id="")
@@ -52,21 +52,24 @@ mixin dialog-cart
             div
               button(
                 type="submit",
-                class="button w-full aria-hidden:hidden sm:w-auto",
+                class="button w-full whitespace-nowrap aria-hidden:hidden sm:w-auto",
                 data-form-success-submitter-replace="to-cart",
                 aria-hidden="false"
               ) Добавить в корзину
               a#to-cart(
                 href="cart.html",
-                class="button w-full aria-hidden:hidden sm:w-auto",
+                class="button w-full whitespace-nowrap aria-hidden:hidden sm:w-auto",
                 aria-hidden="true"
               ) В корзине
           div(
             class="mt-3 flex items-baseline justify-between text-description ~text-sm/base"
           )
             p Запчастей в стандартной комплектации
-            span(class="font-medium", data-part-set="") 
-        div(class="mt-5 flex items-center justify-between", data-parent-to-remove="")
+            span(class="whitespace-nowrap font-medium", data-part-set="") 
+        div(
+          class="mt-5 flex flex-wrap items-center justify-between gap-x-4 gap-y-2",
+          data-parent-to-remove=""
+        )
           a(href="#", class="button outlined", data-part-nested-href="") Перейти к детали →
           p(class="text-description") Деталь содержит
             | #{ " " }
