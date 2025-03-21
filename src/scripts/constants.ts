@@ -1,5 +1,6 @@
 export const SelectorMap = {
   Header: "[data-header]",
+  HeaderTop: "[data-header-top]",
 
   // Submenu
   Submenu: "[data-submenu]",

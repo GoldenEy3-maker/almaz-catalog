@@ -2,12 +2,13 @@ include ./submenu
 
 mixin header(isAuth=false)
   header(
-    class="max-container main-container fixed inset-x-0 top-0 z-20 w-full bg-background",
+    class="max-container main-container fixed inset-x-0 top-0 z-20 w-full -translate-y-[var(--header-offset)] bg-background transition-transform duration-300 aria-expanded:translate-y-0",
     data-header=""
   )
     div(class="relative col-span-full grid grid-cols-subgrid")
       div(
-        class="relative z-20 col-[main] flex border-b border-card bg-background ~pt-3/[1.125rem] ~pb-2/[1.125rem] [.lock-scroll_&]:pr-[var(--scrollbar-width)]"
+        class="relative z-20 col-[main] flex border-b border-card bg-background ~pt-3/[1.125rem] ~pb-2/[1.125rem] [.lock-scroll_&]:pr-[var(--scrollbar-width)]",
+        data-header-top=""
       )
         a(
           href="index.html",

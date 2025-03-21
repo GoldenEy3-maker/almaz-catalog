@@ -11,6 +11,7 @@ import {
   initFieldsWithSearchParams,
   initValidationWatcher,
 } from "./form";
+import { initStickyHeader } from "./header";
 import { yearMaskHandler } from "./mask";
 import { openModal } from "./modal";
 import { initSubmenu } from "./submenu";
@@ -22,6 +23,7 @@ import {
 } from "./suggestions";
 import { getAttrFromSelector } from "./utils";
 
+initStickyHeader();
 initSubmenu();
 initValidationWatcher();
 initFieldsWithSearchParams();
