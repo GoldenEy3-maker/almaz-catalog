@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "@tailwindcss/container-queries": "^0.1.1",
+    "choices.js": "^11.1.0",
     "gulp-pug": "^5.0.0",
     "imask": "^7.6.1",
     "tailwindcss": "^3.4.10",

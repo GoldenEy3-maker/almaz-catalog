@@ -23,13 +23,7 @@ export const SelectorMap = {
   CounterDecrementTrigger: "[data-counter-decrement]",
 
   // Custom Select
-  CustomSelectTrigger: "[data-custom-select-trigger]",
   CustomSelect: "[data-custom-select]",
-  CustomSelectContent: "[data-custom-select-content]",
-  CustomSelectInput: "[data-custom-select-input]",
-  CustomSelectSearch: "[data-custom-select-search]",
-  CustomSelectOption: "[data-custom-select-option]",
-  CustomSelectEmpty: "[data-custom-select-empty]",
 
   // Suggestions
   SuggestionsAction: "[data-suggestions-action]",

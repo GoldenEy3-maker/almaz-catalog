@@ -1,5 +1,6 @@
 @use "fonts"
 @use "utils" as utils
+@use "libs"
 
 @tailwind base
 @tailwind components
@@ -23,6 +24,14 @@
 
   input[type=number]
     -moz-appearance: textfield
+
+  .choices
+    font-size: inherit
+
+  .choices__inner
+    font-size: inherit
+    border-radius: 0 !important
+    @apply bg-background border !border-border
 
   @media (prefers-reduced-motion: reduce)
     *

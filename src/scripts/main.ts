@@ -5,6 +5,7 @@ import {
   decrementCounter,
   incrementCounter,
 } from "./counter";
+import { initCustomSelect } from "./custom-select";
 import { initEquipmentPartLinksHandler } from "./equipment";
 import {
   formSubmitHandler,
@@ -28,6 +29,7 @@ initSubmenu();
 initValidationWatcher();
 initFieldsWithSearchParams();
 initEquipmentPartLinksHandler();
+initCustomSelect();
 
 document.addEventListener("submit", (event) => {
   const formTarget = (event.target as HTMLElement).closest(SelectorMap.Form);
@@ -107,4 +109,15 @@ document.addEventListener("click", (event) => {
 document.addEventListener("keydown", (event) => {
   if (event.code === "ArrowDown" || event.code === "ArrowUp")
     suggestionsArrowFocusHandler(event);
+});
+
+document.addEventListener("change", (event) => {
+  const target = event.target as HTMLElement;
+  const form = target.closest("[data-form-success-redirect]");
+
+  if (target instanceof HTMLSelectElement) {
+    const option = target.selectedOptions[0];
+    const newPath = option.getAttribute("data-new-path");
+    if (newPath) form?.setAttribute("data-form-success-redirect", newPath);
+  }
 });
